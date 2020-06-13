@@ -434,8 +434,11 @@ class Story{
 			// console.log(inheritedContent_)
 			newScene_.addInheritance(inheritedContent_)
 			this.currentScene=newScene_;
-			dataLayer.push({'pathScenes': newScene_.id});
-      		dataLayer.push({'pathTimes': Date.now()});
+			dataLayer.push({
+				'pathScenes': newScene_.id,
+				'pathTimes': Date.now(),
+				'event':'updatePath'
+			});
 
 			
 
