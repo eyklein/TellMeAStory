@@ -25,7 +25,7 @@ class Scene{
 	}
 
 	displayFrontEnd(){
-		window.location.hash = this.id;
+		//window.location.hash = this.id;
 		for(let i=0;i<this.actionsOut.length;i++){
 			this.actionsOut[i].activate();
 		}
@@ -206,18 +206,18 @@ class Scene{
 
 
 //this creates the buttons to go the the back end of that scene
-Scene.prototype.createBackEndButton=function(){
+// Scene.prototype.createBackEndButton=function(){
 
 
-	this.html.be.sceneButton=document.createElement("button");
-	this.html.be.sceneButton.innerHTML = this.name;
-	this.html.be.sceneButton.refrenceScene=this;
-	this.html.be.sceneButton.addEventListener ("click", function() {
-		this.refrenceScene.updateIconContent();
-		this.refrenceScene.play.windowManager.sceneModual.display(this.refrenceScene);
-	});
+// 	this.html.be.sceneButton=document.createElement("button");
+// 	this.html.be.sceneButton.innerHTML = this.name;
+// 	this.html.be.sceneButton.refrenceScene=this;
+// 	this.html.be.sceneButton.addEventListener ("click", function() {
+// 		this.refrenceScene.updateIconContent();
+// 		this.refrenceScene.play.windowManager.sceneModual.display(this.refrenceScene);
+// 	});
 
-}
+// }
 
 Scene.prototype.updateIconContent=function(){
 

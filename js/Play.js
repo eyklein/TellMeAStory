@@ -430,14 +430,14 @@ class Story{
 		// console.log(newScene_)
 		if(newScene_ instanceof Scene){
 
-			console.log("new scene " + newScene_.id + " @ " + Date.now())
+			//console.log("new scene " + newScene_.id + " @ " + Date.now())
 			// console.log(inheritedContent_)
-			newScene_.addInheritance(inheritedContent_)
+			//newScene_.addInheritance(inheritedContent_)
 			this.currentScene=newScene_;
 			dataLayer.push({
 				'pathScenes': newScene_.id,
 				'pathTimes': Date.now(),
-				'event':'updatePath'
+				'event':'newScene'
 			});
 
 			
@@ -449,7 +449,7 @@ class Story{
 	}
 
 	start(){
-		currentStory.newScene('aa');
+		currentStory.newScene('INTRO');
 		//currentStory.windowManager=new WindowManager();
 		loadScreen.hide();
 		currentStory.windowManager.createMainButtons();

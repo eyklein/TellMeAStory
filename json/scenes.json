@@ -551,7 +551,7 @@
     },
     {
       "name": "intro",
-      "id": "aa",
+      "id": "INTRO",
       "actions": [
         {
           "id":"01",
@@ -564,7 +564,7 @@
         },
         {
           "id":"01",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "001",
           "trigger": "time",
           "elicit": "display",
@@ -572,7 +572,7 @@
         },
         {
           "id":"02",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "001",
           "trigger": "time",
           "elicit": "clickable",
@@ -588,7 +588,7 @@
         },
         {
           "id":"04",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "901",
           "trigger": "time",
           "elicit": "display",
@@ -596,7 +596,7 @@
         },
         {
           "id":"05",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "902",
           "trigger": "time",
           "elicit": "display",
@@ -604,7 +604,7 @@
         },
         {
           "id":"06",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "903",
           "trigger": "time",
           "elicit": "display",
@@ -612,7 +612,7 @@
         },
         {
           "id":"07",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "904",
           "trigger": "time",
           "elicit": "display",
@@ -620,7 +620,7 @@
         },
         {
           "id":"08",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "905",
           "trigger": "time",
           "elicit": "display",
@@ -628,7 +628,7 @@
         },
         {
           "id":"09",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "906",
           "trigger": "time",
           "elicit": "display",
@@ -636,7 +636,7 @@
         },
         {
           "id":"010",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "907",
           "trigger": "time",
           "elicit": "display",
@@ -644,7 +644,7 @@
         },
         {
           "id":"011",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "908",
           "trigger": "time",
           "elicit": "display",
@@ -652,7 +652,7 @@
         },
         {
           "id":"012",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "909",
           "trigger": "time",
           "elicit": "display",
@@ -660,7 +660,7 @@
         },
         {
           "id":"013",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "910",
           "trigger": "time",
           "elicit": "display",
@@ -668,7 +668,7 @@
         },
         {
           "id":"014",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "911",
           "trigger": "time",
           "elicit": "display",
@@ -676,7 +676,7 @@
         },
         {
           "id":"015",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "912",
           "trigger": "time",
           "elicit": "display",
@@ -684,7 +684,7 @@
         },
         {
           "id":"016",
-          "tailID": "aa",
+          "tailID": "INTRO",
           "headID": "913",
           "trigger": "time",
           "elicit": "display",
@@ -3597,7 +3597,7 @@
           "headID": "003",
           "trigger": "click",
           "elicit": "display",
-          "delay": 14,
+          "delay": 12,
           "info": "where is that"
         },{
           "id": "5001",
@@ -3605,7 +3605,7 @@
           "headID": "003",
           "trigger": "click",
           "elicit": "clickable",
-          "delay": 14,
+          "delay": 12,
           "info": "where is that"
         },{
           "id": "5001",
@@ -3687,7 +3687,7 @@
             "general": {
               "clipping": {
                 "start": 6,
-                "duration": 14
+                "duration": 12
               }
             },
             "entrance": {},
@@ -3707,8 +3707,8 @@
           "effects": {
             "general": {
               "clipping": {
-                "start": 20,
-                "duration": 115
+                "start": 18,
+                "duration": 117
               }
             },
             "entrance": {},
