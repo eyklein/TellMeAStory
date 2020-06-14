@@ -65,6 +65,7 @@ class Story{
 
 	constructor(){
 		this.path="";//this will keep track of the path that has been taken
+		this.sceneTimesArray=[];
 		this.playing=false;
 		this.audioCount=0;
 
@@ -433,10 +434,18 @@ class Story{
 			//console.log("new scene " + newScene_.id + " @ " + Date.now())
 			// console.log(inheritedContent_)
 			//newScene_.addInheritance(inheritedContent_)
+
+			this.sceneTimesArray.push(
+			{
+				"scene":newScene_.id,
+				"time":Date.now()
+			});
+
 			this.currentScene=newScene_;
 			dataLayer.push({
 				'pathScenes': newScene_.id,
 				'pathTimes': Date.now(),
+				'sceneTimesArray':this.sceneTimesArray,
 				'event':'newScene'
 			});
 

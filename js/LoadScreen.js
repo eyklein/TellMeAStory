@@ -15,6 +15,8 @@ class LoadScreen{
 		this.easedLoaded=0;
 		this.easing=.05;
 
+		this.loadStartTime=Date.now();
+
 		this.updateInterval=setInterval(this.draw.bind(this),10);
 	}
 
@@ -101,9 +103,20 @@ class LoadScreen{
 			this.loaded = (this.loadedAudioFiles/this.numAudioFiles*100) 
 
 
+
+
 			if(this.loaded == 100){
 				//console.log("Start the Story !!!")
 				document.title = 'Story Time';
+
+				
+
+				document.getElementById('favicon').href = "img/favicon/moon_y_favicon-100.gif"
+
+				dataLayer.push({
+					'loadTime': Date.now()-this.loadStartTime,
+					'event':'pageLoaded'
+				});
 
 				currentStory.start();
 			}
@@ -122,9 +135,19 @@ class LoadScreen{
 		this.html.rocketContainer.style.top= ((window.innerHeight-191)*(1-this.easedLoaded/100)) +'px';
 		this.html.loadText.innerHTML=Math.round(this.easedLoaded) + " %"
 		document.title = 'Story Time ' + this.html.loadText.innerHTML;
+		let roundedLoad = Math.floor(this.easedLoaded/10)*10;
+		// console.log(Math.round(this.easedLoaded) + " %");
+		// console.log("img/favicon/moon_y_favicon-"+ roundedLoad + ".gif")
+		document.getElementById('favicon').href = "img/favicon/moon_y_favicon-"+ roundedLoad + ".gif";
+
+
+
+
 		this.fireHeight+=(speed*600-this.fireHeight)*.01
 		//console.log(this.fireHeight)
 		this.html.rocketFire.style.height= this.fireHeight + 'px';
+
+
 		
 	}
 
