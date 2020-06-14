@@ -100,8 +100,11 @@ class LoadScreen{
 		if(this.numAudioFiles > 0){
 			this.loaded = (this.loadedAudioFiles/this.numAudioFiles*100) 
 
+
 			if(this.loaded == 100){
 				//console.log("Start the Story !!!")
+				document.title = 'Story Time';
+
 				currentStory.start();
 			}
 			//console.log((this.loadedAudioFiles/this.numAudioFiles*100));
@@ -115,8 +118,10 @@ class LoadScreen{
 		this.easedLoaded = speed + this.easedLoaded;
 		this.html.loadBar.style.width=this.easedLoaded+"%";
 
+
 		this.html.rocketContainer.style.top= ((window.innerHeight-191)*(1-this.easedLoaded/100)) +'px';
 		this.html.loadText.innerHTML=Math.round(this.easedLoaded) + " %"
+		document.title = 'Story Time ' + this.html.loadText.innerHTML;
 		this.fireHeight+=(speed*600-this.fireHeight)*.01
 		//console.log(this.fireHeight)
 		this.html.rocketFire.style.height= this.fireHeight + 'px';
