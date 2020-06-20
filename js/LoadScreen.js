@@ -18,6 +18,8 @@ class LoadScreen{
 		this.loadStartTime=Date.now();
 
 		this.updateInterval=setInterval(this.draw.bind(this),10);
+
+		this.favicon = document.getElementById('favicon');
 	}
 
 	createDivs(){
@@ -108,10 +110,11 @@ class LoadScreen{
 			if(this.loaded == 100){
 				//console.log("Start the Story !!!")
 				document.title = 'Story Time';
+				this.favicon.href = "img/favicon/moon_y_favicon-100.gif";
 
 				
 
-				document.getElementById('favicon').href = "img/favicon/moon_y_favicon-100.gif"
+				
 
 				dataLayer.push({
 					'loadTime': Date.now()-this.loadStartTime,
@@ -126,7 +129,7 @@ class LoadScreen{
 
 	
 	draw(){
-		//console.log(this.loaded + " : " + this.easedLoaded)
+		
 		let speed = (this.loaded-this.easedLoaded)*this.easing
 		this.easedLoaded = speed + this.easedLoaded;
 		this.html.loadBar.style.width=this.easedLoaded+"%";
@@ -138,7 +141,13 @@ class LoadScreen{
 		let roundedLoad = Math.floor(this.easedLoaded/10)*10;
 		// console.log(Math.round(this.easedLoaded) + " %");
 		// console.log("img/favicon/moon_y_favicon-"+ roundedLoad + ".gif")
-		document.getElementById('favicon').href = "img/favicon/moon_y_favicon-"+ roundedLoad + ".gif";
+		let faviconLoadedAddress= "img/favicon/moon_y_favicon-"+ roundedLoad + ".gif";
+		if(this.favicon.href != faviconLoadedAddress){
+			//document.getElementById('favicon').href = "img/favicon/moon_y_favicon-"+ roundedLoad + ".gif";
+			console.log(faviconLoadedAddress)
+			this.favicon.href = faviconLoadedAddress;
+		}
+		
 
 
 
