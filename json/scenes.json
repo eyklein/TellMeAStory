@@ -550,6 +550,564 @@
       ]
     },
     {
+      "name": "constructBedroom",
+      "id": "CONSTRUCT",
+      "actions": [
+        
+        {
+          "id":"04",
+          "tailID": "CONSTRUCT",
+          "headID": "901",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"05",
+          "tailID": "CONSTRUCT",
+          "headID": "902",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"06",
+          "tailID": "CONSTRUCT",
+          "headID": "903",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"07",
+          "tailID": "CONSTRUCT",
+          "headID": "904",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"08",
+          "tailID": "CONSTRUCT",
+          "headID": "905",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"09",
+          "tailID": "CONSTRUCT",
+          "headID": "906",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"010",
+          "tailID": "CONSTRUCT",
+          "headID": "907",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"011",
+          "tailID": "CONSTRUCT",
+          "headID": "908",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"012",
+          "tailID": "CONSTRUCT",
+          "headID": "909",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"013",
+          "tailID": "CONSTRUCT",
+          "headID": "910",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"014",
+          "tailID": "CONSTRUCT",
+          "headID": "911",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"015",
+          "tailID": "CONSTRUCT",
+          "headID": "912",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"016",
+          "tailID": "CONSTRUCT",
+          "headID": "913",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"020",
+          "tailID": "CONSTRUCT",
+          "headID": "901",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"023",
+          "tailID": "CONSTRUCT",
+          "headID": "INSTUCTIONS",
+          "conditions":["cookie.scene==undefined"],
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"023",
+          "tailID": "CONSTRUCT",
+          "headID": "INTRO",
+          "conditions":["cookie.scene!=undefined"],
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        }
+      ],
+      "contents": [
+        
+      ]
+    },
+    {
+      "name": "instuctions",
+      "id": "INSTUCTIONS",
+      "actions": [
+        {
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "001",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "005",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "002",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "002",
+          "trigger": "time",
+          "elicit": "clickable",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "002",
+          "headID": "002",
+          "trigger": "click",
+          "elicit": "unclickable",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "002",
+          "headID": "003",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "004",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "004",
+          "trigger": "time",
+          "elicit": "clickable",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "004",
+          "headID": "INTRO",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "004",
+          "headID": "001",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "004",
+          "headID": "002",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info":""
+        },
+        {
+          "id":"01",
+          "tailID": "004",
+          "headID": "003",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "004",
+          "headID": "004",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "004",
+          "headID": "005",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "004",
+          "headID": "501",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "501",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        }
+
+      ],
+      "contents": [
+        {
+          "id": "001",
+          "content": {
+            "type": "text",
+            "value": "This is an experimental story telling platform. You can click on &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            text or objects to inspire the reader through the story."
+          },
+          "effects": {
+            "general": {
+              "position":{
+                "type":"absolute",
+                "top": "10%",
+                "left": "10%"
+              },
+              "dimensions":{
+                
+                "width": "80%",
+                "height": "80%"
+              },
+              "font":{
+                "font-family":"indieFlower"
+              },
+              "size":{
+                "type":"scalable",
+                "value":0.04
+              },"z-index":{
+                "index":101
+              },
+              "fill": {
+                "color": "#fff"
+              },
+              "stroke": {
+                "color": "#00ff00",
+                "thickness": "0px"
+              }
+            },
+            "entrance": {
+              "fade": {
+                "type": "linear",
+                "duration": 0.5
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            }
+          }
+        },{
+          "id": "005",
+          "content": {
+            "type": "text",
+            "value": "Click here to go full screen &#x2193;"
+          },
+          "effects": {
+            "general": {
+              "position":{
+                "type":"absolute",
+                "bottom": "2%",
+                "right": "1.1%"
+              },
+              "font":{
+                "font-family":"indieFlower"
+              },
+              "size":{
+                "type":"scalable",
+                "value":0.04
+              },"z-index":{
+                "index":101
+              },
+              "fill": {
+                "color": "#fff"
+              },
+              "stroke": {
+                "color": "#00ff00",
+                "thickness": "0px"
+              }
+            },
+            "entrance": {
+              "fade": {
+                "type": "linear",
+                "duration": 0.5
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            }
+          }
+        },{
+          "id": "002",
+          "content": {
+            "type": "text",
+            "value": "highlighted"
+          },
+          "effects": {
+            "general": {
+              "position":{
+                "type":"absolute",
+                "top": "20.2%",
+                "left": "37.39%"
+              },
+              "font":{
+                "font-family":"indieFlower"
+              },
+              "size":{
+                "type":"scalable",
+                "value":0.04
+              },"z-index":{
+                "index":102
+              },
+              "fill": {
+                "color": "#fff"
+              },
+              "stroke": {
+                "color": "#00ff00",
+                "thickness": "0px"
+              }
+            },
+            "entrance": {
+              "fade": {
+                "type": "linear",
+                "duration": 0.5
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            }
+          }
+        },{
+          "id": "003",
+          "content": {
+            "type": "text",
+            "value": "highlighted"
+          },
+          "effects": {
+            "general": {
+              "position":{
+                "type":"absolute",
+                "top": "20.2%",
+                "left": "37.39%"
+              },
+              "font":{
+                "font-family":"indieFlower"
+              },
+              "size":{
+                "type":"scalable",
+                "value":0.04
+              },"z-index":{
+                "index":103
+              },
+              "fill": {
+                "color": "#6aca4d"
+              },
+              "stroke": {
+                "color": "#00ff00",
+                "thickness": "0px"
+              }
+            },
+            "entrance": {
+              "fade": {
+                "type": "linear",
+                "duration": 0.5
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            }
+          }
+        },{
+          "id": "004",
+          "content": {
+            "type": "text",
+            "value": "<u>START</u>"
+          },
+          "effects": {
+            "general": {
+              "position":{
+                "type":"absolute",
+                "top": "45%",
+                "left": "37.39%"
+              },
+              "font":{
+                "font-family":"indieFlower"
+              },
+              "size":{
+                "type":"scalable",
+                "value":0.04
+              },"z-index":{
+                "index":103
+              },
+              "fill": {
+                "color": "#fff"
+              },
+              "stroke": {
+                "color": "#00ff00",
+                "thickness": "0px"
+              }
+            },
+            "entrance": {
+              "fade": {
+                "type": "linear",
+                "duration": 0.5
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            }
+          }
+        },{
+          "id": "501",
+          "content": {
+            "type": "img",
+            "value": "img/black.jpg"
+          },
+          "properties": {},
+          "effects": {
+            "general": {
+              "position": {
+                "type": "absolute",
+                "top": "0%",
+                "left": "0%"
+              },
+              "opacity":{
+                "opacity":"0.7"
+              }
+
+            },
+            "entrance": {},
+            "exit": {
+              "hide": true
+            },
+            "clickable": {},
+            "hover": {},
+            "mousePressed": {}
+          }
+        }
+        
+      ]
+    },
+    {
       "name": "intro",
       "id": "INTRO",
       "actions": [
@@ -561,6 +1119,46 @@
           "elicit": "display",
           "delay": 0,
           "info":"background content it should start auto but need an interaction"
+        },
+         {
+          "id":"01",
+          "tailID": "INTRO",
+          "headID": "000",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"01",
+          "tailID": "INTRO",
+          "headID": "000",
+          "trigger": "time",
+          "elicit": "clickable",
+          "delay": 0
+        },
+        {
+          "id":"01",
+          "tailID": "000",
+          "headID": "000",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+        {
+          "id":"01",
+          "tailID": "000",
+          "headID": "001",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+        {
+          "id":"01",
+          "tailID": "000",
+          "headID": "INSTUCTIONS",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0
         },
         {
           "id":"01",
@@ -578,6 +1176,7 @@
           "elicit": "clickable",
           "delay": 0
         },
+
         {
           "id":"03",
           "tailID": "001",
@@ -585,109 +1184,12 @@
           "trigger": "click",
           "elicit": "hide",
           "delay": 0
-        },
-        {
-          "id":"04",
-          "tailID": "INTRO",
-          "headID": "901",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id":"05",
-          "tailID": "INTRO",
-          "headID": "902",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id":"06",
-          "tailID": "INTRO",
-          "headID": "903",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id":"07",
-          "tailID": "INTRO",
-          "headID": "904",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id":"08",
-          "tailID": "INTRO",
-          "headID": "905",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id":"09",
-          "tailID": "INTRO",
-          "headID": "906",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id":"010",
-          "tailID": "INTRO",
-          "headID": "907",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id":"011",
-          "tailID": "INTRO",
-          "headID": "908",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id":"012",
-          "tailID": "INTRO",
-          "headID": "909",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id":"013",
-          "tailID": "INTRO",
-          "headID": "910",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id":"014",
-          "tailID": "INTRO",
-          "headID": "911",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id":"015",
-          "tailID": "INTRO",
-          "headID": "912",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id":"016",
-          "tailID": "INTRO",
-          "headID": "913",
-          "trigger": "time",
-          "elicit": "display",
+        }, {
+          "id":"03",
+          "tailID": "001",
+          "headID": "000",
+          "trigger": "click",
+          "elicit": "hide",
           "delay": 0
         },
         {
@@ -713,14 +1215,6 @@
           "trigger": "click",
           "elicit": "clickable",
           "delay": 17
-        },
-        {
-          "id":"020",
-          "tailID": "001",
-          "headID": "901",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
         },
         {
           "id":"021",
@@ -793,6 +1287,52 @@
           }
         },
         {
+          "id": "000",
+          "content": {
+            "type": "text",
+            "value": "< Directions"
+          },
+          "effects": {
+            "general": {
+              "position":{
+                "type":"absolute",
+                "top":"2%",
+                "left":"2%"
+              },
+
+              "size": {
+                "type": "scalable",
+                "value":0.02
+              },"font":{
+                "font-family":"indieFlower"
+              },"fill": {
+                "color": "#fff"
+              },
+              "stroke": {
+                "color": "#00ff00",
+                "thickness": "0px"
+              }
+            },
+            "entrance": {
+              "fade": {
+                "type": "linear",
+                "duration": 0.5
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            }
+          }
+        },{
           "id": "001",
           "content": {
             "type": "text",

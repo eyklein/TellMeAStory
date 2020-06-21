@@ -3,6 +3,8 @@ var currentStory;
 
 var timeDelays={};
 
+var cookie = new Cookie();
+
 //var absoluteLocation="https://eyklein.github.io/TellMeAStory/";
 var absoluteLocation="";
 
@@ -427,7 +429,7 @@ class Story{
 
 
 	//loads the new scene and tracks path (maybe just use this to start and track elseware?)
-	newScene(newScene_, inheritedContent_){
+	newScene(newScene_){
 		// console.log(newScene_)
 		if(newScene_ instanceof Scene){
 
@@ -440,6 +442,13 @@ class Story{
 				"scene":newScene_.id,
 				"time":Date.now()
 			});
+
+			if(newScene_.id != "CONSTRUCT" && newScene_.id != "INSTUCTIONS" && newScene_.id != "INTRO"){
+				cookie.set("scene", newScene_.id)
+			}else{
+				cookie.delete("scene")
+			}
+			
 
 			this.currentScene=newScene_;
 			dataLayer.push({
@@ -458,7 +467,7 @@ class Story{
 	}
 
 	start(){
-		currentStory.newScene('INTRO');
+		currentStory.newScene('CONSTRUCT');
 		//currentStory.windowManager=new WindowManager();
 		loadScreen.hide();
 		currentStory.windowManager.createMainButtons();

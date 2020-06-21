@@ -21,7 +21,7 @@ function deleteCookie(name) {
     document.cookie = name+'=; Max-Age=-99999999;';  
 }
 
-
+var scalableTextEffects=[];
 function updateContentSize(){
 	
 	let contentDiv=document.getElementById("content");
@@ -75,6 +75,12 @@ function updateContentSize(){
 	// currentStory.windowManager.volumes.style.width=width*.25+"px";
 
 	//currentStory.windowManager.playPause.style.width=height*.03+'px';
+
+	//update all text font size effects
+	for(let effect in scalableTextEffects){
+		console.log("update size")
+		scalableTextEffects[effect].updateSize(width);
+	}
 
 
 

@@ -13,6 +13,15 @@ class Action{
 		this.delay=actionJSON_.delay;//time/click are the basic but could be any sensable action...
 		this.passOnInheritance=undefined;
 
+		if(actionJSON_.conditions != undefined){
+			this.conditionals=[] //all contitions are evaluated as AND conditions
+			for(let condition of actionJSON_.conditions){
+				this.conditionals.push(new Conditional(condition));
+			}
+			
+			
+		}
+
 
 		this.order=1;
 		this.bePositionSet=false;
@@ -30,6 +39,8 @@ class Action{
 		this.html.be.pos={};
 		this.html.be.pos.x={};
 		this.html.be.pos.y={};
+
+
 
 
 		// console.log(actionJSON_.id)
@@ -84,10 +95,8 @@ class Action{
 			this.timer.skip(skipTime_)
 		}
 	}
-	onEvent(){//this and action must be bound
-		//this.activateExitEffects();
-		//console.log(this.id)
-		//console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+	onEvent(){
+		
 		this.activate();
 	}
 
@@ -102,8 +111,24 @@ class Action{
 	removeEventListener(){
 		this.tail.html.fe.removeEventListener("click", this.onEventBind );
 	}
-
 	activate(){
+		//console.log(this.conditionals)
+		if(this.conditionals != undefined){
+			for(let conditional of this.conditionals){
+				if(conditional.eval() == false){
+					return;
+				}
+				
+			}
+			this.activateNow();
+		}else{
+			this.activateNow();
+		}
+
+	}
+
+	activateNow(){
+		
 		//console.log("activate " + this.id)
 		if(this.elicit=="display"){
 

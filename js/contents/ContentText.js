@@ -24,7 +24,15 @@ class TextContent extends Content{
 				this.effects.general[effect]=new StrokeTextEffect(this.JSONData.effects.general[effect],this)
 			}else if(effect=="position"){
 				this.effects.general[effect]=new PositionTextEffect(this.JSONData.effects.general[effect],this)
-			}else if(effect=="z-index"){
+			}
+			else if(effect=="dimensions"){
+				this.effects.general[effect]=new DimensionsTextEffect(this.JSONData.effects.general[effect],this)
+			}
+			else if(effect=="size"){
+				
+				this.effects.general[effect]=new SizeTextEffect(this.JSONData.effects.general[effect],this)
+			}
+			else if(effect=="z-index"){
 				this.effects.general[effect] = new ZIndexEffect(this.JSONData.effects.general[effect],this)
 			}else if(effect=="font"){
 				this.effects.general[effect] = new FontTextEffect(this.JSONData.effects.general[effect],this)
