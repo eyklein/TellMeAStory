@@ -1,6 +1,11 @@
-class PositionNode{ //not to be confused with nodejs
+class SceneNode{ //not to be confused with nodejs
 	constructor(scene_){
 		this.scene=scene_;
+
+		this.parents=[];
+		this.parentsInfo={};
+		this.children=[];
+		this.childrenInfo={};
 
 
 		
@@ -17,22 +22,22 @@ class PositionNode{ //not to be confused with nodejs
 		// this.position={} //absolute position
 		// this.position.x;
 		// this.position.y;
-		this.posIndex={}
-		this.posIndex.x;
-		this.posIndex.y;
+		// this.posIndex={}
+		// this.posIndex.x;
+		// this.posIndex.y;
 
-		this.spacingIndex={}
-		this.spacingIndex.x;
-		this.spacingIndex.y;
-
-		
-
-
+		// this.spacingIndex={}
+		// this.spacingIndex.x;
+		// this.spacingIndex.y;
 
 		
+
+
+
 		
-		//this.siblingNodes=[];
-		this.prevSiblingNodes=[];
+		
+		// //this.siblingNodes=[];
+		// this.prevSiblingNodes=[];
 	}
 
 	setParents(){

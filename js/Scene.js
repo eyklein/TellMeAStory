@@ -10,14 +10,16 @@ class Scene{
 		this.name=this.sceneData.name;
 		this.play=play_;
 		this.html={};
-		this.prevScenes={}//the previous scene(s) that get to this scene
-		this.nextScenes={}//the next scene(s)
 
-		this.nextScenesArray=[]//the next scene(s)
-		this.prevScenesArray=[]//the next scene(s)
+		this.node=new SceneNode(this);
+		// this.prevScenes={}//the previous scene(s) that get to this scene
+		// this.nextScenes={}//the next scene(s)
 
-		this.scenesUp;//all the scenes that led up to this one (only get one posibility)
-		this.index;
+		// this.nextScenesArray=[]//the next scene(s)
+		// this.prevScenesArray=[]//the next scene(s)
+
+		// this.scenesUp;//all the scenes that led up to this one (only get one posibility)
+		// this.index;
 
 
 		//this.backEndModual={};
@@ -78,7 +80,7 @@ class Scene{
 
 	addBackEnd(){
 		this.be={};
-		this.be.node=new PositionNode(this);
+		//this.be.node=new PositionNode(this);
 
 
 		this.be.html=document.createElement("div");
@@ -89,16 +91,16 @@ class Scene{
 		this.be.html.innerHTML=this.id;
 		this.be.html.style.opacity=.8;
 
-		this.be.spacing={};
-		this.be.spacing.top=0;//default
-		this.be.spacing.left=0;
+		// this.be.spacing={};
+		// this.be.spacing.top=0;//default
+		// this.be.spacing.left=0;
 
 
 		
 
 
-		this.be.spacing={}
-		this.be.spacing.myUnitWidth=Math.max(1,size(this.nextScenes));
+		// this.be.spacing={}
+		// this.be.spacing.myUnitWidth=Math.max(1,size(this.nextScenes));
 	}
 
 	getBackEndLeftPos(){

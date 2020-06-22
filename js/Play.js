@@ -118,8 +118,8 @@ class Story{
 	  		this.scenesLib[scenesData_[i].id].addActions(scenesData_[i])
 	  	}
 
-	  	this.setLastAndNextScenes();
-	  	this.setSceneIndexNumbers();
+	  	this.setLastAndNextSceneNodes();
+	  	//this.setSceneIndexNumbers();
 
 	  	this.addScenesBackEnd();
 	  	this.setWidthSceneBackEnd();
@@ -136,8 +136,8 @@ class Story{
 
 	}
 
-	setLastAndNextScenes(){
-		//
+	setLastAndNextSceneNodes(){
+		
 		
 		for(let scene in this.scenesLib){
 			for(let action in this.scenesLib[scene].actionsLib){
@@ -146,41 +146,39 @@ class Story{
 					let trailingScene = this.scenesLib[scene].actionsLib[action].head;
 					
 					//set last scenes
-					if(trailingScene.prevScenes[leadingScene.id] == undefined){
-						trailingScene.prevScenes[leadingScene.id]={};
-						trailingScene.prevScenes[leadingScene.id].count=1;
-						trailingScene.prevScenes[leadingScene.id].scene = leadingScene;
-						trailingScene.prevScenes[leadingScene.id].order=size(trailingScene.prevScenes)-1;
-
-						// console.log(trailingScene.id + " : " )
-						// console.log(size(trailingScene.prevScenes)-1)
-						//set the index amungs siblings
-						//trailingScene.siblingIndex = size(trailingScene.prevScenes)-1;
-
-
-
-						//trailingScene.prevScenesArray.push(previousScene);
+					console.log(trailingScene.node.parents.indexOf(leadingScene))
+					if(trailingScene.node.parents.indexOf(leadingScene.node) == -1){
 						
+						trailingScene.node.parents.push(leadingScene.node);
+
+
+						trailingScene.node.parentsInfo[leadingScene.id]={};
+						trailingScene.node.parentsInfo[leadingScene.id].count=1;
+						trailingScene.node.parentsInfo[leadingScene.id].scene = leadingScene;
+						trailingScene.node.parentsInfo[leadingScene.id].order = trailingScene.node.parents.length-1;
+
+
+
 					}
 					else{
-						trailingScene.prevScenes[previousScene.id].count++;
+						trailingScene.node.parentsInfo[leadingScene.id].count++;
 					}
 
-					//set next scenes
-					if(leadingScene.nextScenes[trailingScene.id] == undefined){
-						leadingScene.nextScenes[trailingScene.id]={};
-						leadingScene.nextScenes[trailingScene.id].count=1;
-						leadingScene.nextScenes[trailingScene.id].scene = trailingScene;
-						leadingScene.nextScenes[trailingScene.id].order=size(leadingScene.nextScenes)-1;
+					if(leadingScene.node.children.indexOf(trailingScene.node) == -1){
 
-						leadingScene.nextScenes[trailingScene.id].order=size(leadingScene.nextScenes)-1;
+						leadingScene.node.children.push(trailingScene.node);
 
-						trailingScene.siblingIndex = size(leadingScene.nextScenes)-1;
-
-						//leadingScene.nextScenesArray.push(currentScene);
+						leadingScene.node.childrenInfo[trailingScene.id]={};
+						leadingScene.node.childrenInfo[trailingScene.id].count=1;
+						leadingScene.node.childrenInfo[trailingScene.id].scene = trailingScene;
+						leadingScene.node.childrenInfo[trailingScene.id].node = trailingScene.node;
+						leadingScene.node.childrenInfo[trailingScene.id].order = leadingScene.node.children.length-1;
+					
+						
 					}else{
-						leadingScene.nextScenes[trailingScene.id].count++;
+						leadingScene.node.childrenInfo[trailingScene.id].count++;
 					}
+
 				}
 			}
 		}
@@ -188,20 +186,20 @@ class Story{
 
 
 	setSceneIndexNumbers(){
-		let baseScenes=[]
+		// let baseScenes=[]
 
-		//get base scenes
-		for(let scene in this.scenesLib){
-			if(size(this.scenesLib[scene].prevScenes)==0){
-				//this.scenesLib[scene].index=0;
-				baseScenes.push(this.scenesLib[scene]);
-				//baseScenes[this.scenesLib[scene].id]	
-			}
-		}
-		for(let scene in baseScenes){
-			//console.log(baseScenes[scene]);
-			baseScenes[scene].setIndexNumberRecusive(0,[])
-		}
+		// //get base scenes
+		// for(let scene in this.scenesLib){
+		// 	if(size(this.scenesLib[scene].prevScenes)==0){
+		// 		//this.scenesLib[scene].index=0;
+		// 		baseScenes.push(this.scenesLib[scene]);
+		// 		//baseScenes[this.scenesLib[scene].id]	
+		// 	}
+		// }
+		// for(let scene in baseScenes){
+		// 	//console.log(baseScenes[scene]);
+		// 	baseScenes[scene].setIndexNumberRecusive(0,[])
+		// }
 
 	}
 	addScenesBackEnd(){
@@ -219,17 +217,17 @@ class Story{
 	}
 	setSceneNodeParents(){
 		for(let scene in this.scenesLib){
-			this.scenesLib[scene].be.node.setParents();
+			this.scenesLib[scene].node.setParents();
 		}
 	}
 	setSceneNodeChildren(){
 		for(let scene in this.scenesLib){
-			this.scenesLib[scene].be.node.setChildren();
+			this.scenesLib[scene].node.setChildren();
 		}
 	}
 	setSceneNodePrevSiblings(){
 		for(let scene in this.scenesLib){
-			this.scenesLib[scene].be.node.setPrevSiblings();
+			this.scenesLib[scene].node.setPrevSiblings();
 		}
 	}
 
