@@ -142,33 +142,44 @@ class Story{
 		for(let scene in this.scenesLib){
 			for(let action in this.scenesLib[scene].actionsLib){
 				if(this.scenesLib[scene].actionsLib[action].head instanceof Scene){
-					let previousScene = this.scenesLib[scene].actionsLib[action].scene;
-					let currentScene = this.scenesLib[scene].actionsLib[action].head;
+					let leadingScene = this.scenesLib[scene].actionsLib[action].scene;
+					let trailingScene = this.scenesLib[scene].actionsLib[action].head;
 					
 					//set last scenes
-					if(currentScene.prevScenes[previousScene.id] == undefined){
-						currentScene.prevScenes[previousScene.id]={};
-						currentScene.prevScenes[previousScene.id].count=1;
-						currentScene.prevScenes[previousScene.id].scene = previousScene;
-						currentScene.prevScenes[previousScene.id].order=size(currentScene.prevScenes)
+					if(trailingScene.prevScenes[leadingScene.id] == undefined){
+						trailingScene.prevScenes[leadingScene.id]={};
+						trailingScene.prevScenes[leadingScene.id].count=1;
+						trailingScene.prevScenes[leadingScene.id].scene = leadingScene;
+						trailingScene.prevScenes[leadingScene.id].order=size(trailingScene.prevScenes)-1;
 
-						//currentScene.prevScenesArray.push(previousScene);
+						// console.log(trailingScene.id + " : " )
+						// console.log(size(trailingScene.prevScenes)-1)
+						//set the index amungs siblings
+						//trailingScene.siblingIndex = size(trailingScene.prevScenes)-1;
+
+
+
+						//trailingScene.prevScenesArray.push(previousScene);
 						
 					}
 					else{
-						currentScene.prevScenes[previousScene.id].count++;
+						trailingScene.prevScenes[previousScene.id].count++;
 					}
 
 					//set next scenes
-					if(previousScene.nextScenes[currentScene.id] == undefined){
-						previousScene.nextScenes[currentScene.id]={};
-						previousScene.nextScenes[currentScene.id].count=1;
-						previousScene.nextScenes[currentScene.id].scene = currentScene;
-						previousScene.nextScenes[currentScene.id].order=size(previousScene.nextScenes);
+					if(leadingScene.nextScenes[trailingScene.id] == undefined){
+						leadingScene.nextScenes[trailingScene.id]={};
+						leadingScene.nextScenes[trailingScene.id].count=1;
+						leadingScene.nextScenes[trailingScene.id].scene = trailingScene;
+						leadingScene.nextScenes[trailingScene.id].order=size(leadingScene.nextScenes)-1;
 
-						//previousScene.nextScenesArray.push(currentScene);
+						leadingScene.nextScenes[trailingScene.id].order=size(leadingScene.nextScenes)-1;
+
+						trailingScene.siblingIndex = size(leadingScene.nextScenes)-1;
+
+						//leadingScene.nextScenesArray.push(currentScene);
 					}else{
-						previousScene.nextScenes[currentScene.id].count++;
+						leadingScene.nextScenes[trailingScene.id].count++;
 					}
 				}
 			}

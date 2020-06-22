@@ -13,8 +13,9 @@ class Scene{
 		this.prevScenes={}//the previous scene(s) that get to this scene
 		this.nextScenes={}//the next scene(s)
 
-		// this.nextScenesArray=[]//the next scene(s)
-		// this.prevScenesArray=[]//the next scene(s)
+		this.nextScenesArray=[]//the next scene(s)
+		this.prevScenesArray=[]//the next scene(s)
+
 		this.scenesUp;//all the scenes that led up to this one (only get one posibility)
 		this.index;
 
@@ -114,6 +115,8 @@ class Scene{
 
 	}
 	getUnitWidths(){//reterns all the unit widths with cascading children
+
+		console.log("getUnitWidths !!!!!!!!!!!!!!!!!!!!")
 		let childrensWidths=[];
 
 		let deaperNextScenes={}
@@ -140,9 +143,24 @@ class Scene{
 	}
 
 	setBESpacingWidth(){
+		//this.be.siblibgIndex = this.getSiblingIndex();
 		
-		this.be.spacing.unitWidths=this.getUnitWidths(); //could be more efficent ??? 
+		//this.be.spacing.unitWidths=this.getUnitWidths(); //could be more efficent ??? 
 	}
+
+	// getSiblingIndex(){
+	// 	if(this.prevScenesArray.length>0){
+	// 		for(let i in this.prevScenesArray){
+	// 			console.log(this.prevScenesArray[i].id + "  compair to " + this.id)
+	// 			if(this.prevScenesArray[i]==this){
+	// 				console.log("true")
+	// 				return i;
+	// 			}
+	// 		}
+	// 		return null;
+			
+	// 	}
+	// }
 
 
 

@@ -6,7 +6,7 @@ class EditorWindow{
 		this.pos.x=0;
 		this.pos.y=0;
 
-		this.width=1000;
+		this.width=800;
 		this.height=1000;
 
 		this.createHTML();
