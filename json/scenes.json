@@ -670,7 +670,7 @@
           "id":"023",
           "tailID": "CONSTRUCT",
           "headID": "INSTUCTIONS",
-          "conditions":["cookie.scene==undefined"],
+          "conditions":["false"],
           "trigger": "time",
           "elicit": "display",
           "delay": 0
@@ -679,7 +679,7 @@
           "id":"023",
           "tailID": "CONSTRUCT",
           "headID": "INTRO",
-          "conditions":["cookie.scene!=undefined"],
+          "conditions":["true"],
           "trigger": "time",
           "elicit": "display",
           "delay": 0
