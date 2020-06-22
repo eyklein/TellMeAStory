@@ -155,6 +155,7 @@ class Story{
 						trailingScene.node.parentsInfo[leadingScene.id]={};
 						trailingScene.node.parentsInfo[leadingScene.id].count=1;
 						trailingScene.node.parentsInfo[leadingScene.id].scene = leadingScene;
+						trailingScene.node.parentsInfo[leadingScene.id].node = leadingScene.node;
 						trailingScene.node.parentsInfo[leadingScene.id].order = trailingScene.node.parents.length-1;
 
 
