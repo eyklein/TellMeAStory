@@ -23,7 +23,9 @@ window.onload=function(){
 	pageLoaded=true;
 	if(dataLoaded){//if the data is already loaded
 
-		// console.log(window.onload.data)
+		
+		currentStory.startingScene = window.onload.data.startingScene;
+		
 		populateStory(window.onload.data.scenes)
 		
 	}
@@ -32,6 +34,7 @@ window.onload=function(){
 var backEnd;
 
 function populateStory(sceneData_){
+
 	currentStory.loadScenesLib(sceneData_);//one or the other
 		
 	currentStory.createScenesFrontEndHTMLs();

@@ -122,11 +122,15 @@ class Story{
 	  	//this.setSceneIndexNumbers();
 
 	  	this.addScenesBackEnd();
-	  	this.setWidthSceneBackEnd();
+	  	// this.setWidthSceneBackEnd();
 
-	  	this.setSceneNodeParents();
-	  	this.setSceneNodeChildren();
-	  	this.setSceneNodePrevSiblings();
+	  	// this.setSceneNodeParents();
+	  	// this.setSceneNodeChildren();
+
+
+	  	this.setSceneIndexNumbers();
+	  	this.setWidthSceneNodes();
+	  	//this.setSceneNodePrevSiblings();
 	  	// this.setSceneNodePositions();
 
 	  	// this.setLeftOffsets();
@@ -187,16 +191,23 @@ class Story{
 
 
 	setSceneIndexNumbers(){
-		// let baseScenes=[]
+		let baseScenes=[]
 
-		// //get base scenes
-		// for(let scene in this.scenesLib){
-		// 	if(size(this.scenesLib[scene].prevScenes)==0){
-		// 		//this.scenesLib[scene].index=0;
-		// 		baseScenes.push(this.scenesLib[scene]);
-		// 		//baseScenes[this.scenesLib[scene].id]	
-		// 	}
-		// }
+		//get base scenes
+		for(let scene in this.scenesLib){
+			if(this.scenesLib[scene].node.parents==0){
+				//this.scenesLib[scene].index=0;
+
+				this.scenesLib[scene].node.isBase=true;
+				console.log("#######*******************************###")
+
+				//baseScenes.push(this.scenesLib[scene]);
+				//baseScenes[this.scenesLib[scene].id]	
+			}else{
+				this.scenesLib[scene].node.isBase=false;
+				console.log("false")
+			}
+		}
 		// for(let scene in baseScenes){
 		// 	//console.log(baseScenes[scene]);
 		// 	baseScenes[scene].setIndexNumberRecusive(0,[])
@@ -209,28 +220,28 @@ class Story{
 		}
 
 	}
-	setWidthSceneBackEnd(){
+	setWidthSceneNodes(){
 
 		for(let scene in this.scenesLib){
-			this.scenesLib[scene].setBESpacingWidth();
+			this.scenesLib[scene].node.setWidth()
 		}
 		
 	}
-	setSceneNodeParents(){
-		for(let scene in this.scenesLib){
-			this.scenesLib[scene].node.setParents();
-		}
-	}
-	setSceneNodeChildren(){
-		for(let scene in this.scenesLib){
-			this.scenesLib[scene].node.setChildren();
-		}
-	}
-	setSceneNodePrevSiblings(){
-		for(let scene in this.scenesLib){
-			this.scenesLib[scene].node.setPrevSiblings();
-		}
-	}
+	// setSceneNodeParents(){
+	// 	for(let scene in this.scenesLib){
+	// 		this.scenesLib[scene].node.setParents();
+	// 	}
+	// }
+	// setSceneNodeChildren(){
+	// 	for(let scene in this.scenesLib){
+	// 		this.scenesLib[scene].node.setChildren();
+	// 	}
+	// }
+	// setSceneNodePrevSiblings(){
+	// 	for(let scene in this.scenesLib){
+	// 		this.scenesLib[scene].node.setPrevSiblings();
+	// 	}
+	// }
 
 	// setSceneNodePositions(){
 	// 	for(let scene in this.scenesLib){
@@ -453,11 +464,11 @@ class Story{
 				"time":Date.now()
 			});
 
-			if(newScene_.id != "CONSTRUCT" && newScene_.id != "INSTUCTIONS" && newScene_.id != "INTRO"){
+			//if(newScene_.id != "CONSTRUCT" && newScene_.id != "INSTUCTIONS" && newScene_.id != "INTRO"){
 				cookie.set("scene", newScene_.id)
-			}else{
-				cookie.delete("scene")
-			}
+			// }else{
+			// 	cookie.delete("scene")
+			// }
 			
 
 			this.currentScene=newScene_;
@@ -477,10 +488,11 @@ class Story{
 	}
 
 	start(){
-		currentStory.newScene('CONSTRUCT');
+		console.log(this.startingScene)
+		this.newScene(this.startingScene);
 		//currentStory.windowManager=new WindowManager();
 		loadScreen.hide();
-		currentStory.windowManager.createMainButtons();
+		this.windowManager.createMainButtons();
 		//updateContentSize();
 	}
 
@@ -547,7 +559,7 @@ fetch(absoluteLocation + "json/scenes.json")
 	}).then(function(data){
 		//console.log(data.scenes)
 		
-		
+		//currentStroy.startingScene = data.startingScene;
 		
 		window.onload.data=data;
 		dataLoaded=true;
@@ -558,6 +570,7 @@ fetch(absoluteLocation + "json/scenes.json")
 	
 		if(pageLoaded){//if the page is already loaded otherwise do this on page load
 
+			currentStory.startingScene = data.startingScene;
 			populateStory(data.scenes)
 
 			// currentStory.loadScenesLib(data.scenes);//one or the other

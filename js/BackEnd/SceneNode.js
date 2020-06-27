@@ -7,6 +7,8 @@ class SceneNode{ //not to be confused with nodejs
 		this.children=[];
 		this.childrenInfo={};
 
+		this.width=0;
+
 
 		
 		//offset effects children and siblings bot not object
@@ -71,18 +73,30 @@ class SceneNode{ //not to be confused with nodejs
 		}
 		 
 	}
-	setWidthIndexBottomUp(){
+	// setWidthIndexBottomUp(){
 		
 
-	}
-	setPositionIndexTopDown(){
-		for(let node of this.childrenNodes){
-			node.setPositionIndexTopDown()
-		}
-		this.posIndex.x=this.prevSiblingNodes
-		this.posIndex.x=this.parentNodes[0].posIndex.x+this.prevSiblingNodes.length;
-		for(let node of this.childrenNodes){
-			node.setPositionIndexDown();
+	// }
+	// setPositionIndexTopDown(){
+	// 	for(let node of this.childrenNodes){
+	// 		node.setPositionIndexTopDown()
+	// 	}
+	// 	this.posIndex.x=this.prevSiblingNodes
+	// 	this.posIndex.x=this.parentNodes[0].posIndex.x+this.prevSiblingNodes.length;
+	// 	for(let node of this.childrenNodes){
+	// 		node.setPositionIndexDown();
+	// 	}
+	// }
+
+	// addWidthParents(){
+	// 	for(let parentScene for this.parents){
+	// 		parentScene.width++;
+	// 	}
+	// }
+
+	setWidth(){
+		if(this.children.length==0){ //only if it is at the bottom of the root
+			this.width=1;
 		}
 	}
 
