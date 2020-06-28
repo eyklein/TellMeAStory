@@ -15,7 +15,7 @@ class LinkImageEffect extends ImageEffect{
 				window.open(this.vareables.src);
 			}else if(this.vareables.type == "window"){
 				window.open(this.vareables.src,this.vareables.name,
-    "resizable,scrollbars,status");
+    "toolbar=yes,scrollbars=yes,resizable=yes, location=yes,menubar=yes");
 			}else if(this.vareables.type == "redirect"){
 				window.location.href = this.vareables.src;
 
