@@ -17,6 +17,8 @@ class ImageContent extends Content{
 			return new HideImageEffect(effectJSON_,this)
 		}else if(effectName_=="translate"){
 			return new TranslateImageEffect(effectJSON_,this)
+		}else if(effectName_=="link"){
+			return new LinkImageEffect(effectJSON_,this)
 		}
 		else{
 			return new ImageEffect(effectJSON_,this)

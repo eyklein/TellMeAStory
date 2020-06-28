@@ -7,7 +7,7 @@ class LinkTextEffect extends TextEffect{
 	}
 
 	apply(){
-		console.log("LINK ========" + this.parentContent.html.fe.innerText.link(this.vareables.src))
+		
 		this.parentContent.html.fe.innerHTML = this.parentContent.html.fe.innerText.link(this.vareables.src);
 
 	}
