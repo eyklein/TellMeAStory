@@ -4664,6 +4664,22 @@
           "delay": 0,
           "info": "Goodnight"
         },{
+          "id": "5001",
+          "tailID": "END-AS",
+          "headID": "504",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info": "Servey"
+        },{
+          "id": "5001",
+          "tailID": "END-AS",
+          "headID": "504",
+          "trigger": "time",
+          "elicit": "clickable",
+          "delay": 0,
+          "info": "Servey"
+        },{
           "id": "500",
           "tailID": "502",
           "headID": "501",
@@ -4823,6 +4839,52 @@
             "hover": {
               "glow": {
                 "className": "glow-gif-blue"
+              }
+            },
+            "mousePressed": {
+              "glow": {
+                "className": "glow-gif-red"
+              }
+            }
+          }
+        },{
+          "id": "504",
+          "content": {
+            "type": "img",
+            "value": "img/Survey.jpg"
+          },
+          "effects": {
+            "general": {
+              "position": {
+                "type": "absolute",
+                "top": "55%",
+                "left": "30%"
+              }, 
+              "opacity":{
+                "opacity":"0.7"
+              },
+              "link":{
+                "src":"https://docs.google.com/forms/d/1oZlHlhHczbDChWalHlXrPd_tUzoRlUVXF88QyvGqYwg/edit?ts=5ef23f06",
+                "type":"window",
+                "name":"Aeaea Servey"
+              }
+            },
+            "entrance": {},
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow-gif"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            },
+            "hover": {
+              "glow": {
+                "className": "glow-gif-red"
               }
             },
             "mousePressed": {
