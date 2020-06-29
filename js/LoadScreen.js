@@ -94,6 +94,13 @@ class LoadScreen{
 	}
 	hide(){
 		clearInterval(this.updateInterval);
+		console.log(currentStory.windowManager.html.content)
+		console.log(this.html.loadDisplay)
+		console.log(this.html.loadDisplay.parentNode)
+
+		//this.html.loadDisplay.parentNode.removeChild(this.html.loadDisplay);
+
+		//document.getElementById('content').removeChild(this.html.loadDisplay)
 		currentStory.windowManager.html.content.removeChild(this.html.loadDisplay);
 		updateContentSize();
 		// currentStory.windowManager.addFullScreen();
@@ -121,7 +128,7 @@ class LoadScreen{
 					'event':'pageLoaded'
 				});
 
-				currentStory.start();
+				// currentStory.start();
 			}
 			//console.log((this.loadedAudioFiles/this.numAudioFiles*100));
 		}

@@ -18,8 +18,10 @@ class EditorWindow{
 		this.html.style.position = "absolute";
 		this.html.style.left = this.pos.x;
 		this.html.style.top = this.pos.y;
-		this.html.style.width = this.width + "px";
-		this.html.style.height = this.height + "px";
+		this.html.style.width = "70%"//this.width + "px";
+		this.html.style.height = "80%"//this.height + "px";
+
+		this.html.style.overflow = "scroll";
 
 		this.html.style['z-index']=100;
 

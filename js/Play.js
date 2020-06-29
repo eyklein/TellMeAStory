@@ -75,6 +75,7 @@ class Story{
 		this.volume={};
 		this.volume['main']=1;
 		this.volume['background']=.8;
+		this.currentScene=null;
 
 
 		// this.mainVolume=1;
@@ -119,7 +120,8 @@ class Story{
 	  	}
 
 	  	this.setLastAndNextSceneNodes();
-	  	//this.setSceneIndexNumbers();
+
+
 
 	  	this.addScenesBackEnd();
 	  	// this.setWidthSceneBackEnd();
@@ -129,7 +131,9 @@ class Story{
 
 
 	  	this.setSceneIndexNumbers();
-	  	this.setWidthSceneNodes();
+	  	this.setSceneFullWidth()
+	  	this.setRelativePositionIndex();
+	  	this.setPositionIndex();
 	  	//this.setSceneNodePrevSiblings();
 	  	// this.setSceneNodePositions();
 
@@ -151,7 +155,7 @@ class Story{
 					
 					//set last scenes
 					console.log(trailingScene.node.parents.indexOf(leadingScene))
-					if(trailingScene.node.parents.indexOf(leadingScene.node) == -1){
+					if(trailingScene.node.parents.indexOf(leadingScene.node) == -1){ 
 						
 						trailingScene.node.parents.push(leadingScene.node);
 
@@ -191,29 +195,57 @@ class Story{
 
 
 	setSceneIndexNumbers(){
-		let baseScenes=[]
+		this.baseSceneNodes=[]
+		this.rootEndSceneNodes=[]
 
 		//get base scenes
+
+		//find the scenes with no parent nodes those are the base nodes
 		for(let scene in this.scenesLib){
 			if(this.scenesLib[scene].node.parents==0){
 				//this.scenesLib[scene].index=0;
 
 				this.scenesLib[scene].node.isBase=true;
-				console.log("#######*******************************###")
+				this.baseSceneNodes.push(this.scenesLib[scene].node);
+				//console.log("#######*******************************###")
 
 				//baseScenes.push(this.scenesLib[scene]);
 				//baseScenes[this.scenesLib[scene].id]	
 			}else{
 				this.scenesLib[scene].node.isBase=false;
-				console.log("false")
+				//console.log("false")
 			}
 		}
+
+		for(let i in this.baseSceneNodes){
+			this.baseSceneNodes[i].assignDescendentsIndexes(0);
+		}
+
+
 		// for(let scene in baseScenes){
 		// 	//console.log(baseScenes[scene]);
 		// 	baseScenes[scene].setIndexNumberRecusive(0,[])
 		// }
 
 	}
+	setSceneFullWidth(){
+		for(let i in this.rootEndSceneNodes){
+			this.rootEndSceneNodes[i].setFullWidthCascadeUp(1)
+		}
+	}
+	setRelativePositionIndex(){
+		for(let i in this.scenesLib){
+			this.scenesLib[i].node.setRelativePosition();
+		}
+	}
+	setPositionIndex(){
+		//console.log("setPositionIndex")
+		for(let i in this.baseSceneNodes){ //cascades down
+			//console.log(this.baseSceneNodes[i])
+			this.baseSceneNodes[i].setPosition();
+		}
+	}
+
 	addScenesBackEnd(){
 		for(let scene in this.scenesLib){
 			this.scenesLib[scene].addBackEnd();
@@ -268,6 +300,24 @@ class Story{
 			
 	// 	}
 	// }
+
+	loadAudio(){
+		console.log("LOAD AND NOW")
+
+		priorityAudioLoader.rankPriority();
+
+		priorityAudioLoader.populateHistogram();
+
+		priorityAudioLoader.loadAudioBucket(0);
+		// for(let audioUrl in priorityAudioLoader.files){
+			
+		// 	priorityAudioLoader.files[audioUrl].rankPriority();
+		// }
+		// for(let audioUrl in priorityAudioLoader.files){
+		// 	console.log(audioUrl)
+		// 	priorityAudioLoader.files[audioUrl].load();
+		// }
+	}
 
 	updatePlayPause(){
 		if(this.isPlayable()){
@@ -488,6 +538,7 @@ class Story{
 	}
 
 	start(){
+
 		console.log(this.startingScene)
 		this.newScene(this.startingScene);
 		//currentStory.windowManager=new WindowManager();
@@ -563,6 +614,8 @@ fetch(absoluteLocation + "json/scenes.json")
 		
 		window.onload.data=data;
 		dataLoaded=true;
+
+		console.log("JSON LOADED!!!!!!!!!!!!!!!")
 		
 
 		//console.log("loading scen data");
@@ -570,8 +623,15 @@ fetch(absoluteLocation + "json/scenes.json")
 	
 		if(pageLoaded){//if the page is already loaded otherwise do this on page load
 
+			//console.log("pageLoaded loaded first then dataLoaded")
 			currentStory.startingScene = data.startingScene;
 			populateStory(data.scenes)
+
+			currentStory.loadAudio();
+			// for(let audioUrl in priorityAudioLoader.files){
+			// 	console.log(audioUrl)
+			// 	priorityAudioLoader.files[audioUrl].load();
+			// }
 
 			// currentStory.loadScenesLib(data.scenes);//one or the other
 			

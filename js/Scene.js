@@ -40,7 +40,6 @@ class Scene{
 			for(let content of this.sceneData.contents){
 				// console.log(content.content.type)
 				if(content.content.type=="audio"){
-					//console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
 					this.contentsLib[content.id]=new AudioContent(content,this)
 				}else if(content.content.type=="text"){
 					this.contentsLib[content.id]=new TextContent(content,this)
@@ -196,8 +195,8 @@ class Scene{
 		}
 	}
 	positionBE(){
-		this.be.html.style.top=this.be.node.position.y*60 + "px";
-		this.be.html.style.left=this.be.node.position.x*50 + "px";
+		this.be.html.style.top=this.node.posIndex.y*60 + "px";
+		this.be.html.style.left=this.node.posIndex.x*100 + "px";
 	}
 
 

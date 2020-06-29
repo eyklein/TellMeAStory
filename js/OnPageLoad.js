@@ -21,12 +21,35 @@ window.onload=function(){
 		
 	currentStory.windowManager=new WindowManager();
 	pageLoaded=true;
+
+	// console.log("audio loaded")
+	// console.log(priorityAudioLoader.files)
+
+	// console.log(priorityAudioLoader.files['audio/Background Noise.mp3']);
+	// //LOAD AUDIO
+	// for(let audioUrl in priorityAudioLoader.files){
+	// 	console.log(audioUrl)
+	// 	priorityAudioLoader.files[audioUrl].load();
+	// }
+	//priorityAudioLoader.files
+
+
+
+
 	if(dataLoaded){//if the data is already loaded
 
-		
+		console.log("dataLoaded first then pageLoaded")
 		currentStory.startingScene = window.onload.data.startingScene;
 		
 		populateStory(window.onload.data.scenes)
+
+
+		currentStory.loadAudio();
+		
+		// for(let audioUrl in priorityAudioLoader.files){
+		// 	console.log(audioUrl)
+		// 	priorityAudioLoader.files[audioUrl].load();
+		// }
 		
 	}
 };

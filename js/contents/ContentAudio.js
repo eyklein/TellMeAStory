@@ -1,6 +1,5 @@
-let audioRepo={};
-//let activeAudio={};
-//audioRepo.audioBuffer
+let priorityAudioLoader=new PriorityLoader();
+
 
 
 
@@ -12,6 +11,8 @@ class AudioContent extends Content{
 		
 
 		super(contentJson_,parentScene_)
+
+		//console.log("new audioContent " + this.content.value)
 		this.loadAudio(absoluteLocation + this.content.value); //creates and loads the audioBuffer object
 
 		this.loop=false;
@@ -54,61 +55,126 @@ class AudioContent extends Content{
 	loadAudio(url_){
 
 
-		if(audioRepo[url_]==undefined){
-			audioRepo[url_]={};
-			audioRepo[url_]['status'] = "loading";
-			audioRepo[url_]['contentObjects'] = [];
-			audioRepo[url_]['contentObjects'].push(this);
-			audioRepo[url_]['audioBuffer'] = null;
-
-
-			var request = new XMLHttpRequest();
-			request.open('GET', url_, true);
-			request.responseType = 'arraybuffer';
-
-			request.audioContent=this;
-
-			// Decode asynchronously
-
-			//console.log(loadScreen)
-			loadScreen.numAudioFiles++;
-			loadScreen.update();
-			request.onload = function() {
-				loadScreen.loadedAudioFiles++;
-				loadScreen.update();
-
-			   	context.decodeAudioData(request.response, function(buffer_) {
-			    	buffer_.url=url_;
-			    	// console.log(url_)
-			    	this.audioContent.audioBuffer=buffer_;
-
-			    	audioRepo[url_]['audioBuffer']=buffer_;
-
-			    	audioRepo[url_]['status'] = "loaded";
-			    	for(let i in audioRepo[url_]['contentObjects']){
-			    		audioRepo[url_]['contentObjects'][i].audioBuffer=audioRepo[url_]['audioBuffer'];
-			    		audioRepo[url_]['contentObjects'][i].createEffects();
-			    		audioRepo[url_]['contentObjects'][i].applyGeneralEffects();
-			    	}
-
-			    }.bind(this), onLoadError);
-			}
-			request.send();
-
+		if(priorityAudioLoader.files[url_]==undefined){
+			priorityAudioLoader.files[url_]=new AudioLoader(url_,this);
+		}else{
+			priorityAudioLoader.files[url_].addContentAudio(this)
 		}
-		else if(audioRepo[url_]['status'] == "loading"){
-			audioRepo[url_]['contentObjects'].push(this);
-		}else if(audioRepo[url_]['status'] == "loaded"){
+	}
 
-			this.audioBuffer=audioRepo[url_]['audioBuffer'];
-			this.createEffects();
-			this.applyGeneralEffects();
-		}
+			
+
+
+
+
+
+		// 	priorityAudioLoader.files[url_]['status'] = "preload";
+		// 	priorityAudioLoader.files[url_]['contentObjects'] = [];
+		// 	priorityAudioLoader.files[url_]['contentObjects'].push(this);
+		// 	priorityAudioLoader.files[url_]['audioBuffer'] = null;
+
+
+		// 	var request = new XMLHttpRequest();
+		// 	request.open('GET', url_, true);
+		// 	request.responseType = 'arraybuffer';
+
+		// 	request.audioContent=this;
+
+		// 	// Decode asynchronously
+
+		// 	//console.log(loadScreen)
+		// 	loadScreen.numAudioFiles++;
+		// 	loadScreen.update();
+		// 	request.onload = function() {
+		// 		loadScreen.loadedAudioFiles++;
+		// 		loadScreen.update();
+
+		// 	   	context.decodeAudioData(request.response, function(buffer_) {
+		// 	    	buffer_.url=url_;
+		// 	    	// console.log(url_)
+		// 	    	this.audioContent.audioBuffer=buffer_;
+
+		// 	    	priorityAudioLoader.files[url_]['audioBuffer']=buffer_;
+
+		// 	    	priorityAudioLoader.files[url_]['status'] = "loaded";
+		// 	    	for(let i in priorityAudioLoader.files[url_]['contentObjects']){
+		// 	    		priorityAudioLoader.files[url_]['contentObjects'][i].audioBuffer=priorityAudioLoader.files[url_]['audioBuffer'];
+		// 	    		priorityAudioLoader.files[url_]['contentObjects'][i].createEffects();
+		// 	    		priorityAudioLoader.files[url_]['contentObjects'][i].applyGeneralEffects();
+		// 	    	}
+
+		// 	    }.bind(this), onLoadError);
+		// 	}
+		// 	request.send();
+
+		// }
+		// else if(priorityAudioLoader.files[url_]['status'] == "loading"){
+		// 	priorityAudioLoader.files[url_]['contentObjects'].push(this);
+		// }else if(priorityAudioLoader.files[url_]['status'] == "loaded"){
+
+		// 	this.audioBuffer=priorityAudioLoader.files[url_]['audioBuffer'];
+		// 	this.createEffects();
+		// 	this.applyGeneralEffects();
+		// }
+			
+
+
+
+		// if(priorityAudioLoader.files[url_]==undefined){
+		// 	priorityAudioLoader.files[url_]={};
+		// 	priorityAudioLoader.files[url_]['status'] = "preload";
+		// 	priorityAudioLoader.files[url_]['contentObjects'] = [];
+		// 	priorityAudioLoader.files[url_]['contentObjects'].push(this);
+		// 	priorityAudioLoader.files[url_]['audioBuffer'] = null;
+
+
+		// 	var request = new XMLHttpRequest();
+		// 	request.open('GET', url_, true);
+		// 	request.responseType = 'arraybuffer';
+
+		// 	request.audioContent=this;
+
+		// 	// Decode asynchronously
+
+		// 	//console.log(loadScreen)
+		// 	loadScreen.numAudioFiles++;
+		// 	loadScreen.update();
+		// 	request.onload = function() {
+		// 		loadScreen.loadedAudioFiles++;
+		// 		loadScreen.update();
+
+		// 	   	context.decodeAudioData(request.response, function(buffer_) {
+		// 	    	buffer_.url=url_;
+		// 	    	// console.log(url_)
+		// 	    	this.audioContent.audioBuffer=buffer_;
+
+		// 	    	priorityAudioLoader.files[url_]['audioBuffer']=buffer_;
+
+		// 	    	priorityAudioLoader.files[url_]['status'] = "loaded";
+		// 	    	for(let i in priorityAudioLoader.files[url_]['contentObjects']){
+		// 	    		priorityAudioLoader.files[url_]['contentObjects'][i].audioBuffer=priorityAudioLoader.files[url_]['audioBuffer'];
+		// 	    		priorityAudioLoader.files[url_]['contentObjects'][i].createEffects();
+		// 	    		priorityAudioLoader.files[url_]['contentObjects'][i].applyGeneralEffects();
+		// 	    	}
+
+		// 	    }.bind(this), onLoadError);
+		// 	}
+		// 	request.send();
+
+		// }
+		// else if(priorityAudioLoader.files[url_]['status'] == "loading"){
+		// 	priorityAudioLoader.files[url_]['contentObjects'].push(this);
+		// }else if(priorityAudioLoader.files[url_]['status'] == "loaded"){
+
+		// 	this.audioBuffer=priorityAudioLoader.files[url_]['audioBuffer'];
+		// 	this.createEffects();
+		// 	this.applyGeneralEffects();
+		// }
 			
 
 		
 
-	}
+	
 
 
 
