@@ -5,19 +5,24 @@
 class LoadScreen{
 
 	constructor(){
-		this.numAudioFiles=0;
-		this.loadedAudioFiles=0;
+		// this.numAudioFiles=0;
+		// this.loadedAudioFiles=0;
 		this.html={};
 		this.createDivs();
 		this.show();
 
+		this.total=0;
 		this.loaded=0;
+		this.loadedPercent=0;
 		this.easedLoaded=0;
 		this.easing=.05;
 
 		this.loadStartTime=Date.now();
 
 		this.updateInterval=setInterval(this.draw.bind(this),10);
+
+		this.preloadFiles={};
+		//this.sizeOfFiles=0;
 
 		this.favicon = document.getElementById('favicon');
 	}
@@ -107,43 +112,106 @@ class LoadScreen{
 		// currentStory.windowManager.addPlayPauseButton();
 	}
 
-	update(){
-		if(this.numAudioFiles > 0){
-			this.loaded = (this.loadedAudioFiles/this.numAudioFiles*100) 
+	// addFileToDownload(evt_){
+	// 	this.filesToDownload.push(evt_.target.responseURL);
+	// 	this.sizeOfFiles+=evt_.total;
+	// }
 
+	getDownloaded(){
 
-
-
-			if(this.loaded == 100){
-				//console.log("Start the Story !!!")
-				document.title = 'Story Time';
-				this.favicon.href = "img/favicon/moon_y_favicon-100.gif";
-
-				
-
-				
-
-				dataLayer.push({
-					'loadTime': Date.now()-this.loadStartTime,
-					'event':'pageLoaded'
-				});
-
-				// currentStory.start();
+		let loaded=0;
+		for(let taget in this.preloadFiles){
+			//console.log(this.preloadFiles[taget].loaded)
+			if(this.preloadFiles[taget].loaded != undefined){
+				loaded += this.preloadFiles[taget].loaded
 			}
-			//console.log((this.loadedAudioFiles/this.numAudioFiles*100));
 		}
+		return loaded;
+
+	}
+	getTotal(){
+		let total=0;
+		for(let taget in this.preloadFiles){
+			total += this.preloadFiles[taget].fileSize
+			//console.log(this.preloadFiles[taget].fileSize)
+		}
+		return total;
+	}
+
+	update(evt_){
+		// console.log("evt_")
+		// console.log(evt_)
+		// console.log("evt_.target.responseURL")
+		// console.log(evt_.target.responseURL)
+		// console.log("evt_.target.audioContent")
+		// console.log(evt_.target.audioContent)
+		// console.log(evt_.target.audioContent.url)
+		// if(this.preloadFiles[evt_.target.responseURL] == undefined){
+
+		// 	this.preloadFiles[evt_.target.responseURL] = {};
+		// 	this.preloadFiles[evt_.target.responseURL].total = evt_.total;
+		// 	//preloadFiles[evt_.target.responseURL].loaded = evt_.loaded;
+
+		// 	this.total += evt_.total;
+
+
+		// }
+		console.log(this.preloadFiles)
+		console.log(evt_.target.audioContent.url)
+		this.preloadFiles[evt_.target.audioContent.url].loaded = evt_.loaded;
+
+
+		
+		this.loaded=this.getDownloaded();
+		this.total = this.getTotal()
+
+		console.log(this.loaded + " / " + this.total)
+
+		this.loadedPercent=this.loaded/this.total;
+
+
+
+		
+		
+
+
+		// if(this.numAudioFiles > 0){
+		// 	this.loaded = (this.loadedAudioFiles/this.numAudioFiles*100) 
+
+
+
+
+		// 	if(this.loaded == 100){
+		// 		//console.log("Start the Story !!!")
+		// 		document.title = 'Story Time';
+		// 		this.favicon.href = "img/favicon/moon_y_favicon-100.gif";
+
+				
+
+				
+
+		// 		dataLayer.push({
+		// 			'loadTime': Date.now()-this.loadStartTime,
+		// 			'event':'pageLoaded'
+		// 		});
+
+		// 		// currentStory.start();
+		// 	}
+		// 	//console.log((this.loadedAudioFiles/this.numAudioFiles*100));
+		// }
 	}
 
 	
 	draw(){
 		
-		let speed = (this.loaded-this.easedLoaded)*this.easing
-		this.easedLoaded = speed + this.easedLoaded;
-		this.html.loadBar.style.width=this.easedLoaded+"%";
+		// let speed = (this.loaded-this.easedLoaded)*this.easing
+		// this.easedLoaded = speed + this.easedLoaded;
+		// this.html.loadBar.style.width=this.easedLoaded+"%";
+		this.html.loadBar.style.width=this.loadedPercent*100+"%";
 
 
-		this.html.rocketContainer.style.top= ((window.innerHeight-191)*(1-this.easedLoaded/100)) +'px';
-		this.html.loadText.innerHTML=Math.round(this.easedLoaded) + " %"
+		this.html.rocketContainer.style.top= ((window.innerHeight-191)*(1-this.loadedPercent)) +'px';
+		this.html.loadText.innerHTML=Math.round(this.loadedPercent*100) + " %"
 		document.title = 'Story Time ' + this.html.loadText.innerHTML;
 		let roundedLoad = Math.floor(this.easedLoaded/10)*10;
 		// console.log(Math.round(this.easedLoaded) + " %");
@@ -151,7 +219,7 @@ class LoadScreen{
 		let faviconLoadedAddress= "img/favicon/moon_y_favicon-"+ roundedLoad + ".gif";
 		if(this.favicon.href != faviconLoadedAddress){
 			//document.getElementById('favicon').href = "img/favicon/moon_y_favicon-"+ roundedLoad + ".gif";
-			console.log(faviconLoadedAddress)
+			//console.log(faviconLoadedAddress)
 			this.favicon.href = faviconLoadedAddress;
 		}
 		
@@ -159,9 +227,8 @@ class LoadScreen{
 
 
 
-		this.fireHeight+=(speed*600-this.fireHeight)*.01
-		//console.log(this.fireHeight)
-		this.html.rocketFire.style.height= this.fireHeight + 'px';
+		// this.fireHeight+=(speed*600-this.fireHeight)*.01;
+		// this.html.rocketFire.style.height= this.fireHeight + 'px';
 
 
 		

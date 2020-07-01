@@ -6,6 +6,10 @@ class AudioLoader{
 		//console.log("create " + this.url)
 
 		this.contentAudioObjects.push(contentAudio_);
+
+		this.getFileSize()
+
+		this.isPreloaded=false;
 		
 		//this.load()
 	}
@@ -29,6 +33,32 @@ class AudioLoader{
 		this.contentAudioObjects.push(contentAudio_);
 	}
 
+	getFileSize()
+	{
+	    var fileSize = '';
+	    var http = new XMLHttpRequest();
+	    http.open('HEAD', this.url, true); // true = Asynchronous
+	    http.onreadystatechange = function(headReturned_) {
+	    	let thisSC = headReturned_.target;
+	    	//console.log(this)
+	        if (thisSC.readyState == thisSC.DONE) {
+	            if (thisSC.status === 200) {
+	                this.fileSize = parseInt(thisSC.getResponseHeader('content-length'));
+	                console.log("************" + this.fileSize)
+	                //console.log('fileSize = ' + this.fileSize);
+	                //
+	                // ok here is the only place in the code where we have our request result and file size ...
+	                // the problem is that here we are in the middle of anonymous function nested into another function and it does not look pretty
+	                // this stupid ASYNC pattern makes me hate Javascript even more than I already hate it :)
+	                //
+	                //
+	            }
+	        }
+	    }.bind(this);
+	    http.send(); // it will submit request and jump to the next line immediately, without even waiting for request result b/c we used ASYNC XHR call
+	    return null//('At this moment, we do not even have Request Results b/c we used ASYNC call to follow with stupid JavaScript patterns');
+	}
+
 	load(){
 		var request = new XMLHttpRequest();
 		request.open('GET', this.url, true);
@@ -36,19 +66,31 @@ class AudioLoader{
 
 		request.audioContent=this;
 
-		loadScreen.numAudioFiles++;
-		loadScreen.update();
+		// loadScreen.numAudioFiles++;
+		// loadScreen.update();
 
-		request.addEventListener("progress", function (evt) {
-	        if(evt.lengthComputable) {
-	            var percentComplete = evt.loaded / evt.total;
-	            console.log(percentComplete);
-	        }
-	    }, false);
-		
+		if(this.isPreloaded){
+
+			request.addEventListener("progress", function (evt) {
+
+		        if(evt.lengthComputable) {
+		        	// if(this.status == "preload"){
+		        	// 	this.status = "downloading"
+		        	// 	loadScreen.addFileToDownload(evt)
+		        	// 	//console.log(evt)
+		        	// }
+		        	//console.log(evt)
+		            // var percentComplete = evt.loaded / evt.total;
+		            // console.log(percentComplete);
+
+		            loadScreen.update(evt)
+		        }
+		    }.bind(this), false);
+		}
+
 		request.onload = function() {
-			loadScreen.loadedAudioFiles++;
-			loadScreen.update();
+			//loadScreen.loadedAudioFiles++;
+			//loadScreen.update();
 
 			let currentBucketIndex=priorityAudioLoader.currentLoadbucket
 			// console.log(currentBucketIndex)

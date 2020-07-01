@@ -4,7 +4,7 @@ class PriorityLoader{
 		this.maxIndex=0; //INDEX OR RANK IS THE LEVEL THE OF THE SCENE
 		this.files={}
 
-		this.threshhold=5; //threshhold for when to start story and continue loading in the background
+		this.threshhold=4; //threshhold for when to start story and continue loading in the background
 
 		this.currentLoadbucket=0
 
@@ -20,11 +20,20 @@ class PriorityLoader{
 		
 	}
 	populateHistogram(){
-		for(let i=0; i<=this.maxIndex;i++){
-			this.indexHistogram[i]=[]
+		for(let bucket=0; bucket<=this.maxIndex;bucket++){
+			this.indexHistogram[bucket]=[]
 			for(let url in this.files){
-				if(this.files[url].rank == i){
-					this.indexHistogram[i].push(this.files[url]);
+				if(this.files[url].rank == bucket){
+					this.indexHistogram[bucket].push(this.files[url]);
+				}
+			}
+
+			if(bucket<=this.threshhold){
+				for(let audioLoaderIndex in this.indexHistogram[bucket]){
+					this.indexHistogram[bucket][audioLoaderIndex].isPreloaded=true;
+					loadScreen.preloadFiles[this.indexHistogram[bucket][audioLoaderIndex].url]=this.indexHistogram[bucket][audioLoaderIndex];
+					
+					// console.log("---------------------")
 				}
 			}
 		}
