@@ -474,16 +474,6 @@ div#main_text{
 
 
 
-.connector-line{
-	position: absolute;
-	overflow: scroll;
-	z-index: 50; 
-	stroke-width: 4;
-	pointer-events:none;
-	opacity: 20%;
-	/*background: green;*/
-	/*stroke: green;*/
-}
 
 
 .time-delay{
@@ -510,18 +500,33 @@ div#main_text{
 	left: -20px;
 }
 
-.connector-line .time{
+.connector-line{
+  position: absolute;
+  overflow: scroll;
+  z-index: 50; 
+  stroke-width: 4;
+  pointer-events:none;
+  opacity: 20%;
+  /*background: green;*/
+  stroke: green;
+}
+
+
+
+.connector-line.time{
 	stroke: blue;
 }
-.connector-line .click{
+.connector-line.click{
 	stroke: red;
+  stroke-dasharray:15,5;
+
 }
-.connector-line .click.delay{
+.connector-line.click.delay{
 	stroke: blue;
 }
-.connector-line .self-driven{
+.connector-line.self-driven{
 	stroke: gray;
-	stroke-dasharray:15,5;
+	/*stroke-dasharray:15,5;*/
 }
 
 .event-content{

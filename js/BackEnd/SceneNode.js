@@ -20,6 +20,15 @@ class SceneNode{ //not to be confused with nodejs
 		this.posIndex.y=0;
 		this.posIndex.xRelative=0;//relative to siblings 
 
+		this.pos={};
+
+		this.height=30;
+		this.width=100;
+		
+		this.createHTML();
+
+		this.html.svgPathsArrows=[];
+
 
 
 		
@@ -52,6 +61,24 @@ class SceneNode{ //not to be confused with nodejs
 		
 		// //this.siblingNodes=[];
 		// this.prevSiblingNodes=[];
+	}
+
+	createHTML(){
+		this.html={};
+
+		this.html.container=document.createElement("div");
+
+		this.html.node=document.createElement("div");
+		this.html.node.style['background-color']="blue";
+		this.html.node.style.width=this.width+"px";
+		this.html.node.style.height=this.height+"px";
+		this.html.node.style.position="absolute";
+		this.html.node.innerHTML=this.scene.id;
+		this.html.node.style.opacity=.8;
+
+		this.html.container.appendChild(this.html.node);
+
+
 	}
 
 	setParents(){
@@ -116,7 +143,7 @@ class SceneNode{ //not to be confused with nodejs
 	}
 
 
-	setPosition(){ //must set relative position first also must call top down from partent to child
+	setPositionIndex(){ //must set relative position first also must call top down from partent to child
 		this.posIndex.y = this.index;
 
 		//let shift=0;
@@ -131,31 +158,79 @@ class SceneNode{ //not to be confused with nodejs
 
 		for(let i in this.children){//top down
 			if(this.children[i].primaryParent==this){
+				this.children[i].setPositionIndex()
+			}
+		}
+
+
+	}
+	setPosition(){ //must set relative position first also must call top down from partent to child
+		this.pos.y = this.posIndex.y*60;
+		this.pos.x = this.posIndex.x*100;
+
+		this.html.node.style.top=this.pos.y+"px";
+		this.html.node.style.left=this.pos.x+"px";
+
+
+		
+
+
+
+
+		//let shift=0;
+
+		//console.log("set pos parent = " +this.primaryParent);
+		
+		for(let i in this.children){//top down
+			if(this.children[i].primaryParent==this){
 				this.children[i].setPosition()
 			}
 		}
+
+
+	}
+	//actionArrowSVG(deltaX_,deltaY_,strokeThickness_,type_){
+	createPathsArrows(){
+		for(let i=0;i<this.parents.length;i++){
+			console.log(i)
+			this.createPathArrow(this.parents[i])
+		}
 		
-		// if(this.parents.length>0){
-		// 	for(let i in this.parents[0].children){
-		// 		if(this.parents[0].children[i]==this){
-		// 			break;
-		// 		}else{
-		// 			this.posIndex.x+=this.parents[0].children[i].widthFull;
-		// 		}
-		// 	}
-		// }else if(this.isBase){// for the base nodes without a parent        this.scene.play.baseSceneNodes.indexOf(this) != -1){
-
-		// 	for(let i in this.scene.play.baseSceneNodes){
-		// 		if(this.scene.play.baseSceneNodes[i]==this){
-		// 			break;
-		// 		}else{
-		// 			this.posIndex.x+=this.scene.play.baseSceneNodes[i].widthFull;
-		// 		}
-		// 	}
-		// 	//this.scene.play.baseSceneNodes.indexOf(this)
-		// }
+	}
+	createPathArrow(patent_){
+		if(patent_ instanceof SceneNode){
+			let deltaX=this.pos.x - patent_.pos.x;
+			let deltaY=this.pos.y - patent_.pos.y-this.height;
+			console.log(patent_)
 
 
+			this.html.svgPathsArrows.push(document.createElementNS("http://www.w3.org/2000/svg", "svg"));
+			
+			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].classList.add("connector-line")
+			//??????????
+			
+			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].classList.add("click")
+			// if(this.primaryParent){
+			// 	this.html.svgPathArrow.classList.add("self-driven")
+			// }
+
+			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.height=deltaY+"px";
+			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.width=deltaX+20+"px";
+
+			// if(deltaX>20){
+			// 	console.log(this.html.svgPathArrow)
+			// }
+
+			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].innerHTML=actionArrowSVG(deltaX, deltaY, 3, "dashed")
+			//console.log(this.html.svgPathArrow)
+			this.html.container.appendChild(this.html.svgPathsArrows[this.html.svgPathsArrows.length-1]);
+			
+			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.position="absolute"
+			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.left=patent_.pos.x
+			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.top=patent_.pos.y+this.height;
+		}
+
+		
 	}
 
 	assignDescendentsIndexes(index_,primaryParent_){

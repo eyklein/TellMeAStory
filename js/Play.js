@@ -123,7 +123,7 @@ class Story{
 
 
 
-	  	this.addScenesBackEnd();
+	  	//this.addScenesBackEnd();
 	  	// this.setWidthSceneBackEnd();
 
 	  	// this.setSceneNodeParents();
@@ -134,6 +134,9 @@ class Story{
 	  	this.setSceneFullWidth()
 	  	this.setRelativePositionIndex();
 	  	this.setPositionIndex();
+	  	this.setPosition();
+
+	  	this.createPathsArrows();
 	  	//this.setSceneNodePrevSiblings();
 	  	// this.setSceneNodePositions();
 
@@ -228,7 +231,7 @@ class Story{
 		// }
 
 	}
-	setSceneFullWidth(){
+	setSceneFullWidth(){//sets the width the the children nodes will take up
 		for(let i in this.rootEndSceneNodes){
 			this.rootEndSceneNodes[i].setFullWidthCascadeUp(1)
 		}
@@ -242,16 +245,36 @@ class Story{
 		//console.log("setPositionIndex")
 		for(let i in this.baseSceneNodes){ //cascades down
 			//console.log(this.baseSceneNodes[i])
+			this.baseSceneNodes[i].setPositionIndex();
+		}
+	}
+	setPosition(){
+		//console.log("setPositionIndex")
+		for(let i in this.baseSceneNodes){ //cascades down
+			//console.log(this.baseSceneNodes[i])
 			this.baseSceneNodes[i].setPosition();
 		}
 	}
-
-	addScenesBackEnd(){
-		for(let scene in this.scenesLib){
-			this.scenesLib[scene].addBackEnd();
+	createPathsArrows(){
+		for(let key in this.scenesLib){ //cascades down
+			//console.log(this.baseSceneNodes[i])
+			this.scenesLib[key].node.createPathsArrows();
 		}
-
 	}
+	// createPathArrows(){
+	// 	//console.log("setPositionIndex")
+	// 	for(let i in this.baseSceneNodes){ //cascades down
+	// 		//console.log(this.baseSceneNodes[i])
+	// 		this.baseSceneNodes[i].setPosition();
+	// 	}
+	// }
+
+	// addScenesBackEnd(){
+	// 	for(let scene in this.scenesLib){
+	// 		this.scenesLib[scene].addBackEnd();
+	// 	}
+
+	// }
 	setWidthSceneNodes(){
 
 		for(let scene in this.scenesLib){

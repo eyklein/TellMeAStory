@@ -1,15 +1,87 @@
 function actionArrowSVG(deltaX_,deltaY_,strokeThickness_,type_){
 	let arrowSize=10;
+	console.log(deltaX_)
+	console.log(deltaY_)
 	//console.log(deltaY_);
 	if(deltaY_>20){//is there room in the vertical direction to make a curvy arrow
 		if(deltaX_>=20){//is there enogh room in the x direction
-			xStart=strokeThickness_/2;
+			xStart=strokeThickness_/2+10;
 			yStart=0;
 			lineV1=(deltaY_ - 20)/2;
 
 			ridius1=10;
 
 			ridius2=10;
+
+			lineH1=deltaX_-ridius1-ridius2;
+
+			lineV2=deltaY_-lineV1-ridius1-ridius2;
+
+			// console.log('<path class="'+type_+'" d="m '+xStart+' '+yStart+'  ' + //starting piont
+			// 	'l '+0+' '+ lineV1 +' ' + //vertical line
+			// 	' q '+0+' ' + ridius1  + ' ' + ridius1  + ' ' + ridius1  + ' ' + //curve down and right
+			// 	'l '+lineH1+' '+ 0 +' ' + //horizontal line
+			// 	'q ' +  ridius2 + ' '+ 0 + ' ' +  ridius2 + ' '+ridius2+ ' ' + //curve down
+			// 	'l '+0+' '+lineV2+//vertical line
+			// 	'l'+-arrowSize +' '+-arrowSize+
+			// 	//'L'+(deltaX_-arrowSize)+' '+(deltaY_-arrowSize)+  //should be same as above line
+			// 	' "' + 
+			// 	' style="stroke-width:4;fill:none;" />')
+
+			return '<path class="'+type_+'" d="m '+xStart+' '+yStart+'  ' + //starting piont
+				'l '+0+' '+ lineV1 +' ' + //vertical line
+				' q '+0+' ' + ridius1  + ' ' + -ridius1  + ' ' + ridius1  + ' ' + //curve down and right
+				'l '+lineH1+' '+ 0 +' ' + //horizontal line
+				'q ' +  ridius2 + ' '+ 0 + ' ' +  ridius2 + ' '+ridius2+ ' ' + //curve down
+				'l '+0+' '+lineV2+//vertical line
+				'l'+-arrowSize +' '+-arrowSize+
+				//'L'+(deltaX_-arrowSize)+' '+(deltaY_-arrowSize)+  //should be same as above line
+				' "' + 
+				' style="stroke-width:4;fill:none;" />';
+
+		}else if(deltaX_<=-20){//negative x direction. is this posible in the logic? also the entire svg needs to move over because it will be outside the frame
+			xStart=strokeThickness_/2+10;
+			yStart=0;
+
+			ridius1=10;
+
+			ridius2=10;
+
+			lineH1=deltaX_-ridius1-ridius2;
+
+			lineV2=deltaY_-ridius1-ridius2;
+
+			console.log('<path class="'+type_+'" d="m '+xStart+' '+yStart+'  ' + //starting piont
+				//'l '+0+' '+ lineV1 +' ' + //vertical line
+				' q '+0+' ' + ridius1  + ' ' + ridius1  + ' ' + ridius1  + ' ' + //curve down and right
+				'l '+lineH1+' '+ 0 +' ' + //horizontal line
+				'q ' +  ridius2 + ' '+ 0 + ' ' +  ridius2 + ' '+ridius2+ ' ' + //curve down
+				'l '+0+' '+lineV2+//vertical line
+				'l'+-arrowSize +' '+-arrowSize+
+				//'L'+(deltaX_-arrowSize)+' '+(deltaY_-arrowSize)+  //should be same as above line
+				' "' + 
+				' style="stroke-width:4;fill:none;" />')
+
+			return '<path class="'+type_+'" d="m '+xStart+' '+yStart+'  ' + //starting piont
+				//'l '+0+' '+ lineV1 +' ' + //vertical line
+				' q '+0+' ' + ridius1  + ' ' + ridius1  + ' ' + ridius1  + ' ' + //curve down and right
+				'l '+lineH1+' '+ 0 +' ' + //horizontal line
+				'q ' +  ridius2 + ' '+ 0 + ' ' +  ridius2 + ' '+ridius2+ ' ' + //curve down
+				'l '+0+' '+lineV2+//vertical line
+				'l'+-arrowSize +' '+-arrowSize+
+				//'L'+(deltaX_-arrowSize)+' '+(deltaY_-arrowSize)+  //should be same as above line
+				' "' + 
+				' style="stroke-width:4;fill:none;" />';
+		}
+		else{//straight arrow
+			xStart=strokeThickness_/2+10;
+			yStart=0;
+
+			lineV1=(deltaY_ - 20)/2;
+
+			ridius1=deltaX_/2;
+
+			ridius2=deltaX_/2;
 
 			lineH1=deltaX_-ridius1-ridius2;
 
@@ -25,24 +97,6 @@ function actionArrowSVG(deltaX_,deltaY_,strokeThickness_,type_){
 				//'L'+(deltaX_-arrowSize)+' '+(deltaY_-arrowSize)+  //should be same as above line
 				' "' + 
 				' style="stroke-width:4;fill:none;" />';
-
-		}else if(deltaX_<=-20){//negative x direction. is this posible in the logic? also the entire svg needs to move over because it will be outside the frame
-			ridius1=10;
-
-			ridius2=10;
-
-			lineH1=deltaX_-ridius1-ridius2;
-
-			lineV2=deltaY_-ridius1-ridius2;
-		}
-		else{//straight arrow
-			ridius1=deltaX_/2;
-
-			ridius2=deltaX_/2;
-
-			lineH1=deltaX_-ridius1-ridius2;
-
-			lineV2=deltaY_-ridius1-ridius2;
 		}
 	}else if(deltaY_>0){
 

@@ -23,16 +23,16 @@ class StoryEditor{
 	addSceneDivs(){
 		for(let scene in this.story.scenesLib){
 			//document.getElementById("")
-			this.html.appendChild(this.story.scenesLib[scene].be.html)
+			this.html.appendChild(this.story.scenesLib[scene].node.html.container)
 			//this.backEnd.editorWindow.html.appendChild(this.story.scenesLib[scene].be.html)
 		}
 	}
 
 	display(){
 		//console.log("display story")
-		for(let scene in this.story.scenesLib){
-			this.story.scenesLib[scene].positionBE();
-		}
+		// for(let scene in this.story.scenesLib){
+		// 	this.story.scenesLib[scene].positionBE();
+		// }
 
 		this.backEnd.editorWindow.html.appendChild(this.html)
 		//this.backEnd.editorWindow.html.appendChild(this.html)

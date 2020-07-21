@@ -194,10 +194,10 @@ class Scene{
 			}
 		}
 	}
-	positionBE(){
-		this.be.html.style.top=this.node.posIndex.y*60 + "px";
-		this.be.html.style.left=this.node.posIndex.x*100 + "px";
-	}
+	// positionBE(){
+	// 	this.be.html.style.top=this.node.pos.y + "px";
+	// 	this.be.html.style.left=this.node.pos.x + "px";
+	// }
 
 
 

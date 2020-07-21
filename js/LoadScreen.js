@@ -156,8 +156,8 @@ class LoadScreen{
 
 
 		// }
-		console.log(this.preloadFiles)
-		console.log(evt_.target.audioContent.url)
+		// console.log(this.preloadFiles)
+		// console.log(evt_.target.audioContent.url)
 		this.preloadFiles[evt_.target.audioContent.url].loaded = evt_.loaded;
 
 
@@ -165,7 +165,7 @@ class LoadScreen{
 		this.loaded=this.getDownloaded();
 		this.total = this.getTotal()
 
-		console.log(this.loaded + " / " + this.total)
+		// console.log(this.loaded + " / " + this.total)
 
 		this.loadedPercent=this.loaded/this.total;
 
