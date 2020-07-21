@@ -1,7 +1,6 @@
 function actionArrowSVG(deltaX_,deltaY_,strokeThickness_,type_){
 	let arrowSize=10;
-	console.log(deltaX_)
-	console.log(deltaY_)
+	
 	//console.log(deltaY_);
 	if(deltaY_>20){//is there room in the vertical direction to make a curvy arrow
 		if(deltaX_>=20){//is there enogh room in the x direction

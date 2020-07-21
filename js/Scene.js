@@ -102,6 +102,53 @@ class Scene{
 		// this.be.spacing.myUnitWidth=Math.max(1,size(this.nextScenes));
 	}
 
+	setLastAndNextContentNodes(){
+		for(let scene in this.scenesLib){
+			for(let action in this.scenesLib[scene].actionsLib){
+				if(this.scenesLib[scene].actionsLib[action].head instanceof Scene){
+					let leadingScene = this.scenesLib[scene].actionsLib[action].scene;
+					let trailingScene = this.scenesLib[scene].actionsLib[action].head;
+					
+					//set last scenes
+					console.log(trailingScene.node.parents.indexOf(leadingScene))
+					if(trailingScene.node.parents.indexOf(leadingScene.node) == -1){ 
+						
+						trailingScene.node.parents.push(leadingScene.node);
+
+
+						trailingScene.node.parentsInfo[leadingScene.id]={};
+						trailingScene.node.parentsInfo[leadingScene.id].count=1;
+						trailingScene.node.parentsInfo[leadingScene.id].scene = leadingScene;
+						trailingScene.node.parentsInfo[leadingScene.id].node = leadingScene.node;
+						trailingScene.node.parentsInfo[leadingScene.id].order = trailingScene.node.parents.length-1;
+
+
+
+					}
+					else{
+						trailingScene.node.parentsInfo[leadingScene.id].count++;
+					}
+
+					if(leadingScene.node.children.indexOf(trailingScene.node) == -1){
+
+						leadingScene.node.children.push(trailingScene.node);
+
+						leadingScene.node.childrenInfo[trailingScene.id]={};
+						leadingScene.node.childrenInfo[trailingScene.id].count=1;
+						leadingScene.node.childrenInfo[trailingScene.id].scene = trailingScene;
+						leadingScene.node.childrenInfo[trailingScene.id].node = trailingScene.node;
+						leadingScene.node.childrenInfo[trailingScene.id].order = leadingScene.node.children.length-1;
+					
+						
+					}else{
+						leadingScene.node.childrenInfo[trailingScene.id].count++;
+					}
+
+				}
+			}
+		}
+	}
+
 	getBackEndLeftPos(){
 		this.scenesUp[this.scenesUp];
 	}

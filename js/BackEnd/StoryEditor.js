@@ -16,7 +16,7 @@ class StoryEditor{
 
 		this.sceneEditors = {};
 		for(let scene in this.story.scenesLib){
-			this.sceneEditors[scene] = new SceneEditor(this.story.scenesLib[scene], this)
+			this.sceneEditors[scene] = new SceneEditor(this.story.scenesLib[scene], this, this.backEnd)
 		}
 	}
 
