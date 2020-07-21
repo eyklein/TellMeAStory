@@ -23,7 +23,7 @@ class SceneNode{ //not to be confused with nodejs
 		this.pos={};
 
 		this.height=30;
-		this.width=100;
+		this.width=90;
 		
 		this.createHTML();
 
@@ -70,6 +70,8 @@ class SceneNode{ //not to be confused with nodejs
 
 		this.html.node=document.createElement("div");
 		this.html.node.style['background-color']="blue";
+		this.html.node.style['color']="white";
+		this.html.node.style['font-size']="10px";
 		this.html.node.style.width=this.width+"px";
 		this.html.node.style.height=this.height+"px";
 		this.html.node.style.position="absolute";
@@ -200,8 +202,12 @@ class SceneNode{ //not to be confused with nodejs
 	createPathArrow(patent_){
 		if(patent_ instanceof SceneNode){
 			let deltaX=this.pos.x - patent_.pos.x;
-			let deltaY=this.pos.y - patent_.pos.y-this.height;
-			console.log(patent_)
+			let deltaY;
+			if(this.pos.y >= patent_.pos.y){
+				deltaY=this.pos.y - patent_.pos.y-this.height;
+			}else{
+				deltaY=this.pos.y - patent_.pos.y - this.height;
+			}
 
 
 			this.html.svgPathsArrows.push(document.createElementNS("http://www.w3.org/2000/svg", "svg"));
@@ -214,20 +220,48 @@ class SceneNode{ //not to be confused with nodejs
 			// 	this.html.svgPathArrow.classList.add("self-driven")
 			// }
 
-			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.height=deltaY+"px";
-			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.width=deltaX+20+"px";
+			if(deltaY>0){
+				// this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.height=deltaY+"px";
+				// this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.width=Math.abs(deltaX)+200+"px";
+
+				this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].innerHTML=actionArrowSVG(deltaX, deltaY, 3, "dashed")
+				//console.log(this.html.svgPathArrow)
+				this.html.container.appendChild(this.html.svgPathsArrows[this.html.svgPathsArrows.length-1]);
+				
+				this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.position="absolute"
+
+				if(deltaX>=-20){
+					this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.left=patent_.pos.x 
+				}else{
+					this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.left=patent_.pos.x + deltaX
+				}
+				this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.top=patent_.pos.y+this.height;
+			}else{//arrow gos up
+				// this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.height=deltaY+ 10 +"px";//+10 because it needs room for the arrow on top
+				// this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.width=Math.abs(deltaX)+20+"px"; //+20 because it moves left first then up 
+
+				this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].innerHTML=actionArrowSVG(deltaX, deltaY, 3, "dashed")
+				//console.log(this.html.svgPathArrow)
+				this.html.container.appendChild(this.html.svgPathsArrows[this.html.svgPathsArrows.length-1]);
+				
+				this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.position="absolute"
+
+				
+				this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.left=this.pos.x -10
+				
+				this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.top=this.pos.y;
+
+
+
+				
+			}
+			
 
 			// if(deltaX>20){
 			// 	console.log(this.html.svgPathArrow)
 			// }
 
-			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].innerHTML=actionArrowSVG(deltaX, deltaY, 3, "dashed")
-			//console.log(this.html.svgPathArrow)
-			this.html.container.appendChild(this.html.svgPathsArrows[this.html.svgPathsArrows.length-1]);
 			
-			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.position="absolute"
-			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.left=patent_.pos.x
-			this.html.svgPathsArrows[this.html.svgPathsArrows.length-1].style.top=patent_.pos.y+this.height;
 		}
 
 		

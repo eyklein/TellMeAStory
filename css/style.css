@@ -505,6 +505,7 @@ div#main_text{
   overflow: scroll;
   z-index: 50; 
   stroke-width: 4;
+  overflow: overlay;
   pointer-events:none;
   opacity: 20%;
   /*background: green;*/
@@ -518,7 +519,7 @@ div#main_text{
 }
 .connector-line.click{
 	stroke: red;
-  stroke-dasharray:15,5;
+  /*stroke-dasharray:15,5;*/
 
 }
 .connector-line.click.delay{

@@ -30,7 +30,7 @@ function actionArrowSVG(deltaX_,deltaY_,strokeThickness_,type_){
 
 			return '<path class="'+type_+'" d="m '+xStart+' '+yStart+'  ' + //starting piont
 				'l '+0+' '+ lineV1 +' ' + //vertical line
-				' q '+0+' ' + ridius1  + ' ' + -ridius1  + ' ' + ridius1  + ' ' + //curve down and right
+				' q '+0+' ' + ridius1  + ' ' + ridius1  + ' ' + ridius1  + ' ' + //curve down and right
 				'l '+lineH1+' '+ 0 +' ' + //horizontal line
 				'q ' +  ridius2 + ' '+ 0 + ' ' +  ridius2 + ' '+ridius2+ ' ' + //curve down
 				'l '+0+' '+lineV2+//vertical line
@@ -40,33 +40,24 @@ function actionArrowSVG(deltaX_,deltaY_,strokeThickness_,type_){
 				' style="stroke-width:4;fill:none;" />';
 
 		}else if(deltaX_<=-20){//negative x direction. is this posible in the logic? also the entire svg needs to move over because it will be outside the frame
-			xStart=strokeThickness_/2+10;
+			xStart=-1*deltaX_ + strokeThickness_/2+10;
 			yStart=0;
 
 			ridius1=10;
 
 			ridius2=10;
 
-			lineH1=deltaX_-ridius1-ridius2;
+			lineH1=deltaX_+ridius1+ridius2;
 
 			lineV2=deltaY_-ridius1-ridius2;
 
-			console.log('<path class="'+type_+'" d="m '+xStart+' '+yStart+'  ' + //starting piont
-				//'l '+0+' '+ lineV1 +' ' + //vertical line
-				' q '+0+' ' + ridius1  + ' ' + ridius1  + ' ' + ridius1  + ' ' + //curve down and right
-				'l '+lineH1+' '+ 0 +' ' + //horizontal line
-				'q ' +  ridius2 + ' '+ 0 + ' ' +  ridius2 + ' '+ridius2+ ' ' + //curve down
-				'l '+0+' '+lineV2+//vertical line
-				'l'+-arrowSize +' '+-arrowSize+
-				//'L'+(deltaX_-arrowSize)+' '+(deltaY_-arrowSize)+  //should be same as above line
-				' "' + 
-				' style="stroke-width:4;fill:none;" />')
+			
 
 			return '<path class="'+type_+'" d="m '+xStart+' '+yStart+'  ' + //starting piont
 				//'l '+0+' '+ lineV1 +' ' + //vertical line
-				' q '+0+' ' + ridius1  + ' ' + ridius1  + ' ' + ridius1  + ' ' + //curve down and right
+				' q '+0+' ' + ridius1  + ' ' + -ridius1  + ' ' + ridius1  + ' ' + //curve down and right
 				'l '+lineH1+' '+ 0 +' ' + //horizontal line
-				'q ' +  ridius2 + ' '+ 0 + ' ' +  ridius2 + ' '+ridius2+ ' ' + //curve down
+				'q ' +  -ridius2 + ' '+ 0 + ' ' +  -ridius2 + ' '+ridius2+ ' ' + //curve down
 				'l '+0+' '+lineV2+//vertical line
 				'l'+-arrowSize +' '+-arrowSize+
 				//'L'+(deltaX_-arrowSize)+' '+(deltaY_-arrowSize)+  //should be same as above line
@@ -129,32 +120,34 @@ function actionArrowSVG(deltaX_,deltaY_,strokeThickness_,type_){
 
 	else if(deltaY_<=0){
 
-		xStart=strokeThickness_/2;
+		xStart=strokeThickness_/2+20;
 		yStart=-1*deltaY_;
 
-		lineV1=0;
+		lineH1=-20;
+		lineH2=10;
 
 		ridius1=10;
 
-		ridius2=10;
+		// ridius2=10;
 
 		ridius3=10;
 
 
-		lineH1=deltaX_-ridius1-ridius2-ridius3;
+		//lineH1=deltaX_-ridius1-ridius2-ridius3;
 
-		lineV2=deltaY_-lineV1-ridius1+ridius2+ridius3;
+		lineV2=deltaY_+ridius1+ridius3;
 
 
 		return '<path class="'+type_+'" d="m '+xStart+' '+yStart+'  ' + //starting piont
-			'l '+0+' '+ lineV1 +' ' + //vertical line
-			' q '+0+' ' + ridius1  + ' ' + ridius1  + ' ' + ridius1  + ' ' + //curve down and right
-			'l '+lineH1+' '+ 0 +' ' + //horizontal line
-			'q ' +  ridius2 + ' '+ 0 + ' ' +  ridius2 + ' '+-1*ridius2+ ' ' + //curve up
+			'l '+lineH1+' '+ 0 +' ' + //vertical line
+			' q '+ -ridius1 +' ' + 0  + ' ' + -ridius1  + ' ' + -ridius1  + ' ' + //curve down and right
+			// 'l '+lineH1+' '+ 0 +' ' + //horizontal line
+			// 'q ' +  ridius2 + ' '+ 0 + ' ' +  ridius2 + ' '+-1*ridius2+ ' ' + //curve up
 			'l '+0+' '+lineV2+//vertical line
 			// 'l'+-arrowSize +' '+-arrowSize+
 			'q ' +  0 + ' '+-1*ridius3 + ' ' +  ridius3 + ' '+-1*ridius3+ ' ' + //curve up
-			//'L'+(deltaX_-arrowSize)+' '+(deltaY_-arrowSize)+  //should be same as above line
+			'l '+lineH2+' '+ 0 +' ' + //vertical line
+			'l'+ -arrowSize +' '+ -arrowSize+
 			' "' + 
 			' style="stroke-width:4;fill:none;" />';
 	}
