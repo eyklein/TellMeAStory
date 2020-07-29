@@ -84,6 +84,9 @@ class Story{
 		this.activeMainAudio={};
 		this.activeBackgroundAudio={};
 
+		this.baseSceneNodes=[]
+		this.rootEndSceneNodes=[]
+
 		//this.setLeftOffsets()
 		
 	}
@@ -119,23 +122,20 @@ class Story{
 	  		this.scenesLib[scenesData_[i].id].addActions(scenesData_[i])
 	  	}
 
+	  	// set which content leads to which content
+	  	this.setLastAndNextContentNodes();
+	  	this.setContentIndexNumbers();
+
+	  	
+
+
+	  	// set which scenes lead into which scenes
 	  	this.setLastAndNextSceneNodes();
-
-
-
-	  	//this.addScenesBackEnd();
-	  	// this.setWidthSceneBackEnd();
-
-	  	// this.setSceneNodeParents();
-	  	// this.setSceneNodeChildren();
-
-
 	  	this.setSceneIndexNumbers();
 	  	this.setSceneFullWidth()
 	  	this.setRelativePositionIndex();
 	  	this.setPositionIndex();
 	  	this.setPosition();
-
 	  	this.createPathsArrows();
 	  	//this.setSceneNodePrevSiblings();
 	  	// this.setSceneNodePositions();
@@ -145,6 +145,16 @@ class Story{
 
 
 
+	}
+	setLastAndNextContentNodes(){
+		for(let sceneID in this.scenesLib){
+	  		this.scenesLib[sceneID].setLastAndNextContentNodes();
+	  	}
+	}
+	setContentIndexNumbers(){
+		for(let sceneID in this.scenesLib){
+	  		this.scenesLib[sceneID].setContentIndexNumbers();
+	  	}
 	}
 
 	setLastAndNextSceneNodes(){
@@ -157,7 +167,7 @@ class Story{
 					let trailingScene = this.scenesLib[scene].actionsLib[action].head;
 					
 					//set last scenes
-					console.log(trailingScene.node.parents.indexOf(leadingScene))
+					//console.log(trailingScene.node.parents.indexOf(leadingScene))
 					if(trailingScene.node.parents.indexOf(leadingScene.node) == -1){ 
 						
 						trailingScene.node.parents.push(leadingScene.node);
@@ -198,8 +208,7 @@ class Story{
 
 
 	setSceneIndexNumbers(){
-		this.baseSceneNodes=[]
-		this.rootEndSceneNodes=[]
+		
 
 		//get base scenes
 

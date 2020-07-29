@@ -11,7 +11,15 @@ class Scene{
 		this.play=play_;
 		this.html={};
 
+
+
 		this.node=new SceneNode(this);
+		this.baseNodes=[]; //contentNodes
+		this.rootEndNodes=[];
+		this.exitNodes=[];
+
+
+		//this.setLastAndNextContentNodes();
 		// this.prevScenes={}//the previous scene(s) that get to this scene
 		// this.nextScenes={}//the next scene(s)
 
@@ -103,41 +111,53 @@ class Scene{
 	}
 
 	setLastAndNextContentNodes(){
-		for(let scene in this.scenesLib){
-			for(let action in this.scenesLib[scene].actionsLib){
-				if(this.scenesLib[scene].actionsLib[action].head instanceof Scene){
-					let leadingScene = this.scenesLib[scene].actionsLib[action].scene;
-					let trailingScene = this.scenesLib[scene].actionsLib[action].head;
+	
+			for(let action in this.actionsLib){
+				//console.log(action)
+				let head = this.actionsLib[action].head;
+				let tail = this.actionsLib[action].head;
+
+
+				if(head instanceof Scene){
+
+					this.baseNodes.push(head.node);
+					tail.node.isBase=true;
 					
-					//set last scenes
-					console.log(trailingScene.node.parents.indexOf(leadingScene))
-					if(trailingScene.node.parents.indexOf(leadingScene.node) == -1){ 
+				}else if(tail instanceof Scene){
+					this.exitNodes.push(tail)
+				}else if(head instanceof Content && tail instanceof Content){
+
+					if(tail.node.parents.indexOf(head.node) == -1){ 
 						
-						trailingScene.node.parents.push(leadingScene.node);
+						tail.node.parents.push(head.node);
 
 
-						trailingScene.node.parentsInfo[leadingScene.id]={};
-						trailingScene.node.parentsInfo[leadingScene.id].count=1;
-						trailingScene.node.parentsInfo[leadingScene.id].scene = leadingScene;
-						trailingScene.node.parentsInfo[leadingScene.id].node = leadingScene.node;
-						trailingScene.node.parentsInfo[leadingScene.id].order = trailingScene.node.parents.length-1;
+						tail.node.parentsInfo[head.id]={};
+						tail.node.parentsInfo[head.id].count=1;
+						tail.node.parentsInfo[head.id].scene = head;
+						tail.node.parentsInfo[head.id].node = head.node;
+						tail.node.parentsInfo[head.id].order = tail.node.parents.length-1;
 
 
 
 					}
 					else{
-						trailingScene.node.parentsInfo[leadingScene.id].count++;
+						tail.node.parentsInfo[head.id].count++;
 					}
 
-					if(leadingScene.node.children.indexOf(trailingScene.node) == -1){
 
-						leadingScene.node.children.push(trailingScene.node);
 
-						leadingScene.node.childrenInfo[trailingScene.id]={};
-						leadingScene.node.childrenInfo[trailingScene.id].count=1;
-						leadingScene.node.childrenInfo[trailingScene.id].scene = trailingScene;
-						leadingScene.node.childrenInfo[trailingScene.id].node = trailingScene.node;
-						leadingScene.node.childrenInfo[trailingScene.id].order = leadingScene.node.children.length-1;
+
+
+					if(head.node.children.indexOf(tail.node) == -1){ // prevent duplicat paths from head to tail such as a time or a click triger
+
+						head.node.children.push(tail)
+
+						head.node.childrenInfo[tail.id]={};
+						head.node.childrenInfo[tail.id].count=1;
+						head.node.childrenInfo[tail.id].scene = tail;
+						head.node.childrenInfo[tail.id].node = tail.node;
+						head.node.childrenInfo[tail.id].order = head.node.children.length-1;
 					
 						
 					}else{
@@ -146,12 +166,28 @@ class Scene{
 
 				}
 			}
-		}
+
+
+		//}
 	}
 
-	getBackEndLeftPos(){
-		this.scenesUp[this.scenesUp];
+
+	setContentIndexNumbers(){
+
+
+		for(let i in this.baseNodes){
+			console.log(this.baseNodes[i])
+			this.baseNodes[i].assignDescendentsIndexes(0);
+		}
+
+		
 	}
+
+	// getBackEndLeftPos(){
+	// 	this.scenesUp[this.scenesUp];
+	// }
+
+
 
 	setBackEndPosition(){
 		console.log("SET BECK END POSITION -------- left : " +this.be.spacing.left)

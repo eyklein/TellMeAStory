@@ -28,6 +28,10 @@ class StoryEditor{
 		}
 	}
 
+	hide(){
+		this.backEnd.editorWindow.html.innerHTML="";
+	}
+
 	display(){
 		//console.log("display story")
 		// for(let scene in this.story.scenesLib){

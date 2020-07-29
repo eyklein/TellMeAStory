@@ -24,7 +24,7 @@ class AudioLoader{
 			}
 			if(priorityAudioLoader.maxIndex<index){//add the max index
 				priorityAudioLoader.maxIndex=index;
-				console.log("max index : " + priorityAudioLoader.maxIndex)
+				//console.log("max index : " + priorityAudioLoader.maxIndex)
 			}
 		}
 	}
@@ -44,7 +44,7 @@ class AudioLoader{
 	        if (thisSC.readyState == thisSC.DONE) {
 	            if (thisSC.status === 200) {
 	                this.fileSize = parseInt(thisSC.getResponseHeader('content-length'));
-	                console.log("************" + this.fileSize)
+	                //console.log("************" + this.fileSize)
 	                //console.log('fileSize = ' + this.fileSize);
 	                //
 	                // ok here is the only place in the code where we have our request result and file size ...

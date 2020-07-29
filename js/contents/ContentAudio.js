@@ -13,6 +13,8 @@ class AudioContent extends Content{
 		super(contentJson_,parentScene_)
 
 		//console.log("new audioContent " + this.content.value)
+		//this.name=this.content.value;
+
 		this.loadAudio(absoluteLocation + this.content.value); //creates and loads the audioBuffer object
 
 		this.loop=false;
@@ -21,6 +23,9 @@ class AudioContent extends Content{
 		this.gainNode = context.createGain();
 		this.gainNode.gain.value=currentStory.volume[this.track]; //default
 
+
+		this.name=this.content.value;
+		this.createNode();
 		//this._audioContext = audioContext;
 	    //this._buffer = buffer; // AudioBuffer
 	    //this._source; // AudioBufferSourceNode

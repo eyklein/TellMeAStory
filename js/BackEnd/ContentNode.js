@@ -1,54 +1,25 @@
 
-class SceneNode extends Node{ //not to be confused with nodejs
-	constructor(scene_){
-		super(scene_);
-		this.scene=scene_;
-		this.enclosingStructure=this.scene.play;
-		this.id=this.scene.id
+class ContentNode extends Node{ //not to be confused with nodejs
+	constructor(content_){
+		super(content_);
+		this.content=content_;
+		this.enclosingStructure=this.content.parentScene;
+		this.id=this.content.id
 
 
 		this.createHTML();
 		this.html.svgPathsArrows=[];
 		
-		
 
-		// this.parents=[];
-		// this.parentsInfo={};
-		// this.primaryParent;
-
-
-		// this.children=[];
-		// this.childrenInfo={};
-
-		// this.widthFull=0;//if every child has its own spot
-		// this.widthCombined=0;//if only one child has its own spot
-
-		// this.posIndex={};
-		// this.posIndex.x=0;
-		// this.posIndex.y=0;
-		// this.posIndex.xRelative=0;//relative to siblings 
-
-		// this.pos={};
-
-		// this.height=30;
-		// this.width=90;
-		
-		// this.createHTML();
-
-		// this.html.svgPathsArrows=[];
 	}
 
 	createHTML(){
 		super.createHTML()
-		this.html.node.style['background-color']="blue";
+		this.html.node.style['background-color']="red";
 
-		this.html.node.innerHTML=this.id;
+		//console.log(this.content)
 
-		this.html.node.addEventListener('dblclick', function (e) {
-			currentStory.backEnd.setEditor(currentStory.backEnd.storyEditor.sceneEditors[this.id])
-			//currentStory.backEnd.storyEditor.sceneEditors[this.id].display();
-			currentStory.backEnd.display()
-		}.bind(this));
+		this.html.node.innerHTML= this.content.name
 	}
 
 	// setParents(){
@@ -230,7 +201,6 @@ class SceneNode extends Node{ //not to be confused with nodejs
 
 		
 	// }
-
 	assignDescendentsIndexes(index_,primaryParent_){
 
 
@@ -244,22 +214,50 @@ class SceneNode extends Node{ //not to be confused with nodejs
 				if(this.children[i].index==undefined){
 					this.children[i].assignDescendentsIndexes(index_+1,this)
 					rootEnd=false;
-				}else{
-					if(this.children[i].index>=this.index){
-						rootEnd=false;
-					}
+				}else if(this.children[i].index>=this.index){
+					rootEnd=false;
 				}
+				
 			}
 
 			if(rootEnd){ //this.children.length=0 ||   if any of the children have a hight index
 				this.isRootEnd=true;
-				console.log(this.scene.play)
 				this.scene.play.rootEndSceneNodes.push(this);
 			}else{
 				this.isRootEnd=false;
 			}
 		}
 	}
+
+	// assignDescendentsIndexes(index_,primaryParent_){
+
+
+	// 	if(this.index == undefined){ //if not already asigned an index
+	// 		this.index=index_;
+	// 		this.primaryParent=primaryParent_;
+
+	// 		let rootEnd=true;
+	// 		for(let i in this.children){
+
+	// 			if(this.children[i].index==undefined){
+	// 				this.children[i].assignDescendentsIndexes(index_+1,this)
+	// 				rootEnd=false;
+	// 			}else{
+	// 				if(this.children[i].index>=this.index){
+	// 					rootEnd=false;
+	// 				}
+	// 			}
+	// 		}
+
+	// 		if(rootEnd){ //this.children.length=0 ||   if any of the children have a hight index
+	// 			this.isRootEnd=true;
+	// 			this.scene.play.rootEndSceneNodes.push(this);
+	// 		}else{
+	// 			this.isRootEnd=false;
+	// 		}
+	// 	}
+	// }
+	// setWidthIndexBottomUp(){
 		
 
 	// }

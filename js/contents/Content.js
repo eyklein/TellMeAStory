@@ -12,6 +12,8 @@ class Content{
 		this.effects.entrance={};
 		this.effects.exit={};
 		this.effects.clickable={};
+		//this.name="yes";
+		
 		// this.triger=eventJson_.triger;
 
 		this.actionsIn=[];//action heads
@@ -20,8 +22,15 @@ class Content{
 		this.isClickable=false;
 
 		this.html={};
-		this.html.be={};//back end
+		//this.html.be={};//back end
 		this.html.fe={};//front end
+
+
+
+
+		//this.node=new ContentNode(this);
+
+
 
 
 		//this.createProperties(contentJson_)
@@ -40,6 +49,10 @@ class Content{
 		this.addActionOut=function(tailAction_){
 			this.actionsOut.append(tailAction_)
 		}
+	}
+
+	createNode(){
+		this.node=new ContentNode(this);
 	}
 	createEffects(){
 		// console.log(this.JSONData)
@@ -152,6 +165,9 @@ Content.prototype.updateIconContent=function(){
 
 
 	if(this.content.type=="text"){
+		//used to display in backend
+		this.value=this.content.value;
+
 		this.html.be.divIcon.innerHTML=this.content.value;
 
 	// }else if(this.content.type=="text-clickable"){
@@ -160,6 +176,7 @@ Content.prototype.updateIconContent=function(){
 	// 	link.innerHTML=this.content.value;
 	// 	this.html.be.divIcon.appendChild(link);
 	}else if(this.content.type=="img"){
+		this.value=this.content.value;
 
 		let img = document.createElement("img");
 		img.src=this.content.value;
@@ -170,6 +187,7 @@ Content.prototype.updateIconContent=function(){
 		//this.html.be.divIcon.innerHTML=this.content.value;
 		//document.getElementById("background_img").append(this.htmlElements.frontEnd);
 	}else if( this.content.type=="clear-text"){
+		this.value="clear";
 		
 		//this.htmlElement.action="clear";
 		//clearMainText()

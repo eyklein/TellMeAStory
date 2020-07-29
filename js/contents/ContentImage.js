@@ -2,6 +2,10 @@ class ImageContent extends Content{
 	constructor(contentJson_,parentScene_){ //,url_, content_, propertiesJSON_
 		super(contentJson_,parentScene_)
 		this.random=Math.random();
+
+		this.name=this.content.value;
+		this.createNode();
+
 	}
 
 	getEffect(effectName_,effectJSON_){

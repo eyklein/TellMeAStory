@@ -3,7 +3,7 @@ class Node{ //not to be confused with nodejs
 	constructor(scene_){
 
 		//this.enclosingStructure;//this is the story or scene depending on what this node if for
-		
+		this.isBase=false;
 		this.parents=[];
 		this.parentsInfo={};
 		this.primaryParent;
@@ -24,6 +24,8 @@ class Node{ //not to be confused with nodejs
 
 		this.height=30;
 		this.width=90;
+
+		//rootEndNodes
 		
 		
 
@@ -36,13 +38,12 @@ class Node{ //not to be confused with nodejs
 		this.html.container=document.createElement("div");
 
 		this.html.node=document.createElement("div");
-		this.html.node.style['background-color']="blue";
+		
 		this.html.node.style['color']="white";
 		this.html.node.style['font-size']="10px";
 		this.html.node.style.width=this.width+"px";
 		this.html.node.style.height=this.height+"px";
 		this.html.node.style.position="absolute";
-		this.html.node.innerHTML=this.scene.id;
 		this.html.node.style.opacity=.8;
 
 		this.html.container.appendChild(this.html.node);
@@ -85,13 +86,13 @@ class Node{ //not to be confused with nodejs
 	setRelativePosition(){ //position relative to siblings
 		
 		if(!this.isBase){
-			for(let i in this.primaryParent.children){
-				if(this.primaryParent.children[i]==this){
+			for(let i in this.parents[0].children){
+				if(this.parents[0].children[i]==this){
 					//console.log(this.posIndex)
 					break;
 				}else{
-					if(this.primaryParent.children[i].index==this.index){//make sure the index of added children is this index (they are at the same level)
-						this.posIndex.xRelative+=this.primaryParent.children[i].widthFull;
+					if(this.parents[0].children[i].index==this.index){//make sure the index of added children is this index (they are at the same level)
+						this.posIndex.xRelative+=this.parents[0].children[i].widthFull;
 					}
 					
 				}
@@ -234,34 +235,34 @@ class Node{ //not to be confused with nodejs
 		
 	}
 
-	assignDescendentsIndexes(index_,primaryParent_){
+	// assignDescendentsIndexes(index_,primaryParent_){
 
 
-		if(this.index == undefined){ //if not already asigned an index
-			this.index=index_;
-			this.primaryParent=primaryParent_;
+	// 	if(this.index == undefined){ //if not already asigned an index
+	// 		this.index=index_;
+	// 		this.primaryParent=primaryParent_;
 
-			let rootEnd=true;
-			for(let i in this.children){
+	// 		let rootEnd=true;
+	// 		for(let i in this.children){
 
-				if(this.children[i].index==undefined){
-					this.children[i].assignDescendentsIndexes(index_+1,this)
-					rootEnd=false;
-				}else{
-					if(this.children[i].index>=this.index){
-						rootEnd=false;
-					}
-				}
-			}
+	// 			if(this.children[i].index==undefined){
+	// 				this.children[i].assignDescendentsIndexes(index_+1,this)
+	// 				rootEnd=false;
+	// 			}else{
+	// 				if(this.children[i].index>=this.index){
+	// 					rootEnd=false;
+	// 				}
+	// 			}
+	// 		}
 
-			if(rootEnd){ //this.children.length=0 ||   if any of the children have a hight index
-				this.isRootEnd=true;
-				this.scene.play.rootEndSceneNodes.push(this);
-			}else{
-				this.isRootEnd=false;
-			}
-		}
-	}
+	// 		if(rootEnd){ //this.children.length=0 ||   if any of the children have a hight index
+	// 			this.isRootEnd=true;
+	// 			this.scene.play.rootEndSceneNodes.push(this);
+	// 		}else{
+	// 			this.isRootEnd=false;
+	// 		}
+	// 	}
+	// }
 	// setWidthIndexBottomUp(){
 		
 

@@ -44,7 +44,7 @@ class PriorityLoader{
 
 			currentStory.start();
 		}
-		console.log("LOADING BUCKET :   - " + bucketIndex_)
+		//console.log("LOADING BUCKET :   - " + bucketIndex_)
 		this.currentLoadbucket=bucketIndex_;
 
 		if(this.indexHistogram.length>bucketIndex_){
