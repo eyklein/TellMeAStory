@@ -85,7 +85,7 @@ class Story{
 		this.activeBackgroundAudio={};
 
 		this.baseSceneNodes=[]
-		this.rootEndSceneNodes=[]
+		this.rootEndNodes=[]
 
 		//this.setLeftOffsets()
 		
@@ -125,6 +125,7 @@ class Story{
 	  	// set which content leads to which content
 	  	this.setLastAndNextContentNodes();
 	  	this.setContentIndexNumbers();
+	  	this.setContentFullWidth()
 
 	  	
 
@@ -154,6 +155,13 @@ class Story{
 	setContentIndexNumbers(){
 		for(let sceneID in this.scenesLib){
 	  		this.scenesLib[sceneID].setContentIndexNumbers();
+	  	}
+	}
+
+	setContentFullWidth(){
+		for(let sceneID in this.scenesLib){
+			//console.log(sceneID)
+	  		this.scenesLib[sceneID].setContentFullWidth();
 	  	}
 	}
 
@@ -241,8 +249,8 @@ class Story{
 
 	}
 	setSceneFullWidth(){//sets the width the the children nodes will take up
-		for(let i in this.rootEndSceneNodes){
-			this.rootEndSceneNodes[i].setFullWidthCascadeUp(1)
+		for(let i in this.rootEndNodes){
+			this.rootEndNodes[i].setFullWidthCascadeUp(1)
 		}
 	}
 	setRelativePositionIndex(){

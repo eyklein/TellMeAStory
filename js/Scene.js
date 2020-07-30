@@ -111,20 +111,23 @@ class Scene{
 	}
 
 	setLastAndNextContentNodes(){
-	
+		console.log("setLastAndNextContentNodes")
 			for(let action in this.actionsLib){
 				//console.log(action)
 				let head = this.actionsLib[action].head;
-				let tail = this.actionsLib[action].head;
+				let tail = this.actionsLib[action].tail;
 
+				// console.log(head)
+				// console.log(tail)
+				// console.log((head instanceof Scene) + " && " + (tail instanceof Content))
+				// console.log(this.actionsLib[action])
 
-				if(head instanceof Scene){
-
-					this.baseNodes.push(head.node);
+				if(head instanceof Scene && tail instanceof Content){
+					this.baseNodes.push(tail.node);
 					tail.node.isBase=true;
 					
-				}else if(tail instanceof Scene){
-					this.exitNodes.push(tail)
+				}else if(tail instanceof Scene && head instanceof Content){
+					this.exitNodes.push(head.node)
 				}else if(head instanceof Content && tail instanceof Content){
 
 					if(tail.node.parents.indexOf(head.node) == -1){ 
@@ -151,7 +154,7 @@ class Scene{
 
 					if(head.node.children.indexOf(tail.node) == -1){ // prevent duplicat paths from head to tail such as a time or a click triger
 
-						head.node.children.push(tail)
+						head.node.children.push(tail.node)
 
 						head.node.childrenInfo[tail.id]={};
 						head.node.childrenInfo[tail.id].count=1;
@@ -161,7 +164,7 @@ class Scene{
 					
 						
 					}else{
-						leadingScene.node.childrenInfo[trailingScene.id].count++;
+						head.node.childrenInfo[tail.id].count++;
 					}
 
 				}
@@ -176,11 +179,19 @@ class Scene{
 
 
 		for(let i in this.baseNodes){
-			console.log(this.baseNodes[i])
+			// console.log("******************")
+			// console.log(this.baseNodes[i])
 			this.baseNodes[i].assignDescendentsIndexes(0);
 		}
 
 		
+	}
+
+	setContentFullWidth(){//sets the width the the children nodes will take up
+		for(let i in this.rootEndNodes){
+			console.log("0000000324540923965293")
+			this.rootEndNodes[i].setFullWidthCascadeUp(1)
+		}
 	}
 
 	// getBackEndLeftPos(){

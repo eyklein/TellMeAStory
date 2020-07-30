@@ -230,31 +230,64 @@ class SceneNode extends Node{ //not to be confused with nodejs
 
 		
 	// }
+	setRelativePosition(){ //position relative to siblings
+		// console.log(this.primaryParent)
+		if(!this.isBase){
+			// console.log(this)
+			for(let i in this.primaryParent.children){
+				if(this.primaryParent.children[i]==this){
+					//console.log(this.posIndex)
+					break;
+				}else{
+					if(this.primaryParent.children[i].index==this.index){//make sure the index of added children is this index (they are at the same level)
+						this.posIndex.xRelative+=this.primaryParent.children[i].widthFull;
+					}
+					
+				}
+			}
+		}else if(this.isBase){// for the base nodes without a parent        this.scene.play.baseSceneNodes.indexOf(this) != -1){
+
+			for(let i in this.enclosingStructure.baseSceneNodes){
+				if(this.scene.play.baseSceneNodes[i]==this){
+					break;
+				}else{
+					this.posIndex.xRelative+=this.enclosingStructure.baseSceneNodes[i].widthFull;
+				}
+			}
+			
+		}
+
+		
+	}
 
 	assignDescendentsIndexes(index_,primaryParent_){
 
-
+		// console.log(this)
+		// console.log("((((())))")
 		if(this.index == undefined){ //if not already asigned an index
 			this.index=index_;
 			this.primaryParent=primaryParent_;
+			// console.log(this.primaryParent)
 
 			let rootEnd=true;
 			for(let i in this.children){
 
+				// console.log("+++++++++")
+				// console.log(this.children[i])
 				if(this.children[i].index==undefined){
+					// console.log("+++++1++++")
 					this.children[i].assignDescendentsIndexes(index_+1,this)
 					rootEnd=false;
-				}else{
-					if(this.children[i].index>=this.index){
-						rootEnd=false;
-					}
+				}else if(this.children[i].index>=this.index){
+					// console.log("+++++2++++")
+					rootEnd=false;
 				}
+				
 			}
 
 			if(rootEnd){ //this.children.length=0 ||   if any of the children have a hight index
 				this.isRootEnd=true;
-				console.log(this.scene.play)
-				this.scene.play.rootEndSceneNodes.push(this);
+				this.enclosingStructure.rootEndNodes.push(this);
 			}else{
 				this.isRootEnd=false;
 			}
