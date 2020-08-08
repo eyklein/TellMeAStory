@@ -24,6 +24,42 @@ class ContentNode extends Node{ //not to be confused with nodejs
 
 
 
+	assignDescendentsIndexes(index_,primaryParent_){
+
+
+
+		if(this.index == undefined){ //if not already asigned an index
+			this.index=index_;
+			this.primaryParent=primaryParent_;
+
+			let rootEnd=true;
+			for(let i in this.children){
+
+				if(this.children[i].index==undefined){
+					// console.log(this)
+					// console.log(this.children[i])
+					this.children[i].assignDescendentsIndexes(index_+1,this)
+					rootEnd=false;
+				}else{
+					if(this.children[i].index>=this.index){
+						rootEnd=false;
+					}
+				}
+			}
+
+			if(rootEnd){ //this.children.length=0 ||   if any of the children have a hight index
+				this.isRootEnd=true;
+				this.enclosingStructure.rootEndNodes.push(this);
+
+				console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+			}else{
+				this.isRootEnd=false;
+			}
+		}
+	}
+
+
+
 	// assignDescendentsIndexes(index_,primaryParent_){
 
 

@@ -110,10 +110,12 @@ class Scene{
 		// this.be.spacing.myUnitWidth=Math.max(1,size(this.nextScenes));
 	}
 
-	setLastAndNextContentNodes(){
+	setLastAndNextContentNodes(){ //not sure if this will work with the shared contents
 		console.log("setLastAndNextContentNodes")
 			for(let action in this.actionsLib){
+				if(action.elicit == "display"){
 				//console.log(action)
+				
 				let head = this.actionsLib[action].head;
 				let tail = this.actionsLib[action].tail;
 
@@ -169,6 +171,8 @@ class Scene{
 
 				}
 			}
+			
+		}
 
 
 		//}
