@@ -26,6 +26,8 @@ class AudioContent extends Content{
 
 		this.name=this.content.value;
 		this.createNode();
+
+		this.type="audio";
 		//this._audioContext = audioContext;
 	    //this._buffer = buffer; // AudioBuffer
 	    //this._source; // AudioBufferSourceNode
@@ -36,6 +38,7 @@ class AudioContent extends Content{
 
 	displayFrontEndHTML(){
 		//this.applyProperties();
+		super.displayFrontEndHTML();
 		this.play();
 		//this.playing=false;
 		

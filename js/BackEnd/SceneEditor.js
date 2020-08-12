@@ -21,12 +21,10 @@ class SceneEditor{
 
 	addContentDivs(){
 		for(let content in this.scene.contentsLib){
-			//document.getElementById("")
-			//console.log(this.scene.contentsLib[content].node)
-			// console.log("this.scene.contentsLib[content].node.html.container")
-			// console.log(this.scene.contentsLib[content].node.html.container)
 			this.html.appendChild(this.scene.contentsLib[content].node.html.container)
-			//this.backEnd.editorWindow.html.appendChild(this.story.scenesLib[scene].be.html)
+		}
+		for(let action in this.scene.actionsLib){
+			this.html.appendChild(this.scene.actionsLib[action].html.container)
 		}
 	}
 	hide(){

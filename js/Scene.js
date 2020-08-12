@@ -4,7 +4,7 @@ class Scene{
 		this.contentsLib={};
 		this.actionsLib={};
 		this.actionsIn=[];//these are the actions that can start the scene
-		this.actionsOut=[];//these are the first actions in the scene
+		this.actionsOut=[];//these are the first actions in the scene not actions out of the scene
 		this.activatedWithScene=[];
 		this.id=this.sceneData.id;
 		this.name=this.sceneData.name;
@@ -14,29 +14,21 @@ class Scene{
 
 
 		this.node=new SceneNode(this);
+		
+
+
 		this.baseNodes=[]; //contentNodes
 		this.rootEndNodes=[];
 		this.exitNodes=[];
 
+		this.backEnd={}
+		this.backEnd.contentClusters={};
+		//this.backEnd.arrows=[];
 
-		//this.setLastAndNextContentNodes();
-		// this.prevScenes={}//the previous scene(s) that get to this scene
-		// this.nextScenes={}//the next scene(s)
-
-		// this.nextScenesArray=[]//the next scene(s)
-		// this.prevScenesArray=[]//the next scene(s)
-
-		// this.scenesUp;//all the scenes that led up to this one (only get one posibility)
-		// this.index;
-
-
-		//this.backEndModual={};
-
-		//console.log(this.play);
+		//this.setPositionActions();
 	}
 
 	displayFrontEnd(){
-		//window.location.hash = this.id;
 		for(let i=0;i<this.actionsOut.length;i++){
 			this.actionsOut[i].activate();
 		}
@@ -44,9 +36,7 @@ class Scene{
 
 	addContents(sceneJson_){
 		if(this.sceneData.contents){
-
 			for(let content of this.sceneData.contents){
-				// console.log(content.content.type)
 				if(content.content.type=="audio"){
 					this.contentsLib[content.id]=new AudioContent(content,this)
 				}else if(content.content.type=="text"){
@@ -59,17 +49,11 @@ class Scene{
 				
 			}
 		}
-
 	}
 
-
 	addActions(sceneJson_){
-
 		if(this.sceneData.contents){
-
-			
 			for(let action of this.sceneData.actions){
-				// console.log(this.id+ " : " + action.id)
 				if(this.actionsLib[action.id]==undefined){
 					this.actionsLib[action.id]=new Action(action,this)
 				}else{
@@ -79,112 +63,105 @@ class Scene{
 					}
 					this.actionsLib[action.id+namingOffset]=new Action(action,this)
 				}
-				
 			}
-			
 		}
 	}
 
-	addBackEnd(){
-		this.be={};
-		//this.be.node=new PositionNode(this);
-
-
-		this.be.html=document.createElement("div");
-		this.be.html.style['background-color']="blue";
-		this.be.html.style.width="80px";
-		this.be.html.style.height="30px";
-		this.be.html.style.position="absolute";
-		this.be.html.innerHTML=this.id;
-		this.be.html.style.opacity=.8;
-
-		// this.be.spacing={};
-		// this.be.spacing.top=0;//default
-		// this.be.spacing.left=0;
-
-
+	setPositionActions(){
+		let hOffset=10;
+		//this would show what scenes are feeding into it
+		// for(let i in this.actionsIn){
+		// 	console.log(this.actionsIn[i])
+		// }
 		
 
-
-		// this.be.spacing={}
-		// this.be.spacing.myUnitWidth=Math.max(1,size(this.nextScenes));
-	}
-
-	setLastAndNextContentNodes(){ //not sure if this will work with the shared contents
-		console.log("setLastAndNextContentNodes")
-			for(let action in this.actionsLib){
-				if(action.elicit == "display"){
-				//console.log(action)
-				
-				let head = this.actionsLib[action].head;
-				let tail = this.actionsLib[action].tail;
-
-				// console.log(head)
-				// console.log(tail)
-				// console.log((head instanceof Scene) + " && " + (tail instanceof Content))
-				// console.log(this.actionsLib[action])
-
-				if(head instanceof Scene && tail instanceof Content){
-					this.baseNodes.push(tail.node);
-					tail.node.isBase=true;
-					
-				}else if(tail instanceof Scene && head instanceof Content){
-					this.exitNodes.push(head.node)
-				}else if(head instanceof Content && tail instanceof Content){
-
-					if(tail.node.parents.indexOf(head.node) == -1){ 
-						
-						tail.node.parents.push(head.node);
-
-
-						tail.node.parentsInfo[head.id]={};
-						tail.node.parentsInfo[head.id].count=1;
-						tail.node.parentsInfo[head.id].scene = head;
-						tail.node.parentsInfo[head.id].node = head.node;
-						tail.node.parentsInfo[head.id].order = tail.node.parents.length-1;
-
-
-
-					}
-					else{
-						tail.node.parentsInfo[head.id].count++;
-					}
-
-
-
-
-
-					if(head.node.children.indexOf(tail.node) == -1){ // prevent duplicat paths from head to tail such as a time or a click triger
-
-						head.node.children.push(tail.node)
-
-						head.node.childrenInfo[tail.id]={};
-						head.node.childrenInfo[tail.id].count=1;
-						head.node.childrenInfo[tail.id].scene = tail;
-						head.node.childrenInfo[tail.id].node = tail.node;
-						head.node.childrenInfo[tail.id].order = head.node.children.length-1;
-					
-						
-					}else{
-						head.node.childrenInfo[tail.id].count++;
-					}
-
-				}
-			}
-			
+		console.log("out")
+		for(let i in this.actionsOut){
+			this.actionsOut[i].setPosition(hOffset);
 		}
-
-
-		//}
 	}
+
+
+	createSceneBackEnd(){
+		//scenes in
+		// for(let id in this.node.parentsInfo){
+		// 	if(this.backEnd.contentClusters[id] == undefined){
+		// 		this.backEnd.contentClusters[id] = new ContentCluster(this.node.parentsInfo[id].scene);
+		// 	}
+		// }
+
+		//this
+		this.backEnd.contentClusters[this.id] = new ContentCluster(this);
+
+		//scenes out
+		for(let id in this.node.childrenInfo){
+			if(this.backEnd.contentClusters[id] == undefined){
+				this.backEnd.contentClusters[id] = new ContentCluster(this.node.childrenInfo[id].scene);
+			}
+
+		}
+		for(let id in this.contentsLib){
+			if(this.backEnd.contentClusters[id] == undefined){
+				//console.log(id);
+				//console.log(this.contentsLib[id].uniqueIdentifier);
+				this.backEnd.contentClusters[id]=new ContentCluster(this.contentsLib[id]);
+			}
+		}
+		//console.log(this.backEnd.contentClusters)
+		for(let action in this.actionsLib){
+			this.backEnd.contentClusters[this.actionsLib[action].tail.id].addActionIn(this.actionsLib[action])
+
+			this.backEnd.contentClusters[this.actionsLib[action].head.id].addActionOut(this.actionsLib[action])
+		}
+	}
+
+	// setLastAndNextContentNodes(){ //not sure if this will work with the shared contents
+	// 		for(let action in this.actionsLib){
+	// 			if(action.elicit == "display"){
+				
+	// 			let head = this.actionsLib[action].head;
+	// 			let tail = this.actionsLib[action].tail;
+
+	// 			if(head instanceof Scene && tail instanceof Content){
+	// 				this.baseNodes.push(tail.node);
+	// 				tail.node.isBase=true;
+					
+	// 			}else if(tail instanceof Scene && head instanceof Content){
+	// 				this.exitNodes.push(head.node)
+	// 			}else if(head instanceof Content && tail instanceof Content){
+
+	// 				if(tail.node.parents.indexOf(head.node) == -1){ 
+	// 					tail.node.parents.push(head.node);
+	// 					tail.node.parentsInfo[head.id]={};
+	// 					tail.node.parentsInfo[head.id].count=1;
+	// 					tail.node.parentsInfo[head.id].scene = head;
+	// 					tail.node.parentsInfo[head.id].node = head.node;
+	// 					tail.node.parentsInfo[head.id].order = tail.node.parents.length-1;
+	// 				}
+	// 				else{
+	// 					tail.node.parentsInfo[head.id].count++;
+	// 				}
+
+	// 				if(head.node.children.indexOf(tail.node) == -1){ // prevent duplicat paths from head to tail such as a time or a click triger
+	// 					head.node.children.push(tail.node);
+	// 					head.node.childrenInfo[tail.id]={};
+	// 					head.node.childrenInfo[tail.id].count=1;
+	// 					head.node.childrenInfo[tail.id].scene = tail;
+	// 					head.node.childrenInfo[tail.id].node = tail.node;
+	// 					head.node.childrenInfo[tail.id].order = head.node.children.length-1;						
+	// 				}else{
+	// 					head.node.childrenInfo[tail.id].count++;
+	// 				}
+	// 			}
+	// 		}	
+	// 	}
+	// }
 
 
 	setContentIndexNumbers(){
 
 
 		for(let i in this.baseNodes){
-			// console.log("******************")
-			// console.log(this.baseNodes[i])
 			this.baseNodes[i].assignDescendentsIndexes(0);
 		}
 
@@ -193,7 +170,6 @@ class Scene{
 
 	setContentFullWidth(){//sets the width the the children nodes will take up
 		for(let i in this.rootEndNodes){
-			console.log("0000000324540923965293")
 			this.rootEndNodes[i].setFullWidthCascadeUp(1)
 		}
 	}
@@ -205,17 +181,11 @@ class Scene{
 
 
 	setBackEndPosition(){
-		console.log("SET BECK END POSITION -------- left : " +this.be.spacing.left)
-		
 		this.be.html.style.top=this.be.spacing.top + "px";
 		this.be.html.style.left=this.be.spacing.left + "px";
-
-		
-
 	}
-	getUnitWidths(){//reterns all the unit widths with cascading children
 
-		console.log("getUnitWidths !!!!!!!!!!!!!!!!!!!!")
+	getUnitWidths(){//reterns all the unit widths with cascading children
 		let childrensWidths=[];
 
 		let deaperNextScenes={}
@@ -240,28 +210,6 @@ class Scene{
 			return this.be.spacing.myUnitWidth;
 		}
 	}
-
-	setBESpacingWidth(){
-		//this.be.siblibgIndex = this.getSiblingIndex();
-		
-		//this.be.spacing.unitWidths=this.getUnitWidths(); //could be more efficent ??? 
-	}
-
-	// getSiblingIndex(){
-	// 	if(this.prevScenesArray.length>0){
-	// 		for(let i in this.prevScenesArray){
-	// 			console.log(this.prevScenesArray[i].id + "  compair to " + this.id)
-	// 			if(this.prevScenesArray[i]==this){
-	// 				console.log("true")
-	// 				return i;
-	// 			}
-	// 		}
-	// 		return null;
-			
-	// 	}
-	// }
-
-
 
 
 	addInheritance(inheritedContent_){
@@ -292,14 +240,6 @@ class Scene{
 			}
 		}
 	}
-	// positionBE(){
-	// 	this.be.html.style.top=this.node.pos.y + "px";
-	// 	this.be.html.style.left=this.node.pos.x + "px";
-	// }
-
-
-
-
 
 	getName(){
 		return this.sceneData.name;

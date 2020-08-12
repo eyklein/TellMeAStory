@@ -1,6 +1,11 @@
+let timeScale = 50;
+let clickScale = 200;
 class Action{
 
 	constructor(actionJSON_,scene_){
+		
+
+
 		this.JSON=actionJSON_;
 		//actionJSON_.id=Math.random();
 		this.id=actionJSON_.id;
@@ -28,17 +33,24 @@ class Action{
 
 		this.scene=scene_;
 		this.html={};
-		this.html.be={}
+		//this.html.backEnd={}
 
 		this.outIndex;
 		this.inIndex;
 
 
+		this.pos={};
+		this.pos.set=false;
+		//this.pos.y
+
+
+
+
 		this.height;
-		this.width;
-		this.html.be.pos={};
-		this.html.be.pos.x={};
-		this.html.be.pos.y={};
+		this.width = 300*Math.random();
+		// this.html.be.pos={};
+		// this.html.be.pos.x={};
+		// this.html.be.pos.y={};
 
 
 
@@ -47,12 +59,12 @@ class Action{
 		// console.log(actionJSON_.passOnInheritance)
 		if(actionJSON_.passOnInheritance != undefined){
 			this.passOnInheritance=[]
-			console.log(this.id)
-			console.log(actionJSON_.passOnInheritance)
+			// console.log(this.id)
+			// console.log(actionJSON_.passOnInheritance)
 			for(let i in actionJSON_.passOnInheritance){
 				this.passOnInheritance[i]=this.scene.contentsLib[actionJSON_.passOnInheritance[i]];
 			}
-			console.log(this.passOnInheritance)
+			// console.log(this.passOnInheritance)
 		}
 
 
@@ -63,29 +75,33 @@ class Action{
 		if(!isNaN(actionJSON_.tailID)){//if target is numbers it is an event if it is letters it is a scene // returns true if it starts with numbers
 
 			this.tail=this.scene.getContentByID(actionJSON_.tailID);
-			this.tail.actionsOut.push(this);
+			//this.tail.actionsOut.push(this);
+			this.tail.addActionOut(this)
 		}else{
 			if(actionJSON_.tailID != this.scene.id){
 				console.log(actionJSON_.tailID +  " != " + this.scene.id)
 				console.log("Scene trigger and scene object do not match");
 			}
-			//console.log(this.id + ">>>>>"  + actionJSON_.tailID)
-			// this.tail=this.scene.play.scenesLib[actionJSON_.tailID];
 			this.tail=this.scene;
+			
+			//this.tail.addActionOut(this) //need to add this function the scene object ???
 			this.tail.actionsOut.push(this)
 		}
 
 
 		if(!isNaN(actionJSON_.headID)){//ibid
-			// console.log(this)
-			// console.log(actionJSON_.headID)
 			this.head=this.scene.getContentByID(actionJSON_.headID);
-			this.head.actionsIn.push(this);
+			//this.head.actionsIn.push(this);
+
+			this.head.addActionIn(this)
 		}else{
-			//console.log(actionJSON_.headID)
 			this.head=this.scene.play.scenesLib[actionJSON_.headID];
+
+			//this.head.addActionIn(this) //need to add this function the scene object ???
 			this.head.actionsIn.push(this)
 		}
+
+		this.setHeight();
 
 	}
 
@@ -149,6 +165,7 @@ class Action{
 			this.deactivateContent(this.delay);
 		}
 	}
+
 	displayContent(delay_){
 
 		//console.log("display " + this.head.id + " from " + this.tail.id + " delay: " + delay_)
@@ -245,6 +262,57 @@ class Action{
 	}
 
 
+	setPosition(topPos_){
+		this.pos.y = topPos_;
+		this.pos.set = true;
+
+		this.setBackEnd()
+
+		if(this.elicit == "display"){//this should be for activate if there is an activate action
+			//console.log("display")
+			for(let i in this.head.actionsOut){ //this.head is the content acton was pionting to
+				//console.log(i)
+				if(this.head.actionsOut[i].pos.set == false){
+					//console.log(this.pos.y + this.height)
+					this.head.actionsOut[i].setPosition(this.pos.y + this.height)
+				}
+				
+			}
+		}
+		else if(this.elicit == "activate"){//this should be for activate if there is an activate action
+			//console.log("activate")
+			for(let i in this.head.actionsOut){ //this.head is the content acton was pionting to
+				if(this.head.actionsOut[i].pos.set == false){
+					//console.log(this.pos.y + this.height)
+					this.head.actionsOut[i].setPosition(this.pos.y + this.height)
+				}
+				
+			}
+		}
+		
+	}
+
+	setHeight(){
+		if(this.trigger == "time"){
+			this.height=this.delay*timeScale;
+		}else if(this.trigger == "click"){
+			this.height = clickScale; 
+		}
+	}
+
+	setBackEnd(){
+		//actionArrowSVG
+		this.html.container = document.createElement("div");
+
+		this.html.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+		this.html.svg.classList.add("connector-line")
+		this.html.svg.classList.add("click")
+		this.html.svg.innerHTML = actionArrowSVG(this.width, this.height, 3, "dashed");
+		console.log(this.html.svg)
+		this.html.container.append(this.html.svg);
+	}
+
+
 	removeTimer(){
 		// console.log(this)
 		
@@ -253,10 +321,8 @@ class Action{
 
 
 
-	// triggerScene(){//trigers a new scene
-	// 	this.scene.play.newScene(this.head)    //the current play
-	// }
-	triggerContent(delay_){//trigers content
+	
+	triggerContent(delay_){//triggers content
 
 
 		// if(this.head instanceof Scene){
@@ -299,107 +365,107 @@ Action.prototype.updateOutInIndexes=function(){
 }
 
 //back end
-Action.prototype.addHTMLtoSceneContainer=function(){
+// Action.prototype.addHTMLtoSceneContainer=function(){
 
-	if(this.head instanceof Content){
-		this.head.parentScene.html.be.container.appendChild(this.head.html.be.container);
-	}else if(this.head instanceof Scene){
-		//add dummy div of scene
-	}
-		//if it is the scene
-		//console.log( "placed "+ this.head.id + " in " + this.tail.code)
+// 	if(this.head instanceof Content){
+// 		this.head.parentScene.html.be.container.appendChild(this.head.html.be.container);
+// 	}else if(this.head instanceof Scene){
+// 		//add dummy div of scene
+// 	}
+// 		//if it is the scene
+// 		//console.log( "placed "+ this.head.id + " in " + this.tail.code)
 
-}
+// }
 
 
-Action.prototype.createBackEndHTML=function(){
+// Action.prototype.createBackEndHTML=function(){
 	
-		//this is a time bar thatr only shows when dragging
-		this.html.be.timeDealy={}
-		this.html.be.timeDealy.containerDiv = document.createElement("div");
-		this.html.be.timeDealy.containerDiv.classList.add("time-delay");
+// 		//this is a time bar thatr only shows when dragging
+// 		this.html.be.timeDealy={}
+// 		this.html.be.timeDealy.containerDiv = document.createElement("div");
+// 		this.html.be.timeDealy.containerDiv.classList.add("time-delay");
 
 
-		this.html.be.timeDealy.textDiv = document.createElement("div");
-		this.html.be.timeDealy.textDiv.classList.add("time-delay-text");
-		this.html.be.timeDealy.containerDiv.appendChild(this.html.be.timeDealy.textDiv);
+// 		this.html.be.timeDealy.textDiv = document.createElement("div");
+// 		this.html.be.timeDealy.textDiv.classList.add("time-delay-text");
+// 		this.html.be.timeDealy.containerDiv.appendChild(this.html.be.timeDealy.textDiv);
 		
 
-		this.html.be.timeDealy.svgArrow= document.createElementNS("http://www.w3.org/2000/svg", "svg");
-		this.html.be.timeDealy.svgArrow.classList.add("time-delay-arrow");
-		this.html.be.timeDealy.svgArrow.innerHTML=delayArrowSVG(100)
-		//this.htmlElements.timeDealy.containerDiv.style.display = "none";
-		this.html.be.timeDealy.containerDiv.appendChild(this.html.be.timeDealy.svgArrow);
+// 		this.html.be.timeDealy.svgArrow= document.createElementNS("http://www.w3.org/2000/svg", "svg");
+// 		this.html.be.timeDealy.svgArrow.classList.add("time-delay-arrow");
+// 		this.html.be.timeDealy.svgArrow.innerHTML=delayArrowSVG(100)
+// 		//this.htmlElements.timeDealy.containerDiv.style.display = "none";
+// 		this.html.be.timeDealy.containerDiv.appendChild(this.html.be.timeDealy.svgArrow);
 
 
-		// eventDivTimeDelayDisplay.svg=svgTimeDelayArrow;
+// 		// eventDivTimeDelayDisplay.svg=svgTimeDelayArrow;
 
-		// eventDivTimeDelayDisplay.appendChild(textTimeDelay);
-		// eventDivTimeDelayDisplay.text=textTimeDelay;
-		// svgTimeDelayArrow.innerHTML=delayArrowSVG(100);
+// 		// eventDivTimeDelayDisplay.appendChild(textTimeDelay);
+// 		// eventDivTimeDelayDisplay.text=textTimeDelay;
+// 		// svgTimeDelayArrow.innerHTML=delayArrowSVG(100);
 
 
 
-		//specal for creating svgs on the fly inline
-		this.html.be.svg= document.createElementNS("http://www.w3.org/2000/svg", "svg");
-		this.html.be.svg.classList.add("connector-line");
+// 		//specal for creating svgs on the fly inline
+// 		this.html.be.svg= document.createElementNS("http://www.w3.org/2000/svg", "svg");
+// 		this.html.be.svg.classList.add("connector-line");
 		
 
-		// getArrowSVG(deltaX_,deltaY_,strokeThickness_,type_)
-		// this.html.be.svg.innerHTML=getArrowSVG(this.delay*1000,this.order*75,3,this.type)
+// 		// getArrowSVG(deltaX_,deltaY_,strokeThickness_,type_)
+// 		// this.html.be.svg.innerHTML=getArrowSVG(this.delay*1000,this.order*75,3,this.type)
 
-		//the ContentDiv container is now in the content object
+// 		//the ContentDiv container is now in the content object
 
-		// eventDivContainer.appendChild(eventDivDragBar);
-		// eventDivContainer.appendChild(eventDivIcon);
-		// eventDivContainer.appendChild(eventDivContent);
+// 		// eventDivContainer.appendChild(eventDivDragBar);
+// 		// eventDivContainer.appendChild(eventDivIcon);
+// 		// eventDivContainer.appendChild(eventDivContent);
 
-		// 	eventDivContainer.appendChild(eventDivTimeDelayDisplay);
+// 		// 	eventDivContainer.appendChild(eventDivTimeDelayDisplay);
 			
 
-		// 	eventDivContainer.appendChild(connectorLine);
-	//this.addHTMLElementsToContentDiv();
+// 		// 	eventDivContainer.appendChild(connectorLine);
+// 	//this.addHTMLElementsToContentDiv();
 		
-}
+// }
 
 
-//back end
+// //back end
 
-Action.prototype.addHTMLElementsToContentDiv=function(){
-	//this is the main part
-	//console.log(this.head)
-	if(this.head instanceof Content){
-		// if(this.tail instanceof Content){
-		// 	console.log("adding " + this.head.id + this.head.parentScene.id+ " to " + this.tail.id + this.tail.parentScene.id+ " w/ action " + this.id)
-		// }else{
-		// 	console.log("adding " + this.head.id + this.head.parentScene.id+ " to " + this.tail.id+ " w/ action " + this.id)
-		// }
+// Action.prototype.addHTMLElementsToContentDiv=function(){
+// 	//this is the main part
+// 	//console.log(this.head)
+// 	if(this.head instanceof Content){
+// 		// if(this.tail instanceof Content){
+// 		// 	console.log("adding " + this.head.id + this.head.parentScene.id+ " to " + this.tail.id + this.tail.parentScene.id+ " w/ action " + this.id)
+// 		// }else{
+// 		// 	console.log("adding " + this.head.id + this.head.parentScene.id+ " to " + this.tail.id+ " w/ action " + this.id)
+// 		// }
 
 
-		this.head.html.be.container.appendChild(this.html.be.svg);
+// 		this.head.html.be.container.appendChild(this.html.be.svg);
 
-		//this is the time info while dragging
-		this.head.html.be.container.appendChild(this.html.be.timeDealy.containerDiv);
-	}
-}
+// 		//this is the time info while dragging
+// 		this.head.html.be.container.appendChild(this.html.be.timeDealy.containerDiv);
+// 	}
+// }
 
-Action.prototype.setWidthHeight=function(){
+// Action.prototype.setWidthHeight=function(){
 	
-	this.updateOutInIndexes()
+// 	this.updateOutInIndexes()
 
-	if(this.trigger=="time"){
-		this.html.be.height=this.delay*100;
-	}else if(this.trigger=="click"){
-		//console.log(this.id+ " : delay : " + this.delay*100)
-		this.html.be.height=100+this.delay*100;
-	}
+// 	if(this.trigger=="time"){
+// 		this.html.be.height=this.delay*100;
+// 	}else if(this.trigger=="click"){
+// 		//console.log(this.id+ " : delay : " + this.delay*100)
+// 		this.html.be.height=100+this.delay*100;
+// 	}
 
 
-	this.html.be.width=this.outIndex*50+100;
+// 	this.html.be.width=this.outIndex*50+100;
 	
 
 
-}
+// }
 
 
 

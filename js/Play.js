@@ -122,10 +122,13 @@ class Story{
 	  		this.scenesLib[scenesData_[i].id].addActions(scenesData_[i])
 	  	}
 
-	  	// set which content leads to which content
-	  	this.setLastAndNextContentNodes();
-	  	this.setContentIndexNumbers();
-	  	this.setContentFullWidth()
+
+	  	for(let i=0; i<scenesData_.length;i++){//think about the order of loading. right now to goes through scene by scene maybe load all scens first and then do content
+	  		
+	  		this.scenesLib[scenesData_[i].id].setPositionActions()
+	  	}
+
+	  
 
 	  	
 
@@ -144,14 +147,31 @@ class Story{
 	  	// this.setLeftOffsets();
 
 
+	  		// set which content leads to which content
+	  	//this.setLastAndNextContentNodes();
+
+	  	this.createScenesBackEnds();
+	  	// this.setContentIndexNumbers();
+	  	// this.setContentFullWidth()
+
+
 
 
 	}
-	setLastAndNextContentNodes(){
+
+
+	createScenesBackEnds(){
 		for(let sceneID in this.scenesLib){
-	  		this.scenesLib[sceneID].setLastAndNextContentNodes();
+	  		this.scenesLib[sceneID].createSceneBackEnd();
 	  	}
+
 	}
+
+	// setLastAndNextContentNodes(){
+	// 	for(let sceneID in this.scenesLib){
+	//   		this.scenesLib[sceneID].setLastAndNextContentNodes();
+	//   	}
+	// }
 	setContentIndexNumbers(){
 		for(let sceneID in this.scenesLib){
 	  		this.scenesLib[sceneID].setContentIndexNumbers();

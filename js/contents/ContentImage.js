@@ -6,6 +6,8 @@ class ImageContent extends Content{
 		this.name=this.content.value;
 		this.createNode();
 
+		this.type="image";
+
 	}
 
 	getEffect(effectName_,effectJSON_){
@@ -118,6 +120,9 @@ class ImageContent extends Content{
 
 		//make sure this loads first ****
 		// console.log(this.htmlParent)
+
+		super.displayFrontEndHTML();
+		
 		this.htmlParent.append(this.html.fe);
 		this.applyEntranceEffects();
 		this.html.fe.style.display="block";

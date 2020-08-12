@@ -5,6 +5,7 @@ class TextContent extends Content{
 
 		this.name=this.content.value;
 		this.createNode();
+		this.type="link";
 	}
 
 	createFrontEndHTML(){
@@ -90,8 +91,10 @@ class TextContent extends Content{
 	
 
 	displayFrontEndHTML(){
+
+		super.displayFrontEndHTML();
 		
-			this.htmlParent.append(this.html.fe);
+		this.htmlParent.append(this.html.fe);
 
 		
 		this.html.fe.style.display="block";

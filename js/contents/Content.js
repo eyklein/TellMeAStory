@@ -4,6 +4,8 @@ var mouseDragTempObj={};
 class Content{
 
 	constructor(contentJson_,parentScene_){
+		this.type="unspecified";
+		this.uniqueIdentifier = Math.random()*100000000000000000;
 		this.parentScene=parentScene_;
 		this.JSONData=contentJson_;
 		this.id=contentJson_.id;
@@ -12,14 +14,15 @@ class Content{
 		this.effects.entrance={};
 		this.effects.exit={};
 		this.effects.clickable={};
-		//this.name="yes";
-		
-		// this.triger=eventJson_.triger;
 
 		this.actionsIn=[];//action heads
 		this.actionsOut=[];//action tails
 		this.content=contentJson_.content;
 		this.isClickable=false;
+
+		this.elicits={};
+		this.elicits.display=null;//null sginifies no action , fasle signifies an action not triggered , true signifies action triggered
+		this.elicits.clickable=null; //clickable/activate are ths same
 
 		this.html={};
 		//this.html.be={};//back end
@@ -28,28 +31,40 @@ class Content{
 
 
 
-		//this.node=new ContentNode(this);
-
-
-
-
-		//this.createProperties(contentJson_)
-
-		//console.log(this.properties)
-
-		
-		// do i need this?
 		this.contentEditorOverlay=currentStory.contentEditorOverlay;//this is a univeral veiw (same for every content)
 		// this.contentEditorModual=new ContentEditorModual(this, this.contentEditorOverlay);
 
 
-		this.addActionIn=function(headAction_){
-			this.actionsIn.append(headAction_)
-		}
-		this.addActionOut=function(tailAction_){
-			this.actionsOut.append(tailAction_)
-		}
+		// this.addActionIn=function(headAction_){
+		// 	if(headAction_.elicit=="display"){
+		// 		this.elicits.display=false
+		// 	}else if(headAction_.elicit=="clickable"){
+		// 		this.elicits.clickable=false
+		// 	}
+			
+		// 	this.actionsIn.append(headAction_)
+		// }
+		// this.addActionOut=function(tailAction_){
+
+		// 	this.actionsOut.append(tailAction_)
+		// }
 	}
+
+	addActionIn(headAction_){
+		if(headAction_.elicit=="display"){
+			this.elicits.display=false
+		}else if(headAction_.elicit=="clickable"){
+			this.elicits.clickable=false
+		}
+		
+		this.actionsIn.push(headAction_)
+	}
+	addActionOut(tailAction_){
+
+		this.actionsOut.push(tailAction_)
+	}
+
+
 
 	createNode(){
 		this.node=new ContentNode(this);
@@ -133,6 +148,11 @@ class Content{
 				//this.removeClickableEventListener(this.actionsOut[action]);
 			}
 		}
+	}
+
+
+	displayFrontEndHTML(){
+		this.elicits.display=true;
 	}
 
 
@@ -387,22 +407,7 @@ Content.prototype.createFrontEndHTML=function(){
 
 
 
-Content.prototype.displayFrontEndHTML=function(){
 
-	if(this.content.type=="text"){
-		//moved to child class
-		//document.getElementById("main_text").append(this.html.fe);
-		//this.applyProperties();
-	}else if(this.content.type=="text-clickable"){
-		// document.getElementById("main_text").append(this.html.fe);
-	}else if(this.content.type=="img-background"){
-		//document.getElementById("background_img").append(this.html.fe);
-	}else if( this.content.type=="clear-text"){
-		clearMainText()
-	}else if(this.content.type=="audio"){
-
-	}
-}
 
 
 
