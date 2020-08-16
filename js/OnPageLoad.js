@@ -38,7 +38,7 @@ window.onload=function(){
 
 	if(dataLoaded){//if the data is already loaded
 
-		console.log("dataLoaded first then pageLoaded")
+		//console.log("dataLoaded first then pageLoaded")
 		currentStory.startingScene = window.onload.data.startingScene;
 		
 		populateStory(window.onload.data.scenes)
@@ -52,7 +52,41 @@ window.onload=function(){
 		// }
 		
 	}
+
+
+
+
+
+
+	// testArrowContainer = document.createElement("div");
+
+	// testArrow = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+	// testArrow.style.overflow="visible";
+	// testArrow.style["z-index"] = 200000;
+	// testArrowContainer.style["z-index"] = 200000;
+
+	// document.body.append(testArrowContainer);
+
+	// testArrowContainer.append(testArrow)
+
+	// testArrowContainer.style.width="100px"
+	// testArrowContainer.style.height="100px"
+	// testArrowContainer.style.left="200px"
+	// testArrowContainer.style.top="200px"
+	// testArrowContainer.style.overflow="visible"
+	// testArrowContainer.style.position="absolute"
+	// //testArrowContainer.style["background-color"]="red"
+
+
+
+
+	// document.onmousemove = function(e){
+	// 	//console.log(e)
+	// 	testArrow.innerHTML = hArrowSVG(e.clientX-200,e.clientY-200,3, "dashed","blue");
+	// };
 };
+
+var testArrowContainer, testArrow;
 
 var backEnd;
 
@@ -76,6 +110,7 @@ function handler(e){
 	}
 
 window.addEventListener('resize', updateContentSize);
+
 
 
 

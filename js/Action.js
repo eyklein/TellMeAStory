@@ -1,5 +1,5 @@
 let timeScale = 50;
-let clickScale = 200;
+let clickScale = 100;
 class Action{
 
 	constructor(actionJSON_,scene_){
@@ -23,12 +23,10 @@ class Action{
 			for(let condition of actionJSON_.conditions){
 				this.conditionals.push(new Conditional(condition));
 			}
-			
-			
 		}
 
 
-		this.order=1;
+		//this.order=1;
 		this.bePositionSet=false;
 
 		this.scene=scene_;
@@ -144,24 +142,15 @@ class Action{
 	}
 
 	activateNow(){
-		
-		//console.log("activate " + this.id)
 		if(this.elicit=="display"){
-
-			this.displayContent(this.delay)
-			
-			
+			this.displayContent(this.delay);
 		}else if(this.elicit=="hide"){
-			//console.log("hiding")
 			this.hideContent(this.delay);
 		}
 		else if(this.elicit=="clickable"){
-			// console.log("clickable " + this.head.id)
-
 			this.activateContent(this.delay)
 			
 		}else if(this.elicit=="unclickable"){
-			
 			this.deactivateContent(this.delay);
 		}
 	}
@@ -181,16 +170,12 @@ class Action{
 
 		this.timer=new Timer(function(){
 			if(this.head instanceof Content){
-				//console.log(this.head.id)
 				this.head.displayFrontEndHTML();
-
 				//these should just be the actions out not the clickable **
 				this.head.activateActionsOut();
 			}else if(this.head instanceof Scene){
-				//console.log(this.head.id)
 				currentStory.newScene(this.head,this.passOnInheritance);
 			}
-			//console.log(this)
 			this.removeTimer()
 
 		}.bind(this), delay_*1000,this);
@@ -205,8 +190,7 @@ class Action{
 		if(delay_==null){
 			delay_=0;
 		}
-		
-		// console.log("h_" + this.id)
+
 		this.timer=new Timer(function(){
 			if(this.head instanceof Content){
 				this.deactivateContent(0);//deactivate before hiding
@@ -223,58 +207,70 @@ class Action{
 		this.timer.resume();
 
 	}
+
 	activateContent(delay_){
 		if(delay_==null){
 			delay_=0;
 		}
 
-		// console.log("a_" + this.id)
 		this.timer=new Timer(function(){
 			this.head.activateClickable();
 			this.removeTimer()
 		}.bind(this), delay_*1000,this);
 
-		//console.log(this)
-
 		this.timer.resume();
-
 	}
+
 	deactivateContent(delay_){
 		if(delay_==null){
 			delay_=0; 
 		}
 
-		// console.log("unclickable " + this.head.id)
-
-		
-		//console.log("deactivate_" + this.id)
 		this.timer=new Timer(function(){
 			this.head.deactivateClickable();
 			this.removeTimer()
 		}.bind(this), delay_*1000,this);
 
 		this.timer.resume();
-
 	}
+
 	makeClickableContent(){
 
 
 	}
 
 
-	setPosition(topPos_){
+	setPosition(topPos_, xIndex_){
+		//console.log("topPos " + topPos_)
 		this.pos.y = topPos_;
+		
+		this.pos.x = xIndex_ * 200;
+		if(this.tail instanceof Content){
+			this.tail.pos.xIndex = xIndex_;
+		}
 		this.pos.set = true;
+
 
 		this.setBackEnd()
 
 		if(this.elicit == "display"){//this should be for activate if there is an activate action
 			//console.log("display")
+			if(this.head instanceof Content){
+				//this.head.pos.xIndex = xIndex_;
+				this.scene.contentsIndexes[this.head.id]=xIndex_;
+				//this.head.pos.x = xIndex_*200;
+			}
+			
 			for(let i in this.head.actionsOut){ //this.head is the content acton was pionting to
 				//console.log(i)
 				if(this.head.actionsOut[i].pos.set == false){
 					//console.log(this.pos.y + this.height)
-					this.head.actionsOut[i].setPosition(this.pos.y + this.height)
+					this.head.actionsOut[i].setPosition(this.pos.y + this.height , xIndex_+1)
+
+					if(this.tail instanceof Content && this.head instanceof Content){
+						this.width = this.tail.pos.x - this.head.pos.x;
+					}
+					
 				}
 				
 			}
@@ -307,9 +303,14 @@ class Action{
 		this.html.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
 		this.html.svg.classList.add("connector-line")
 		this.html.svg.classList.add("click")
-		this.html.svg.innerHTML = actionArrowSVG(this.width, this.height, 3, "dashed");
-		console.log(this.html.svg)
+		this.html.svg.innerHTML = hArrowSVG(this.width, this.height, 2, "dashed");
+		//console.log(this.html.svg)
 		this.html.container.append(this.html.svg);
+
+		this.html.svg.style.top = this.pos.y + "px"
+		this.html.svg.style.left = this.pos.x +"px"
+		//console.log(this.pos.x +"px")
+		//this.html.container.style.top=this.pos.y;
 	}
 
 
@@ -587,32 +588,32 @@ Action.prototype.deltaActionDelay=function(deltaY_){
 // }
 
 
-Action.prototype.setPosChain=function(){
-	this.bePositionSet=true;
-	if(this.tail==this.head){
-	}else{
-		if(this.tail instanceof Content){
-			this.html.be.pos.y=this.tail.actionsIn[0].html.be.pos.y+this.html.be.height
-			this.html.be.pos.x=this.tail.actionsIn[0].html.be.pos.x+this.html.be.width
-		}else if(this.tail instanceof Scene){
-			this.html.be.pos.y=0+this.html.be.height
-			this.html.be.pos.x=0+this.html.be.width 
-		}
+// Action.prototype.setPosChain=function(){
+// 	this.bePositionSet=true;
+// 	if(this.tail==this.head){
+// 	}else{
+// 		if(this.tail instanceof Content){
+// 			this.html.be.pos.y=this.tail.actionsIn[0].html.be.pos.y+this.html.be.height
+// 			this.html.be.pos.x=this.tail.actionsIn[0].html.be.pos.x+this.html.be.width
+// 		}else if(this.tail instanceof Scene){
+// 			this.html.be.pos.y=0+this.html.be.height
+// 			this.html.be.pos.x=0+this.html.be.width 
+// 		}
 
-		this.head.html.be.container.style.top=this.html.be.pos.y + "px";
-		this.head.html.be.container.style.left=this.html.be.pos.x+ "px";
+// 		this.head.html.be.container.style.top=this.html.be.pos.y + "px";
+// 		this.head.html.be.container.style.left=this.html.be.pos.x+ "px";
 
-		// this.updateArrow(this.html.be.width, this.html.be.height)
+// 		// this.updateArrow(this.html.be.width, this.html.be.height)
 
-		for(let i=0; i<this.head.actionsOut.length;i++){
-			if(this.head.actionsOut[i].head instanceof Content && !this.head.actionsOut[i].bePositionSet){
-				this.head.actionsOut[i].setPosChain()
-			}else{
-				//set position of the dummy html of next scene
-			}
-		}
-	}
-}
+// 		for(let i=0; i<this.head.actionsOut.length;i++){
+// 			if(this.head.actionsOut[i].head instanceof Content && !this.head.actionsOut[i].bePositionSet){
+// 				this.head.actionsOut[i].setPosChain()
+// 			}else{
+// 				//set position of the dummy html of next scene
+// 			}
+// 		}
+// 	}
+// }
 Action.prototype.getJSON=function(){
 // "id":"500",
 // "tailID":"aa",

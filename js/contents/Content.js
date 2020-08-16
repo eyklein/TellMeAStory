@@ -6,9 +6,13 @@ class Content{
 	constructor(contentJson_,parentScene_){
 		this.type="unspecified";
 		this.uniqueIdentifier = Math.random()*100000000000000000;
-		this.parentScene=parentScene_;
+		
 		this.JSONData=contentJson_;
 		this.id=contentJson_.id;
+		this.parentScenes={};
+		this.parentScenes[this.id] = parentScene_;
+		//this.parentScene = parentScene_;
+
 		this.effects={};
 		this.effects.general={};
 		this.effects.entrance={};
@@ -27,6 +31,12 @@ class Content{
 		this.html={};
 		//this.html.be={};//back end
 		this.html.fe={};//front end
+
+		this.pos={};
+		this.pos.xIndex = 0;
+		this.pos.x = this.pos.xIndex*200;
+		this.frontEndCreated=false;
+		//this.pos.yIndex
 
 
 
@@ -69,6 +79,9 @@ class Content{
 	createNode(){
 		this.node=new ContentNode(this);
 	}
+	positionNode(){
+		this.node.createHTML();
+	}
 	createEffects(){
 		// console.log(this.JSONData)
 		for(let effect in this.JSONData.effects.general){
@@ -101,11 +114,13 @@ class Content{
 		}
 	}
 	activateExitEffects(){
-		//console.log("Activating exit")
-		//console.log(this.effects.exit)
 		for(let effect in this.effects.exit){
-			//console.log(this.effects.exit[effect])
 			this.effects.exit[effect].apply();
+		}
+
+		this.elicits.display=false;
+		if(this.elicits.clickable==true){
+			this.elicits.clickable=false;
 		}
 	}
 
@@ -116,6 +131,8 @@ class Content{
 
 	activateClickable(){
 		this.isClickable=true;
+
+		this.elicits.clickable=true;
 
 		//console.log(this.id + " activate clickable")
 
@@ -139,6 +156,8 @@ class Content{
 	deactivateClickable(){
 		
 		this.isClickable=false;
+		this.elicits.clickable=false;
+
 		for(let effect in this.effects.clickable.generic){
 			this.effects.clickable.generic[effect].remove();
 		}
@@ -154,8 +173,6 @@ class Content{
 	displayFrontEndHTML(){
 		this.elicits.display=true;
 	}
-
-
 }
 
 function displayOnTimer(clickEvent){
@@ -177,62 +194,62 @@ function displayOnTimer(clickEvent){
 	}, clickEvent.target.targetContent.action.delay*1000, clickEvent.target.targetContent);
 }
 
-Content.prototype.updateIconContent=function(){
-	iconWidth=100;
-	iconHeight=75;
+// Content.prototype.updateIconContent=function(){
+// 	iconWidth=100;
+// 	iconHeight=75;
 
 
 
 
-	if(this.content.type=="text"){
-		//used to display in backend
-		this.value=this.content.value;
+// 	if(this.content.type=="text"){
+// 		//used to display in backend
+// 		this.value=this.content.value;
 
-		this.html.be.divIcon.innerHTML=this.content.value;
+// 		this.html.be.divIcon.innerHTML=this.content.value;
 
-	// }else if(this.content.type=="text-clickable"){
-	// 	// this.htmlElements={};
-	// 	let link = document.createElement("a");
-	// 	link.innerHTML=this.content.value;
-	// 	this.html.be.divIcon.appendChild(link);
-	}else if(this.content.type=="img"){
-		this.value=this.content.value;
+// 	// }else if(this.content.type=="text-clickable"){
+// 	// 	// this.htmlElements={};
+// 	// 	let link = document.createElement("a");
+// 	// 	link.innerHTML=this.content.value;
+// 	// 	this.html.be.divIcon.appendChild(link);
+// 	}else if(this.content.type=="img"){
+// 		this.value=this.content.value;
 
-		let img = document.createElement("img");
-		img.src=this.content.value;
-		img.style.width=iconWidth+'px';
-		img.style.height=iconHeight+'px';
-		this.html.be.divIcon.appendChild(img);
+// 		let img = document.createElement("img");
+// 		img.src=this.content.value;
+// 		img.style.width=iconWidth+'px';
+// 		img.style.height=iconHeight+'px';
+// 		this.html.be.divIcon.appendChild(img);
 		
-		//this.html.be.divIcon.innerHTML=this.content.value;
-		//document.getElementById("background_img").append(this.htmlElements.frontEnd);
-	}else if( this.content.type=="clear-text"){
-		this.value="clear";
+// 		//this.html.be.divIcon.innerHTML=this.content.value;
+// 		//document.getElementById("background_img").append(this.htmlElements.frontEnd);
+// 	}else if( this.content.type=="clear-text"){
+// 		this.value="clear";
 		
-		//this.htmlElement.action="clear";
-		//clearMainText()
-	}
-	// else if(this.content.type=="audio"){
-	// 	this.html.be.divIcon.innerHTML=this.content.value;
+// 		//this.htmlElement.action="clear";
+// 		//clearMainText()
+// 	}
+// 	// else if(this.content.type=="audio"){
+// 	// 	this.html.be.divIcon.innerHTML=this.content.value;
 		
 
-	// 	if(this.properties["clipping"]!=undefined){
-	// 		this.html.be.divIcon.style.height=this.properties["clipping"]["vareables"].duration.value * 100 + "px";
-	// 	}else{
-	// 		this.html.be.divIcon.style.height=this.audio.duration * 100 + "px";
-	// 	}
+// 	// 	if(this.properties["clipping"]!=undefined){
+// 	// 		this.html.be.divIcon.style.height=this.properties["clipping"]["vareables"].duration.value * 100 + "px";
+// 	// 	}else{
+// 	// 		this.html.be.divIcon.style.height=this.audio.duration * 100 + "px";
+// 	// 	}
 		
-	// 	this.html.be.divIcon.style.width=30 + "px";
+// 	// 	this.html.be.divIcon.style.width=30 + "px";
 
-	// 	this.audioObjectHandler.updateAudioDisplay();
+// 	// 	this.audioObjectHandler.updateAudioDisplay();
 
- //  		this.html.be.divIcon.appendChild(this.audioObjectHandler.audioDisplay.getCanvaseWrap());
+//  //  		this.html.be.divIcon.appendChild(this.audioObjectHandler.audioDisplay.getCanvaseWrap());
 					
-	// 	}
-	}
+// 	// 	}
+// 	}
 
 
-//}
+// //}
 
 Content.prototype.addClassUp=function(class_,applyToActions_){
 	this.html.be.divIcon.classList.add(class_);
@@ -379,7 +396,7 @@ Content.prototype.createBackEndHTML=function(){
 }
 
 Content.prototype.createFrontEndHTML=function(){
-	
+	this.frontEndCreated=true;
 
 	if(this.content.type=="text"){
 		
@@ -399,24 +416,9 @@ Content.prototype.createFrontEndHTML=function(){
 	
 }
 
-// function handleLoad(event) {
-// 	console.log("loaded sound " + event.src)
-//     createjs.Sound.play(event.src);
-// }
-
-
-
-
-
-
-
-
 
 Content.prototype.activateActionsOut=function(){
-	
 	for(let i=0;i<this.actionsOut.length;i++){
-		// console.log("action");
-		// console.log(this.actionsOut[i]);
 		this.actionsOut[i].takeActionLive();
 	}
 }

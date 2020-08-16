@@ -17,7 +17,18 @@ class AudioLoader{
 	rankPriority(){//this is the rank priority based on the audio where the scene is
 		this.rank=100000;//max asumed value
 		for(let contentAudio in this.contentAudioObjects){
-			let index = this.contentAudioObjects[contentAudio].parentScene.node.index
+			
+
+			let index 
+
+			for(let id in this.contentAudioObjects[contentAudio].parentScenes){
+				if(index == undefined){
+					index = this.contentAudioObjects[contentAudio].parentScenes[id].node.index;
+					
+				}else{
+					index = Math.min(index, this.contentAudioObjects[contentAudio].parentScenes[id].node.index)
+				}
+			}
 
 			if(index<this.rank){
 				this.rank=index;

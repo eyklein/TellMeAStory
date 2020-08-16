@@ -11,31 +11,6 @@ class SceneNode extends Node{ //not to be confused with nodejs
 		this.html.svgPathsArrows=[];
 		
 		
-
-		// this.parents=[];
-		// this.parentsInfo={};
-		// this.primaryParent;
-
-
-		// this.children=[];
-		// this.childrenInfo={};
-
-		// this.widthFull=0;//if every child has its own spot
-		// this.widthCombined=0;//if only one child has its own spot
-
-		// this.posIndex={};
-		// this.posIndex.x=0;
-		// this.posIndex.y=0;
-		// this.posIndex.xRelative=0;//relative to siblings 
-
-		// this.pos={};
-
-		// this.height=30;
-		// this.width=90;
-		
-		// this.createHTML();
-
-		// this.html.svgPathsArrows=[];
 	}
 
 	createHTML(){

@@ -287,9 +287,12 @@ class AudioContent extends Content{
 		//console.log("PLAY " + this.id + "   - " + this.track)
 
 		if(this.track=="main"){
-			currentStory.activeMainAudio[this.parentScene.id+this.id]=this;
+			currentStory.activeMainAudio[currentStory.currentScene.id+this.id]=this;
+			// currentStory.activeMainAudio[this.parentScene.id+this.id]=this;
+
 		}else if(this.track=="background"){
-			currentStory.activeBackgroundAudio[this.parentScene.id+this.id]=this;
+			currentStory.activeBackgroundAudio[currentStory.currentScene.id+this.id]=this;
+			// currentStory.activeBackgroundAudio[this.parentScene.id+this.id]=this;
 		}
 		
 		

@@ -10,13 +10,10 @@ class Scene{
 		this.name=this.sceneData.name;
 		this.play=play_;
 		this.html={};
-
-
+		this.contentsIndexes={};
 
 		this.node=new SceneNode(this);
 		
-
-
 		this.baseNodes=[]; //contentNodes
 		this.rootEndNodes=[];
 		this.exitNodes=[];
@@ -68,7 +65,7 @@ class Scene{
 	}
 
 	setPositionActions(){
-		let hOffset=10;
+		let hOffset=50;
 		//this would show what scenes are feeding into it
 		// for(let i in this.actionsIn){
 		// 	console.log(this.actionsIn[i])
@@ -77,7 +74,7 @@ class Scene{
 
 		console.log("out")
 		for(let i in this.actionsOut){
-			this.actionsOut[i].setPosition(hOffset);
+			this.actionsOut[i].setPosition(hOffset , 1);
 		}
 	}
 
@@ -156,6 +153,14 @@ class Scene{
 	// 		}	
 	// 	}
 	// }
+
+	setBackEndContentPositions(){
+		this.contentsIndexes={};
+		for(let id in this.contentsLib){
+			//this.contentsIndexes[id] = 3 ;
+			this.contentsLib[id].positionNode();
+		}
+	}
 
 
 	setContentIndexNumbers(){
@@ -246,6 +251,7 @@ class Scene{
 	}
 
 	createProperties(){
+		console.log("createProperties()")
 		for(let contentId in this.contentsLib){
 			// console.log("Creating property  " + contentId);
 			this.contentsLib[contentId].createEffects();
@@ -336,16 +342,12 @@ Scene.prototype.getBackEndHTML=function(){
 
 Scene.prototype.createFrontEndHTML=function(){
 	//this create the front end html for all the content
-
-	
-
 	for(let id in this.contentsLib){
-		
-		if(this.contentsLib[id].parentScene == this){//prevent universal or shared content from rendering over and over
+		//if(this.contentsLib[id].parentScene == this){//prevent universal or shared content from rendering over and over
+		if(this.contentsLib[id].frontEndCreated==false){
 			this.contentsLib[id].createFrontEndHTML();
 		}
-		
-		
+		//}
 	}
 }
 

@@ -108,7 +108,6 @@ class Story{
 	  	if(this.scenesLib["uni"] != undefined){
 	  		for(let sceneID in this.scenesLib){
 	  			if(sceneID != "uni"){
-
 	  				for(let contentID in this.scenesLib["uni"].contentsLib){
 	  					
 	  					this.scenesLib[sceneID].contentsLib[contentID] = this.scenesLib["uni"].contentsLib[contentID]
@@ -127,6 +126,9 @@ class Story{
 	  		
 	  		this.scenesLib[scenesData_[i].id].setPositionActions()
 	  	}
+
+
+
 
 	  
 
@@ -151,6 +153,11 @@ class Story{
 	  	//this.setLastAndNextContentNodes();
 
 	  	this.createScenesBackEnds();
+
+	  	for(let id in this.scenesLib){//think about the order of loading. right now to goes through scene by scene maybe load all scens first and then do content
+	  		
+	  		this.scenesLib[id].setBackEndContentPositions();
+	  	}
 	  	// this.setContentIndexNumbers();
 	  	// this.setContentFullWidth()
 
@@ -533,6 +540,7 @@ class Story{
 	createScenesFrontEndHTMLs(){
 		for(let sceneKey in this.scenesLib){//this will create the divs for all the scenes. they could be created on each scene load
 			this.scenesLib[sceneKey].createFrontEndHTML();//scene will cycle through each content (and action?) and create a div/span for each
+			console.log(sceneKey)
 		}
 		console.log("finsihed creating the front end")
 	}
@@ -542,6 +550,7 @@ class Story{
 		}
 	}
 	createProperties(){
+		console.log("createProperties!!!!!!!!!!!!!!!!!!!!!!")
 		for(let sceneKey in this.scenesLib){//this will create the divs for all the scenes. they could be created on each scene load
 			this.scenesLib[sceneKey].createProperties();//scene will cycle through each content (and action?) and create a div/span for each
 		}

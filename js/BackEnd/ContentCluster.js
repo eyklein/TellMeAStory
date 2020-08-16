@@ -1,6 +1,6 @@
 class ContentCluster{
 	constructor(content_){
-		this.content=content_;
+		this.content=content_; // usually content sometimes a scene for entering or exiting scene
 		this.actionsIn=[]
 		this.actionsOut=[]
 	}
@@ -10,6 +10,10 @@ class ContentCluster{
 	}
 	addActionOut(action_){
 		this.actionsOut.push(action_)
+	}
+
+	rankActionsIn(){
+		
 	}
 	
 }

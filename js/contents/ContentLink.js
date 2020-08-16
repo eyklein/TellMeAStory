@@ -9,6 +9,7 @@ class TextContent extends Content{
 	}
 
 	createFrontEndHTML(){
+		this.frontEndCreated=true;
 		this.html.fe = document.createElement("span");
 		this.html.fe.innerHTML=this.content.value;
 		this.createEffects();
