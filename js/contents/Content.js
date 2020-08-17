@@ -10,7 +10,8 @@ class Content{
 		this.JSONData=contentJson_;
 		this.id=contentJson_.id;
 		this.parentScenes={};
-		this.parentScenes[this.id] = parentScene_;
+		this.addParentScene(parentScene_);
+		//this.parentScenes[this.id] = parentScene_;
 		//this.parentScene = parentScene_;
 
 		this.effects={};
@@ -60,6 +61,12 @@ class Content{
 		// }
 	}
 
+	addParentScene(parentScene_){
+		this.parentScenes[parentScene_.id] ={}
+		this.parentScenes[parentScene_.id].scene = parentScene_;
+
+	}
+
 	addActionIn(headAction_){
 		if(headAction_.elicit=="display"){
 			this.elicits.display=false
@@ -76,12 +83,12 @@ class Content{
 
 
 
-	createNode(){
-		this.node=new ContentNode(this);
+	getNode(sceneSpacificInfo_){
+		return new ContentNode(this,sceneSpacificInfo_);
 	}
-	positionNode(){
-		this.node.createHTML();
-	}
+	// positionNode(){
+	// 	this.node.createHTML();
+	// }
 	createEffects(){
 		// console.log(this.JSONData)
 		for(let effect in this.JSONData.effects.general){

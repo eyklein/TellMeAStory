@@ -1,6 +1,6 @@
 
 class ContentNode{ //not to be confused with nodejs
-	constructor(content_){
+	constructor(content_,sceneSpacificInfo_){
 		//this.enclosingStructure;//this is the story or scene depending on what this node if for
 		this.isBase=false;
 		this.content=content_;
@@ -8,40 +8,9 @@ class ContentNode{ //not to be confused with nodejs
 		this.height=30;
 		this.width=90;
 
+		this.sceneSpacificInfo = sceneSpacificInfo_;
 
 
-
-		
-
-
-		// this.parentsInfo={};
-		// this.primaryParent;
-
-
-		// this.children=[];
-		// this.childrenInfo={};
-
-		// this.widthFull=0;//if every child has its own spot
-		// this.widthCombined=0;//if only one child has its own spot
-
-		// this.posIndex={};
-		// this.posIndex.x=0;
-		// this.posIndex.y=0;
-		// this.posIndex.xRelative=0;//relative to siblings 
-
-		// this.pos={};
-
-		// this.height=30;
-		// this.width=90;
-
-		// this.content=content_;
-		// this.enclosingStructure=this.content.parentScene;
-		// this.id=this.content.id
-
-
-		//this.createHTML();
-		// this.html.svgPathsArrows=[];
-		
 
 	}
 
@@ -61,8 +30,8 @@ class ContentNode{ //not to be confused with nodejs
 		this.html.info=document.createElement("div");
 		this.html.info.style['color']="white";
 		this.html.info.style['font-size']="10px";
-		this.html.info.style.width="100px";
-		this.html.info.style.height="100px";
+		this.html.info.style.width=this.width + "px";
+		this.html.info.style.height="20px";
 		this.html.info.style.position="absolute";
 		this.html.info.style.opacity=.8;
 		this.html.info.style['background-color']="gray";
@@ -104,9 +73,9 @@ class ContentNode{ //not to be confused with nodejs
 
 		//this.html.container.style.top = Math.random()*300+"px";
 
-		//console.log(this.content.actionsIn)
-		if(this.content.actionsIn.length>0){
-			this.html.container.style.left=this.content.pos.xIndex*200+ "px";
+		
+		if(this.content.actionsIn.length>0){ //this content is used and not just part of universal
+			this.html.container.style.left = this.content.pos.xIndex*200+ "px";
 			this.html.container.style.top=(this.content.actionsIn[0].pos.y+this.content.actionsIn[0].height)+ "px";
 		}
 	}

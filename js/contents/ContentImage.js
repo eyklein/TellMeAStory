@@ -4,14 +4,14 @@ class ImageContent extends Content{
 		this.random=Math.random();
 
 		this.name=this.content.value;
-		this.createNode();
+		//this.createNode();
 
 		this.type="image";
 
 	}
 
 	getEffect(effectName_,effectJSON_){
-		console.log("getEffect ************")
+		//console.log("getEffect ************")
 		if(effectName_=="position"){
 			return new PositionImageEffect(effectJSON_,this)
 		}else if(effectName_=="glow"){
@@ -34,7 +34,7 @@ class ImageContent extends Content{
 
 
 	createEffects(){
-		console.log("createEffects **********!!!!!**")
+		//console.log("createEffects **********!!!!!**")
 		for(let effect in this.JSONData.effects.general){
 			this.effects.general[effect] = this.getEffect(effect,this.JSONData.effects.general[effect])
 		}
@@ -73,7 +73,7 @@ class ImageContent extends Content{
 	//this.frontEndLoaded=false;
 
 	createFrontEndHTML(){
-		
+		this.frontEndCreated=true;
 		
 		this.html.fe = document.createElement("img");
 		this.html.fe.setAttribute('draggable', false);
@@ -124,7 +124,7 @@ class ImageContent extends Content{
 		// console.log(this.htmlParent)
 
 		super.displayFrontEndHTML();
-		console.log(this.htmlParent)
+		//console.log(this.htmlParent)
 		this.htmlParent.append(this.html.fe);
 		this.applyEntranceEffects();
 		this.html.fe.style.display="block";

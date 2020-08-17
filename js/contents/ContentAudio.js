@@ -25,7 +25,7 @@ class AudioContent extends Content{
 
 
 		this.name=this.content.value;
-		this.createNode();
+		//this.createNode();
 
 		this.type="audio";
 		//this._audioContext = audioContext;
@@ -286,6 +286,8 @@ class AudioContent extends Content{
 
 		//console.log("PLAY " + this.id + "   - " + this.track)
 
+
+
 		if(this.track=="main"){
 			currentStory.activeMainAudio[currentStory.currentScene.id+this.id]=this;
 			// currentStory.activeMainAudio[this.parentScene.id+this.id]=this;
@@ -373,7 +375,7 @@ class AudioContent extends Content{
 
 	endOfPlayback(){
 		if(this.isPlaying){ //if isPlaying is true then its not just paused
-			delete currentStory.activeMainAudio[this.parentScene.id+this.id];
+			delete currentStory.activeMainAudio[currentStory.currentScene.id+this.id];
 
 			currentStory.updatePlayPause()//if nothing is playing it will be blocked
 

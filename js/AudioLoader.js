@@ -23,10 +23,10 @@ class AudioLoader{
 
 			for(let id in this.contentAudioObjects[contentAudio].parentScenes){
 				if(index == undefined){
-					index = this.contentAudioObjects[contentAudio].parentScenes[id].node.index;
+					index = this.contentAudioObjects[contentAudio].parentScenes[id].scene.node.index;
 					
 				}else{
-					index = Math.min(index, this.contentAudioObjects[contentAudio].parentScenes[id].node.index)
+					index = Math.min(index, this.contentAudioObjects[contentAudio].parentScenes[id].scene.node.index)
 				}
 			}
 

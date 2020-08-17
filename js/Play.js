@@ -109,8 +109,14 @@ class Story{
 	  		for(let sceneID in this.scenesLib){
 	  			if(sceneID != "uni"){
 	  				for(let contentID in this.scenesLib["uni"].contentsLib){
-	  					
 	  					this.scenesLib[sceneID].contentsLib[contentID] = this.scenesLib["uni"].contentsLib[contentID]
+
+	  					//add ass scene to this content
+	  					this.scenesLib[sceneID].contentsLib[contentID].addParentScene(this.scenesLib[sceneID])
+	  					
+	  					//add universal content to each scene
+	  					this.scenesLib[sceneID].contentNodes[contentID]={}
+	  					this.scenesLib[sceneID].contentNodes[contentID].node = this.scenesLib[sceneID].getContentNode(contentID);
 	  				}
 	  			}
 	  		}

@@ -13,6 +13,7 @@ class Scene{
 		this.contentsIndexes={};
 
 		this.node=new SceneNode(this);
+		this.contentNodes={}
 		
 		this.baseNodes=[]; //contentNodes
 		this.rootEndNodes=[];
@@ -33,6 +34,7 @@ class Scene{
 
 	addContents(sceneJson_){
 		if(this.sceneData.contents){
+			//console.log(this.id)
 			for(let content of this.sceneData.contents){
 				if(content.content.type=="audio"){
 					this.contentsLib[content.id]=new AudioContent(content,this)
@@ -43,9 +45,17 @@ class Scene{
 				}else{
 					this.contentsLib[content.id]=new Content(content,this)
 				}
-				
+
+				//make a node
+				//console.log(content.id)
+				this.contentNodes[content.id]={};
+				this.contentNodes[content.id].node = this.getContentNode(content.id)
 			}
 		}
+	}
+
+	getContentNode(contentID_){
+		return this.contentsLib[contentID_].getNode(this)
 	}
 
 	addActions(sceneJson_){
@@ -72,9 +82,12 @@ class Scene{
 		// }
 		
 
-		console.log("out")
+		//console.log("out")
+		console.log(this.id + "************")
 		for(let i in this.actionsOut){
+			// console.log(this.actionsOut[i].head.id + "?")
 			this.actionsOut[i].setPosition(hOffset , 1);
+
 		}
 	}
 
@@ -154,11 +167,14 @@ class Scene{
 	// 	}
 	// }
 
+	//??**????????
 	setBackEndContentPositions(){
 		this.contentsIndexes={};
-		for(let id in this.contentsLib){
+		// for(let id in this.contentsLib){
+		for(let id in this.contentNodes){
 			//this.contentsIndexes[id] = 3 ;
-			this.contentsLib[id].positionNode();
+			this.contentNodes[id].node.createHTML();
+			//.contentsLib[id].positionNode();
 		}
 	}
 

@@ -1,11 +1,11 @@
 class PositionImageEffect extends ImageEffect{
 	constructor(JSON_,parentContent_){
 		super(JSON_,parentContent_);
-		console.log("create PositionImageEffect")
+		//console.log("create PositionImageEffect")
 	}
 	apply(){
 
-		console.log("apply PositionImageEffect")
+		//console.log("apply PositionImageEffect")
 
 		//console.log("POSITIONING!!!!!!!!! " + this.parentContent.id + " in scene "+ this.parentContent.parentScene.id)
 		if(this.vareables.type == "background"){

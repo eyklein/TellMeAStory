@@ -4,7 +4,7 @@ class TextContent extends Content{
 		this.htmlParent={};
 
 		this.name=this.content.value;
-		this.createNode();
+		//this.createNode();
 		this.type="text";
 	}
 

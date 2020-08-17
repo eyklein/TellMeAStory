@@ -1,5 +1,5 @@
-let timeScale = 50;
-let clickScale = 100;
+let timeScale = 10;
+let clickScale = 50;
 class Action{
 
 	constructor(actionJSON_,scene_){
@@ -45,7 +45,7 @@ class Action{
 
 
 		this.height;
-		this.width = 300*Math.random();
+		this.width = 500*Math.random()-250;
 		// this.html.be.pos={};
 		// this.html.be.pos.x={};
 		// this.html.be.pos.y={};
@@ -241,50 +241,50 @@ class Action{
 
 
 	setPosition(topPos_, xIndex_){
-		//console.log("topPos " + topPos_)
+		if(this.pos.set==false){
+		console.log("setPos " + this.head.id)
 		this.pos.y = topPos_;
-		
 		this.pos.x = xIndex_ * 200;
+
 		if(this.tail instanceof Content){
 			this.tail.pos.xIndex = xIndex_;
 		}
+
 		this.pos.set = true;
 
-
-		this.setBackEnd()
-
-		if(this.elicit == "display"){//this should be for activate if there is an activate action
-			//console.log("display")
+		this.createBackEndHTML()
+		console.log(this.elicit + " :::::" + this.head.id)
+		if(this.elicit == "display" || this.elicit == "clickable" || this.elicit == "activate"){//this should be for activate if there is an activate action
 			if(this.head instanceof Content){
-				//this.head.pos.xIndex = xIndex_;
-				this.scene.contentsIndexes[this.head.id]=xIndex_;
-				//this.head.pos.x = xIndex_*200;
+				console.log("-" + this.head.id)
+				// this.scene.contentsIndexes[this.head.id]=xIndex_;
+				this.scene.contentNodes[this.head.id].xIndex=xIndex_;
 			}
-			
+			//console.log(this.head)
 			for(let i in this.head.actionsOut){ //this.head is the content acton was pionting to
-				//console.log(i)
-				if(this.head.actionsOut[i].pos.set == false){
-					//console.log(this.pos.y + this.height)
+				console.log(this.head.actionsOut[i].id + "   -    " + this.head.actionsOut[i].pos.set)
+				//if(this.head.actionsOut[i].pos.set == false){
 					this.head.actionsOut[i].setPosition(this.pos.y + this.height , xIndex_+1)
 
 					if(this.tail instanceof Content && this.head instanceof Content){
 						this.width = this.tail.pos.x - this.head.pos.x;
 					}
 					
-				}
+				//}
 				
 			}
 		}
-		else if(this.elicit == "activate"){//this should be for activate if there is an activate action
-			//console.log("activate")
-			for(let i in this.head.actionsOut){ //this.head is the content acton was pionting to
-				if(this.head.actionsOut[i].pos.set == false){
-					//console.log(this.pos.y + this.height)
-					this.head.actionsOut[i].setPosition(this.pos.y + this.height)
-				}
+	}
+		// else if(this.elicit == "activate"){//this should be for activate if there is an activate action
+		// 	//console.log("activate")
+		// 	for(let i in this.head.actionsOut){ //this.head is the content acton was pionting to
+		// 		if(this.head.actionsOut[i].pos.set == false){
+		// 			//console.log(this.pos.y + this.height)
+		// 			this.head.actionsOut[i].setPosition(this.pos.y + this.height)
+		// 		}
 				
-			}
-		}
+		// 	}
+		// }
 		
 	}
 
@@ -296,7 +296,7 @@ class Action{
 		}
 	}
 
-	setBackEnd(){
+	createBackEndHTML(){
 		//actionArrowSVG
 		this.html.container = document.createElement("div");
 
@@ -308,7 +308,7 @@ class Action{
 		this.html.container.append(this.html.svg);
 
 		this.html.svg.style.top = this.pos.y + "px"
-		this.html.svg.style.left = this.pos.x +"px"
+		this.html.svg.style.left = (this.pos.x) +"px"
 		//console.log(this.pos.x +"px")
 		//this.html.container.style.top=this.pos.y;
 	}
