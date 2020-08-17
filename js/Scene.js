@@ -28,7 +28,9 @@ class Scene{
 
 	displayFrontEnd(){
 		for(let i=0;i<this.actionsOut.length;i++){
+			console.log(this.actionsOut[i])
 			this.actionsOut[i].activate();
+
 		}
 	}
 
@@ -36,15 +38,17 @@ class Scene{
 		if(this.sceneData.contents){
 			//console.log(this.id)
 			for(let content of this.sceneData.contents){
-				if(content.content.type=="audio"){
-					this.contentsLib[content.id]=new AudioContent(content,this)
-				}else if(content.content.type=="text"){
-					this.contentsLib[content.id]=new TextContent(content,this)
-				}else if(content.content.type=="img"){
-					this.contentsLib[content.id]=new ImageContent(content,this)
-				}else{
-					this.contentsLib[content.id]=new Content(content,this)
-				}
+				this.contentsLib[content.id] = this.createContent(content);
+
+				// if(content.content.type=="audio"){
+				// 	this.contentsLib[content.id]=new AudioContent(content,this)
+				// }else if(content.content.type=="text"){
+				// 	this.contentsLib[content.id]=new TextContent(content,this)
+				// }else if(content.content.type=="img"){
+				// 	this.contentsLib[content.id]=new ImageContent(content,this)
+				// }else{
+				// 	this.contentsLib[content.id]=new Content(content,this)
+				// }
 
 				//make a node
 				//console.log(content.id)
@@ -53,6 +57,21 @@ class Scene{
 			}
 		}
 	}
+
+	createContent(content_){
+		//console.log(content_)
+		if(content_.content.type=="audio"){
+			return new AudioContent(content_,this)
+		}else if(content_.content.type=="text"){
+			return new TextContent(content_,this)
+		}else if(content_.content.type=="img"){
+			return new ImageContent(content_,this)
+		}else{
+			return new Content(content_,this)
+		}
+		
+	}
+
 
 	getContentNode(contentID_){
 		return this.contentsLib[contentID_].getNode(this)
@@ -358,9 +377,12 @@ Scene.prototype.getBackEndHTML=function(){
 
 Scene.prototype.createFrontEndHTML=function(){
 	//this create the front end html for all the content
+	//console.log("create front end " + this.id)
 	for(let id in this.contentsLib){
 		//if(this.contentsLib[id].parentScene == this){//prevent universal or shared content from rendering over and over
+		//console.log(id + "-")
 		if(this.contentsLib[id].frontEndCreated==false){
+			//console.log(id + "o")
 			this.contentsLib[id].createFrontEndHTML();
 		}
 		//}

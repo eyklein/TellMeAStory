@@ -136,6 +136,7 @@ class Action{
 			}
 			this.activateNow();
 		}else{
+			console.log("activating")
 			this.activateNow();
 		}
 
@@ -143,6 +144,7 @@ class Action{
 
 	activateNow(){
 		if(this.elicit=="display"){
+			console.log("display")
 			this.displayContent(this.delay);
 		}else if(this.elicit=="hide"){
 			this.hideContent(this.delay);
@@ -166,23 +168,36 @@ class Action{
 			premature=false
 		}
 		
-		// console.log("d_" + this.id)
+		 console.log("new timer" + delay_*1000)
 
 		this.timer=new Timer(function(){
+			console.log("*****************************?*********************************")
 			if(this.head instanceof Content){
+				console.log(this.head)
+				if(this.head instanceof ImageContent){
+					console.log("TRUE")
+				}else{
+					console.log("FALSE")
+				}
+				
 				this.head.displayFrontEndHTML();
 				//these should just be the actions out not the clickable **
 				this.head.activateActionsOut();
 			}else if(this.head instanceof Scene){
+				//console.log(this.head.displayFrontEndHTML())
 				currentStory.newScene(this.head,this.passOnInheritance);
 			}
 			this.removeTimer()
 
 		}.bind(this), delay_*1000,this);
 
+		//console.log(this.timer)
+
 		
 
 		this.timer.resume();
+
+		//console.log(this.timer)
 		
 
 	}
@@ -242,7 +257,7 @@ class Action{
 
 	setPosition(topPos_, xIndex_){
 		if(this.pos.set==false){
-		console.log("setPos " + this.head.id)
+		//console.log("setPos " + this.head.id)
 		this.pos.y = topPos_;
 		this.pos.x = xIndex_ * 200;
 
@@ -253,16 +268,16 @@ class Action{
 		this.pos.set = true;
 
 		this.createBackEndHTML()
-		console.log(this.elicit + " :::::" + this.head.id)
+		//console.log(this.elicit + " :::::" + this.head.id)
 		if(this.elicit == "display" || this.elicit == "clickable" || this.elicit == "activate"){//this should be for activate if there is an activate action
 			if(this.head instanceof Content){
-				console.log("-" + this.head.id)
+				//console.log("-" + this.head.id)
 				// this.scene.contentsIndexes[this.head.id]=xIndex_;
 				this.scene.contentNodes[this.head.id].xIndex=xIndex_;
 			}
 			//console.log(this.head)
 			for(let i in this.head.actionsOut){ //this.head is the content acton was pionting to
-				console.log(this.head.actionsOut[i].id + "   -    " + this.head.actionsOut[i].pos.set)
+				//console.log(this.head.actionsOut[i].id + "   -    " + this.head.actionsOut[i].pos.set)
 				//if(this.head.actionsOut[i].pos.set == false){
 					this.head.actionsOut[i].setPosition(this.pos.y + this.height , xIndex_+1)
 

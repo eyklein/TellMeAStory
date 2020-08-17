@@ -109,7 +109,36 @@ class Story{
 	  		for(let sceneID in this.scenesLib){
 	  			if(sceneID != "uni"){
 	  				for(let contentID in this.scenesLib["uni"].contentsLib){
-	  					this.scenesLib[sceneID].contentsLib[contentID] = this.scenesLib["uni"].contentsLib[contentID]
+
+
+	  					//add content from universal scene to this scene
+	  					//this.scenesLib[sceneID].contentsLib[contentID] = this.scenesLib["uni"].contentsLib[contentID].getClone();//this.scenesLib["uni"].contentsLib[contentID]
+	  					
+
+	  					// let contentData = this.scenesLib["uni"].contentsLib[contentID].JSONData;
+	  					// console.log(contentData.content.type)
+
+	  			// 		if(content.content.type=="audio"){
+						// 	this.contentsLib[content.id]=new AudioContent(content,this)
+						// }else if(content.content.type=="text"){
+						// 	this.contentsLib[content.id]=new TextContent(content,this)
+						// }else if(content.content.type=="img"){
+						// 	this.contentsLib[content.id]=new ImageContent(content,this)
+						// }else{
+						// 	this.contentsLib[content.id]=new Content(content,this)
+						// }
+
+
+
+
+	  					this.scenesLib[sceneID].contentsLib[contentID] = this.scenesLib[sceneID].createContent(this.scenesLib["uni"].contentsLib[contentID].JSONData); //new ImageContent(this.scenesLib["uni"].contentsLib[contentID].JSONData,this.scenesLib[sceneID])
+	  					
+
+	  					//replace (unify) html
+	  					this.scenesLib[sceneID].contentsLib[contentID].html = this.scenesLib["uni"].contentsLib[contentID].html
+	  					//replace effects
+	  					this.scenesLib[sceneID].contentsLib[contentID].effects = this.scenesLib["uni"].contentsLib[contentID].effects
+
 
 	  					//add ass scene to this content
 	  					this.scenesLib[sceneID].contentsLib[contentID].addParentScene(this.scenesLib[sceneID])
@@ -569,6 +598,9 @@ class Story{
 
 
 	displayCurrentScene(){
+		console.log("displayCurrentScene");
+		console.log(this.currentScene.id)
+		console.log(this.currentScene)
 		this.currentScene.displayFrontEnd();
 	}
 
@@ -578,6 +610,8 @@ class Story{
 	newScene(newScene_){
 		// console.log(newScene_)
 		if(newScene_ instanceof Scene){
+
+			console.log("NEW SCENE")
 
 			//console.log("new scene " + newScene_.id + " @ " + Date.now())
 			// console.log(inheritedContent_)

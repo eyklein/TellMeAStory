@@ -1,6 +1,7 @@
 class ImageContent extends Content{
 	constructor(contentJson_,parentScene_){ //,url_, content_, propertiesJSON_
 		super(contentJson_,parentScene_)
+		this.type="ImageContent";
 		this.random=Math.random();
 
 		this.name=this.content.value;
@@ -73,30 +74,44 @@ class ImageContent extends Content{
 	//this.frontEndLoaded=false;
 
 	createFrontEndHTML(){
-		this.frontEndCreated=true;
+		console.log(this.id + ">")
+		if(!this.html.fe.created){
+				this.html.fe.created=true;
+				this.frontEndCreated=true;
 		
-		this.html.fe = document.createElement("img");
-		this.html.fe.setAttribute('draggable', false);
-		//console.log(this.id)
-		this.html.fe.id=this.id;
-		//this.html.fe.onmousedown = 'return false';
-		this.addEffects();
+				if(this.id=="905"){
+					console.log("clock!")
 		
-		this.html.fe.onload =function(){ // can only adjust the size after it is loaded and therefore knows the natural size
-			
-			this.adjustSize();
-			this.html.fe.onload=null;
-		}.bind(this)
-
-
-		this.html.fe.src=absoluteLocation + this.content.value;
-		//this.html.fe.classList.add('icon-img')
-
-		// this.createEffects();
-		// this.applyGeneralEffects();
-
-
-
+				}
+				
+				this.html.fe = document.createElement("img");
+				this.html.fe.setAttribute('draggable', false);
+				//console.log(this.id)
+				this.html.fe.id=this.id;
+				//this.html.fe.onmousedown = 'return false';
+				this.addEffects();
+				
+				this.html.fe.onload =function(){ // can only adjust the size after it is loaded and therefore knows the natural size
+					
+					this.adjustSize();
+					this.html.fe.onload=null;
+				}.bind(this)
+		
+		
+				this.html.fe.src=absoluteLocation + this.content.value;
+				if(this.id=="905"){
+					console.log("clock!" + this.html.fe.src)
+					console.log(this.parentScenes)
+					console.log(this.html)
+		
+				}
+				//this.html.fe.classList.add('icon-img')
+		
+				// this.createEffects();
+				// this.applyGeneralEffects();
+		
+		
+		}
 		
 
 	}
@@ -107,15 +122,9 @@ class ImageContent extends Content{
 		this.applyGeneralEffects();
 	}
 
-	adjustSize(){
-		this.html.fe.style.width=(this.html.fe.naturalWidth / 1920)*100 + "%";
-	}
-
-
-	
-
-
 	displayFrontEndHTML(){
+
+		console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" )
 		//console.log(this.html.fe)
 		//document.getElementById("background_img").append(this.html.fe);
 
@@ -125,9 +134,20 @@ class ImageContent extends Content{
 
 		super.displayFrontEndHTML();
 		//console.log(this.htmlParent)
+		console.log(this)
 		this.htmlParent.append(this.html.fe);
 		this.applyEntranceEffects();
 		this.html.fe.style.display="block";
 	}
+
+	adjustSize(){
+		this.html.fe.style.width=(this.html.fe.naturalWidth / 1920)*100 + "%";
+	}
+
+
+	
+
+
+
 
 }

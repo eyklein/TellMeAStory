@@ -32,6 +32,8 @@ class Content{
 		this.html={};
 		//this.html.be={};//back end
 		this.html.fe={};//front end
+		this.html.random=Math.random();
+		this.html.fe.created=false;
 
 		this.pos={};
 		this.pos.xIndex = 0;
@@ -59,6 +61,44 @@ class Content{
 
 		// 	this.actionsOut.append(tailAction_)
 		// }
+	}
+
+	getClone(){
+		let clone={};
+
+
+		clone.type=this.type;
+		clone.uniqueIdentifier = Math.random()*100000000000000000;
+		
+		//this.JSONData=contentJson_;
+		clone.id=this.id;
+		clone.parentScenes=this.parentScenes;
+		//this.addParentScene(parentScene_);
+		//this.parentScenes[this.id] = parentScene_;
+		//this.parentScene = parentScene_;
+
+		clone.effects=this.effects;
+		
+
+		clone.actionsIn=this.actionsIn;//action heads
+		clone.actionsOut=this.actionsOut;//action tails
+		clone.content=this.content;
+		clone.isClickable=this.isClickable;
+
+		clone.elicits=this.elicits;
+		// this.elicits.display=null;//null sginifies no action , fasle signifies an action not triggered , true signifies action triggered
+		// this.elicits.clickable=null; //clickable/activate are ths same
+
+		clone.html=this.html;
+		//this.html.be={};//back end
+		// this.html.fe={};//front end
+
+		clone.pos={};
+		clone.pos.xIndex = 0;
+		clone.pos.x = this.pos.xIndex*200;
+		clone.frontEndCreated=false;
+
+		return clone;
 	}
 
 	addParentScene(parentScene_){
@@ -178,6 +218,7 @@ class Content{
 
 
 	displayFrontEndHTML(){
+		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>" )
 		this.elicits.display=true;
 	}
 }
@@ -413,10 +454,10 @@ Content.prototype.createFrontEndHTML=function(){
 
 
 	}else if( this.content.type=="clear-text"){
-		this.html={};
+		//this.html={};
 		
 	}else if(this.content.type=="audio"){
-		this.html={};
+		//this.html={};
 		
 		
 	}
