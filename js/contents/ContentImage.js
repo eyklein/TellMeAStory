@@ -74,15 +74,10 @@ class ImageContent extends Content{
 	//this.frontEndLoaded=false;
 
 	createFrontEndHTML(){
-		console.log(this.id + ">")
 		if(!this.html.fe.created){
 				this.html.fe.created=true;
 				this.frontEndCreated=true;
 		
-				if(this.id=="905"){
-					console.log("clock!")
-		
-				}
 				
 				this.html.fe = document.createElement("img");
 				this.html.fe.setAttribute('draggable', false);
@@ -99,12 +94,7 @@ class ImageContent extends Content{
 		
 		
 				this.html.fe.src=absoluteLocation + this.content.value;
-				if(this.id=="905"){
-					console.log("clock!" + this.html.fe.src)
-					console.log(this.parentScenes)
-					console.log(this.html)
-		
-				}
+				
 				//this.html.fe.classList.add('icon-img')
 		
 				// this.createEffects();
@@ -124,17 +114,11 @@ class ImageContent extends Content{
 
 	displayFrontEndHTML(){
 
-		console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" )
-		//console.log(this.html.fe)
+		
 		//document.getElementById("background_img").append(this.html.fe);
 
 
-		//make sure this loads first ****
-		// console.log(this.htmlParent)
-
 		super.displayFrontEndHTML();
-		//console.log(this.htmlParent)
-		console.log(this)
 		this.htmlParent.append(this.html.fe);
 		this.applyEntranceEffects();
 		this.html.fe.style.display="block";

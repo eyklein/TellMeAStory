@@ -23,6 +23,8 @@ class StoryEditor{
 	addSceneDivs(){
 		for(let scene in this.story.scenesLib){
 			//document.getElementById("")
+			// console.log(this.story.scenesLib[scene])
+			// console.log(this.story.scenesLib[scene].node.html)
 			this.html.appendChild(this.story.scenesLib[scene].node.html.container)
 			//this.backEnd.editorWindow.html.appendChild(this.story.scenesLib[scene].be.html)
 		}

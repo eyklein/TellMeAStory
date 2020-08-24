@@ -5,8 +5,8 @@ class Conditional{
 		
 	}
 	eval(){
-		console.log(this.variableString )
-		console.log(eval(this.variableString))
+		// console.log(this.variableString )
+		// console.log(eval(this.variableString))
 		return eval(this.variableString);
 	}
 	// setVareable(){

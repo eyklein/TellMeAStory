@@ -111,26 +111,6 @@ class Story{
 	  				for(let contentID in this.scenesLib["uni"].contentsLib){
 
 
-	  					//add content from universal scene to this scene
-	  					//this.scenesLib[sceneID].contentsLib[contentID] = this.scenesLib["uni"].contentsLib[contentID].getClone();//this.scenesLib["uni"].contentsLib[contentID]
-	  					
-
-	  					// let contentData = this.scenesLib["uni"].contentsLib[contentID].JSONData;
-	  					// console.log(contentData.content.type)
-
-	  			// 		if(content.content.type=="audio"){
-						// 	this.contentsLib[content.id]=new AudioContent(content,this)
-						// }else if(content.content.type=="text"){
-						// 	this.contentsLib[content.id]=new TextContent(content,this)
-						// }else if(content.content.type=="img"){
-						// 	this.contentsLib[content.id]=new ImageContent(content,this)
-						// }else{
-						// 	this.contentsLib[content.id]=new Content(content,this)
-						// }
-
-
-
-
 	  					this.scenesLib[sceneID].contentsLib[contentID] = this.scenesLib[sceneID].createContent(this.scenesLib["uni"].contentsLib[contentID].JSONData); //new ImageContent(this.scenesLib["uni"].contentsLib[contentID].JSONData,this.scenesLib[sceneID])
 	  					
 
@@ -141,11 +121,11 @@ class Story{
 
 
 	  					//add ass scene to this content
-	  					this.scenesLib[sceneID].contentsLib[contentID].addParentScene(this.scenesLib[sceneID])
+	  					//this.scenesLib[sceneID].contentsLib[contentID].addParentScene(this.scenesLib[sceneID])
 	  					
 	  					//add universal content to each scene
 	  					this.scenesLib[sceneID].contentNodes[contentID]={}
-	  					this.scenesLib[sceneID].contentNodes[contentID].node = this.scenesLib[sceneID].getContentNode(contentID);
+	  					//this.scenesLib[sceneID].contentNodes[contentID].node = this.scenesLib[sceneID].getContentNode(contentID);
 	  				}
 	  			}
 	  		}
@@ -157,10 +137,7 @@ class Story{
 	  	}
 
 
-	  	for(let i=0; i<scenesData_.length;i++){//think about the order of loading. right now to goes through scene by scene maybe load all scens first and then do content
-	  		
-	  		this.scenesLib[scenesData_[i].id].setPositionActions()
-	  	}
+
 
 
 
@@ -187,12 +164,33 @@ class Story{
 	  		// set which content leads to which content
 	  	//this.setLastAndNextContentNodes();
 
-	  	this.createScenesBackEnds();
+	  	//this.createScenesBackEnds();
 
 	  	for(let id in this.scenesLib){//think about the order of loading. right now to goes through scene by scene maybe load all scens first and then do content
 	  		
-	  		this.scenesLib[id].setBackEndContentPositions();
+	  		this.scenesLib[id].setBackEndActionAndContentPositions();
 	  	}
+
+
+
+
+	  	//setHight of actions
+	  	// for(let i=0; i<scenesData_.length;i++){//think about the order of loading. right now to goes through scene by scene maybe load all scens first and then do content
+	  		
+	  	// 	this.scenesLib[scenesData_[i].id].setHightActions()
+	  	// }
+
+	  	// //setYof actions and content nodes
+	  	// for(let i=0; i<scenesData_.length;i++){//think about the order of loading. right now to goes through scene by scene maybe load all scens first and then do content
+	  		
+	  	// 	this.scenesLib[scenesData_[i].id].setPositionActions()
+	  	// }
+
+
+	  	// for(let id in this.scenesLib){//think about the order of loading. right now to goes through scene by scene maybe load all scens first and then do content
+	  		
+	  	// 	this.scenesLib[id].setBackEndContentPositions();
+	  	// }
 	  	// this.setContentIndexNumbers();
 	  	// this.setContentFullWidth()
 
@@ -404,7 +402,6 @@ class Story{
 	// }
 
 	loadAudio(){
-		console.log("LOAD AND NOW")
 
 		priorityAudioLoader.rankPriority();
 
@@ -519,10 +516,7 @@ class Story{
 	}
 
 	pause(){
-		// console.log("PAUSING *********************")
 		this.playing=false;
-
-		// console.log("this.playing " + this.playing);
 
 	 	this.windowManager.displayPlayButton();
 		
@@ -538,8 +532,6 @@ class Story{
 		for(let audioContent in this.activeMainAudio){
 			this.activeMainAudio[audioContent].pause();
 		}
-
-		console.log("this.playing " + this.playing);
 
 		//pause the background audio
 		// for(let audioContent in this.activeBackgroundAudio){
@@ -575,9 +567,7 @@ class Story{
 	createScenesFrontEndHTMLs(){
 		for(let sceneKey in this.scenesLib){//this will create the divs for all the scenes. they could be created on each scene load
 			this.scenesLib[sceneKey].createFrontEndHTML();//scene will cycle through each content (and action?) and create a div/span for each
-			console.log(sceneKey)
 		}
-		console.log("finsihed creating the front end")
 	}
 	createScenesBackEndHTMLs(){
 		for(let sceneKey in this.scenesLib){//this will create the divs for all the scenes. they could be created on each scene load
@@ -585,7 +575,6 @@ class Story{
 		}
 	}
 	createProperties(){
-		console.log("createProperties!!!!!!!!!!!!!!!!!!!!!!")
 		for(let sceneKey in this.scenesLib){//this will create the divs for all the scenes. they could be created on each scene load
 			this.scenesLib[sceneKey].createProperties();//scene will cycle through each content (and action?) and create a div/span for each
 		}
@@ -598,9 +587,6 @@ class Story{
 
 
 	displayCurrentScene(){
-		console.log("displayCurrentScene");
-		console.log(this.currentScene.id)
-		console.log(this.currentScene)
 		this.currentScene.displayFrontEnd();
 	}
 
@@ -611,10 +597,7 @@ class Story{
 		// console.log(newScene_)
 		if(newScene_ instanceof Scene){
 
-			console.log("NEW SCENE")
 
-			//console.log("new scene " + newScene_.id + " @ " + Date.now())
-			// console.log(inheritedContent_)
 			//newScene_.addInheritance(inheritedContent_)
 
 			this.sceneTimesArray.push(

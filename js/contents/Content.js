@@ -9,8 +9,7 @@ class Content{
 		
 		this.JSONData=contentJson_;
 		this.id=contentJson_.id;
-		this.parentScenes={};
-		this.addParentScene(parentScene_);
+		this.parentScene=parentScene_;
 		//this.parentScenes[this.id] = parentScene_;
 		//this.parentScene = parentScene_;
 
@@ -35,9 +34,10 @@ class Content{
 		this.html.random=Math.random();
 		this.html.fe.created=false;
 
-		this.pos={};
-		this.pos.xIndex = 0;
-		this.pos.x = this.pos.xIndex*200;
+		// this.pos={};
+		// this.pos.xIndex = 0;
+		//this.pos.x = this.pos.xIndex*200;
+
 		this.frontEndCreated=false;
 		//this.pos.yIndex
 
@@ -61,6 +61,20 @@ class Content{
 
 		// 	this.actionsOut.append(tailAction_)
 		// }
+
+		this.cNode=new ContentNode(this,this.parentScene);
+	}
+
+	getFirstAction(){
+		let minIndex=0
+		let minPosition = this.actionsIn[minIndex];
+		for(let i=1;i < this.actionsIn.length; i++){
+			if(minPosition >= this.actionsIn[i].getHeadPosition().y){
+				let minIndex=i
+				minPosition = this.actionsIn(i).getHeadPosition().y
+			}
+		}
+		return this.actionsIn[minIndex];
 	}
 
 	getClone(){
@@ -72,7 +86,7 @@ class Content{
 		
 		//this.JSONData=contentJson_;
 		clone.id=this.id;
-		clone.parentScenes=this.parentScenes;
+		clone.parentScene=this.parentScene;
 		//this.addParentScene(parentScene_);
 		//this.parentScenes[this.id] = parentScene_;
 		//this.parentScene = parentScene_;
@@ -101,11 +115,11 @@ class Content{
 		return clone;
 	}
 
-	addParentScene(parentScene_){
-		this.parentScenes[parentScene_.id] ={}
-		this.parentScenes[parentScene_.id].scene = parentScene_;
+	// addParentScene(parentScene_){
+	// 	this.parentScenes[parentScene_.id] ={}
+	// 	this.parentScenes[parentScene_.id].scene = parentScene_;
 
-	}
+	// }
 
 	addActionIn(headAction_){
 		if(headAction_.elicit=="display"){
@@ -123,14 +137,13 @@ class Content{
 
 
 
-	getNode(sceneSpacificInfo_){
-		return new ContentNode(this,sceneSpacificInfo_);
-	}
+	// getNode(sceneSpacificInfo_){
+	// 	return new ContentNode(this,sceneSpacificInfo_);
+	// }
 	// positionNode(){
 	// 	this.node.createHTML();
 	// }
 	createEffects(){
-		// console.log(this.JSONData)
 		for(let effect in this.JSONData.effects.general){
 			this.effects.general[effect]=new ContentEffect(this.JSONData.effects.general[effect],this)
 		}
@@ -142,8 +155,6 @@ class Content{
 		}
 
 		for(let effect in this.JSONData.effects.clickable){
-
-			//console.log("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW " + effect)
 			this.effects.clickable[effect]=new ContentEffect(this.JSONData.effects.clickable[effect],this)
 		}
 	
@@ -181,8 +192,6 @@ class Content{
 
 		this.elicits.clickable=true;
 
-		//console.log(this.id + " activate clickable")
-
 		for(let effect in this.effects.clickable.generic){
 			this.effects.clickable.generic[effect].apply();
 		}
@@ -191,7 +200,6 @@ class Content{
 			if(this.actionsOut[action].scene==currentStory.currentScene){
 				if(this.actionsOut[action].trigger=="click"){
 					this.actionsOut[action].addEventListener();
-					//this.addClickableEventListener(this.actionsOut[action]);
 				}
 			}else{
 				//this if statment blocks actions for universal shared objects from firing
@@ -218,13 +226,11 @@ class Content{
 
 
 	displayFrontEndHTML(){
-		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>" )
 		this.elicits.display=true;
 	}
 }
 
 function displayOnTimer(clickEvent){
-	//console.log(this.action.)
 	clickEvent.target.targetContent.deactivateClickable();
 	clickEvent.target.targetContent.activateExitEffects();
 
@@ -234,7 +240,6 @@ function displayOnTimer(clickEvent){
 		// clickEvent.target.action.head.displayFrontEndHTML();
 		// clickEvent.target.action.head.trigerActionsOut();
 
-		console.log(clickEvent.target.targetContent)
 
 	setTimeout(function(targetContent_){
 		targetContent_.action.head.displayFrontEndHTML();

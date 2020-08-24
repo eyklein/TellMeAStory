@@ -28,7 +28,7 @@ class Scene{
 
 	displayFrontEnd(){
 		for(let i=0;i<this.actionsOut.length;i++){
-			console.log(this.actionsOut[i])
+		
 			this.actionsOut[i].activate();
 
 		}
@@ -52,8 +52,12 @@ class Scene{
 
 				//make a node
 				//console.log(content.id)
-				this.contentNodes[content.id]={};
-				this.contentNodes[content.id].node = this.getContentNode(content.id)
+
+
+
+				// console.log("Nodes added")
+				// this.contentNodes[content.id]={};
+				// this.contentNodes[content.id].node = this.getContentNode(content.id)
 			}
 		}
 	}
@@ -73,9 +77,9 @@ class Scene{
 	}
 
 
-	getContentNode(contentID_){
-		return this.contentsLib[contentID_].getNode(this)
-	}
+	// getContentNode(contentID_){
+	// 	return this.contentsLib[contentID_].getNode(this)
+	// }
 
 	addActions(sceneJson_){
 		if(this.sceneData.contents){
@@ -93,56 +97,70 @@ class Scene{
 		}
 	}
 
-	setPositionActions(){
-		let hOffset=50;
-		//this would show what scenes are feeding into it
-		// for(let i in this.actionsIn){
-		// 	console.log(this.actionsIn[i])
-		// }
+	setHightActions(){
+		//let hOffset=50;
+	
+		for(let i in this.actionsLib){
+			this.actionsLib[i].setHeight();
+		}
+	}
+
+	// setPositionActions(){
+	// 	let hOffset=50;
+	
+	// 	for(let i in this.actionsOut){
+	// 		this.actionsOut[i].setPosition(hOffset , 1);
+	// 	}
+	// }
+
+
+	// createSceneBackEnd(){
+	// 	//scenes in
+	// 	// for(let id in this.node.parentsInfo){
+	// 	// 	if(this.backEnd.contentClusters[id] == undefined){
+	// 	// 		this.backEnd.contentClusters[id] = new ContentCluster(this.node.parentsInfo[id].scene);
+	// 	// 	}
+	// 	// }
+
+	// 	//this
+	// 	this.backEnd.contentClusters[this.id] = new ContentCluster(this);
+
+	// 	//scenes out
+	// 	for(let id in this.node.childrenInfo){
+	// 		if(this.backEnd.contentClusters[id] == undefined){
+	// 			this.backEnd.contentClusters[id] = new ContentCluster(this.node.childrenInfo[id].scene);
+	// 		}
+
+	// 	}
+
+
+	// 	for(let id in this.contentsLib){
+	// 		if(this.backEnd.contentClusters[id] == undefined){
+	// 			//console.log(id);
+	// 			//console.log(this.contentsLib[id].uniqueIdentifier);
+	// 			this.backEnd.contentClusters[id]=new ContentCluster(this.contentsLib[id]);
+	// 		}
+	// 	}
+
+
+	// 	for(let action in this.actionsLib){
+
+
+	// 		this.actionsLib[action].setSize();
+	// 	}
+
+
+	// 	//console.log(this.backEnd.contentClusters)
+	// 	for(let action in this.actionsLib){
+	// 		this.backEnd.contentClusters[this.actionsLib[action].tail.id].addActionIn(this.actionsLib[action])
+
+	// 		this.backEnd.contentClusters[this.actionsLib[action].head.id].addActionOut(this.actionsLib[action])
+	// 	}
 		
 
-		//console.log("out")
-		console.log(this.id + "************")
-		for(let i in this.actionsOut){
-			// console.log(this.actionsOut[i].head.id + "?")
-			this.actionsOut[i].setPosition(hOffset , 1);
 
-		}
-	}
-
-
-	createSceneBackEnd(){
-		//scenes in
-		// for(let id in this.node.parentsInfo){
-		// 	if(this.backEnd.contentClusters[id] == undefined){
-		// 		this.backEnd.contentClusters[id] = new ContentCluster(this.node.parentsInfo[id].scene);
-		// 	}
-		// }
-
-		//this
-		this.backEnd.contentClusters[this.id] = new ContentCluster(this);
-
-		//scenes out
-		for(let id in this.node.childrenInfo){
-			if(this.backEnd.contentClusters[id] == undefined){
-				this.backEnd.contentClusters[id] = new ContentCluster(this.node.childrenInfo[id].scene);
-			}
-
-		}
-		for(let id in this.contentsLib){
-			if(this.backEnd.contentClusters[id] == undefined){
-				//console.log(id);
-				//console.log(this.contentsLib[id].uniqueIdentifier);
-				this.backEnd.contentClusters[id]=new ContentCluster(this.contentsLib[id]);
-			}
-		}
-		//console.log(this.backEnd.contentClusters)
-		for(let action in this.actionsLib){
-			this.backEnd.contentClusters[this.actionsLib[action].tail.id].addActionIn(this.actionsLib[action])
-
-			this.backEnd.contentClusters[this.actionsLib[action].head.id].addActionOut(this.actionsLib[action])
-		}
-	}
+		
+	// }
 
 	// setLastAndNextContentNodes(){ //not sure if this will work with the shared contents
 	// 		for(let action in this.actionsLib){
@@ -187,14 +205,59 @@ class Scene{
 	// }
 
 	//??**????????
-	setBackEndContentPositions(){
-		this.contentsIndexes={};
+	setBackEndActionAndContentPositions(){
+		//this.contentsIndexes={};
 		// for(let id in this.contentsLib){
-		for(let id in this.contentNodes){
-			//this.contentsIndexes[id] = 3 ;
-			this.contentNodes[id].node.createHTML();
-			//.contentsLib[id].positionNode();
+		
+
+		
+		console.log("index content through actions");
+		for(let id in this.actionsOut){
+			// this.actionsOut[id].addIndex(0);
+			this.actionsOut[id].setIndex(0);
 		}
+
+		console.log("set Action Heights")
+		for(let id in this.actionsLib){
+			this.actionsLib[id].setSize();
+		}
+
+		console.log("position content and actions through actions");
+		for(let id in this.actionsOut){
+			// this.actionsOut[id].addIndex(0);
+			this.actionsOut[id].setPosition(50,50);
+		}
+
+		console.log("create the content nodes HTML")
+		for(let id in this.contentsLib){
+			this.contentsLib[id].cNode.createHTML();
+		}
+
+
+
+		
+
+		// console.log("test all content indexes set")
+		// for(let id in this.contentsLib){
+		// 	if(this.contentsLib[id].node.index==undefined && this.contentsLib[id]){
+		// 		console.log("FALSE!!!!!!!!!!!!!!!!!!!")
+		// 		console.log(this.contentsLib[id].node.index)
+		// 		console.log(this.contentsLib[id].node)
+		// 	}
+		// }
+
+		// console.log("test all actions indexes set")
+		// for(let id in this.actionsLib){
+		// 	if(this.actionsLib[id].index==undefined){
+		// 		console.log("FALSE!!!!!!!!!!!!!!!!!!!")
+		// 	}
+		// }
+
+		
+
+		//for()
+
+
 	}
 
 

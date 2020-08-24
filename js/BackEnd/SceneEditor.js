@@ -21,9 +21,9 @@ class SceneEditor{
 
 	addContentDivs(){
 		//console.log(this.scene.id)
-		for(let id in this.scene.contentNodes){
+		for(let id in this.scene.contentsLib){
 			//console.log(content);
-			this.html.appendChild(this.scene.contentNodes[id].node.html.container)
+			this.html.appendChild(this.scene.contentsLib[id].cNode.html.container)
 		}
 		for(let action in this.scene.actionsLib){
 			this.html.appendChild(this.scene.actionsLib[action].html.container)

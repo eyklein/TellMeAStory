@@ -18,17 +18,17 @@ class AudioLoader{
 		this.rank=100000;//max asumed value
 		for(let contentAudio in this.contentAudioObjects){
 			
+			//console.log(this.contentAudioObjects[contentAudio].parentScene)
+			let index  = this.contentAudioObjects[contentAudio].parentScene.node.index;
 
-			let index 
-
-			for(let id in this.contentAudioObjects[contentAudio].parentScenes){
-				if(index == undefined){
-					index = this.contentAudioObjects[contentAudio].parentScenes[id].scene.node.index;
+			//for(let id in this.contentAudioObjects[contentAudio].parentScenes){
+				// if(index == undefined){
+				// 	index = this.contentAudioObjects[contentAudio].parentScene.scene.node.index;
 					
-				}else{
-					index = Math.min(index, this.contentAudioObjects[contentAudio].parentScenes[id].scene.node.index)
-				}
-			}
+				// }else{
+				// 	index = Math.min(index, this.contentAudioObjects[contentAudio].parentScene.scene.node.index)
+				// }
+			//}
 
 			if(index<this.rank){
 				this.rank=index;

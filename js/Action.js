@@ -39,13 +39,18 @@ class Action{
 
 		this.pos={};
 		this.pos.set=false;
+
+
+		this.indices=[]
+
 		//this.pos.y
 
 
 
 
 		this.height;
-		this.width = 500*Math.random()-250;
+		//this.setHeight()
+		//this.width=200;
 		// this.html.be.pos={};
 		// this.html.be.pos.x={};
 		// this.html.be.pos.y={};
@@ -99,7 +104,7 @@ class Action{
 			this.head.actionsIn.push(this)
 		}
 
-		this.setHeight();
+		
 
 	}
 
@@ -136,7 +141,6 @@ class Action{
 			}
 			this.activateNow();
 		}else{
-			console.log("activating")
 			this.activateNow();
 		}
 
@@ -144,7 +148,6 @@ class Action{
 
 	activateNow(){
 		if(this.elicit=="display"){
-			console.log("display")
 			this.displayContent(this.delay);
 		}else if(this.elicit=="hide"){
 			this.hideContent(this.delay);
@@ -168,17 +171,12 @@ class Action{
 			premature=false
 		}
 		
-		 console.log("new timer" + delay_*1000)
+		
 
 		this.timer=new Timer(function(){
-			console.log("*****************************?*********************************")
+			
 			if(this.head instanceof Content){
-				console.log(this.head)
-				if(this.head instanceof ImageContent){
-					console.log("TRUE")
-				}else{
-					console.log("FALSE")
-				}
+				
 				
 				this.head.displayFrontEndHTML();
 				//these should just be the actions out not the clickable **
@@ -254,61 +252,118 @@ class Action{
 
 	}
 
-
-	setPosition(topPos_, xIndex_){
+	setPosition(leftPos_, topPos_){
 		if(this.pos.set==false){
-		//console.log("setPos " + this.head.id)
-		this.pos.y = topPos_;
-		this.pos.x = xIndex_ * 200;
+			this.pos.set=true;
+			this.pos.y = topPos_;
+			this.pos.x = leftPos_
+			//this.pos.x = this.index * 100;
 
-		if(this.tail instanceof Content){
-			this.tail.pos.xIndex = xIndex_;
-		}
-
-		this.pos.set = true;
-
-		this.createBackEndHTML()
-		//console.log(this.elicit + " :::::" + this.head.id)
-		if(this.elicit == "display" || this.elicit == "clickable" || this.elicit == "activate"){//this should be for activate if there is an activate action
 			if(this.head instanceof Content){
-				//console.log("-" + this.head.id)
-				// this.scene.contentsIndexes[this.head.id]=xIndex_;
-				this.scene.contentNodes[this.head.id].xIndex=xIndex_;
+				this.head.cNode.setPosition(leftPos_+this.width , topPos_+this.height , this.elicit);
 			}
-			//console.log(this.head)
-			for(let i in this.head.actionsOut){ //this.head is the content acton was pionting to
-				//console.log(this.head.actionsOut[i].id + "   -    " + this.head.actionsOut[i].pos.set)
-				//if(this.head.actionsOut[i].pos.set == false){
-					this.head.actionsOut[i].setPosition(this.pos.y + this.height , xIndex_+1)
 
-					if(this.tail instanceof Content && this.head instanceof Content){
-						this.width = this.tail.pos.x - this.head.pos.x;
-					}
-					
-				//}
-				
-			}
+			this.pos.set = true;
+
+			this.createBackEndHTML();		
 		}
 	}
-		// else if(this.elicit == "activate"){//this should be for activate if there is an activate action
-		// 	//console.log("activate")
-		// 	for(let i in this.head.actionsOut){ //this.head is the content acton was pionting to
-		// 		if(this.head.actionsOut[i].pos.set == false){
-		// 			//console.log(this.pos.y + this.height)
-		// 			this.head.actionsOut[i].setPosition(this.pos.y + this.height)
-		// 		}
-				
-		// 	}
-		// }
+
+
+
+	getHeadPosition(){
+		//let minHeight=undefined;
+		let headPos={};
+		headPos.y = 0;
+		headPos.x=this.pos.x+this.width;
+		if(this.pos.set){
+			headPos.y = this.pos.y+this.height;
+		}
 		
+		return headPos;
+		
+	}
+
+	setSize(){
+		// console.log("SET SIZE!!!!!!!!!!")
+		this.setHeight();
+		// console.log("Height :   " + this.height)
+		this.setWidth();
 	}
 
 	setHeight(){
 		if(this.trigger == "time"){
+			// console.log("this.delay :   " + this.delay)
+			// console.log(this)
 			this.height=this.delay*timeScale;
 		}else if(this.trigger == "click"){
+			// console.log("clickScale:   " + clickScale)
 			this.height = clickScale; 
 		}
+	}
+	setWidth(){
+		// console.log("h : " + this.head.node.index + "   t : " + this.tail.node.index)
+		// console.log( this.head)
+		if(this.head instanceof Scene){
+			if(this.tail instanceof Scene){
+				this.width=(0)
+			}else{
+				
+				this.width=(0 - this.tail.cNode.index)*100
+			}
+		}
+		else if(this.tail instanceof Scene){
+			this.width=(this.head.cNode.index - 0)*100
+		}else{
+			// console.log(this.head.cNode)
+			// console.log("h : " + this.head.cNode.index + "   t : " + this.tail.cNode.index)
+			//this.width=(this.head.node.index - this.tail.node.index)*100 //- this.tail.node.width
+			this.width=(this.head.cNode.index - this.tail.cNode.index) //- this.tail.node.width
+
+			
+		}
+		// console.log( this.width + " ******************************")
+
+		
+		// 	console.log(this.head.cNode.index)
+		// 	console.log(this.head)
+		// 	console.log(this.tail.cNode.index)
+		// 	console.log(this.tail)
+		
+
+	
+		
+
+		
+	}
+	// addIndex(index_){
+	// 	// if(this.indices==undefined){
+	// 	// 	this.indices=[]
+	// 	// }
+	// 	if(this.indices.indexOf(index_) == -1){
+	// 		this.indices.push(index_);
+	// 		if(this.head instanceof Content){
+	// 			this.head.node.addIndex(index_+1);
+	// 		}
+	// 	}
+		
+	// }
+
+	setIndex(index_){
+		// if(this.indices==undefined){
+		// 	this.indices=[]
+		// }
+
+		
+		if(this.index == undefined){
+			this.index = index_;
+			if(this.head instanceof Content){
+				this.head.cNode.setIndex(index_+1);
+			}
+
+		}
+
+		
 	}
 
 	createBackEndHTML(){
@@ -318,6 +373,9 @@ class Action{
 		this.html.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
 		this.html.svg.classList.add("connector-line")
 		this.html.svg.classList.add("click")
+
+		// console.log("setWidth of arrow  " + this.width+ "   ,    " + this.height)
+		//this.html.svg.innerHTML = hArrowSVG(this.width, this.height, 2, "dashed");
 		this.html.svg.innerHTML = hArrowSVG(this.width, this.height, 2, "dashed");
 		//console.log(this.html.svg)
 		this.html.container.append(this.html.svg);
