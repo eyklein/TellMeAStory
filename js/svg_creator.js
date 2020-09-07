@@ -13,7 +13,7 @@ function hArrowSVG(deltaX_,deltaY_,strokeThickness_,type_,color_){
 			v1 = (deltaY_ - radius*2);
 
 
-			return '<path class="'+type_+
+			return '<path class="'+type_+ " svg_arrow"+
 				svgPiont(xStart,yStart) + //starting piont
 				svgHorizontalLine(h1) + //vertical line
 				svgRightDown(radius) + //curve down and right
@@ -21,7 +21,7 @@ function hArrowSVG(deltaX_,deltaY_,strokeThickness_,type_,color_){
 				svgDownRight(radius) + //curve down
 				svgHorizontalLine(h1) +//vertical line
 				svgArrowDown(arrowSize) +
-				' " style="stroke-width:4;fill:none;stroke:' + color_ + ';" />';
+				' " style="fill:none;stroke:' + color_ + ';" />';
 
 		}else if(deltaY_< 0){//is there enogh room in the x direction
 
@@ -34,7 +34,7 @@ function hArrowSVG(deltaX_,deltaY_,strokeThickness_,type_,color_){
 			v1 = (deltaY_ + radius*2);
 
 
-			return '<path class="'+type_+
+			return '<path class="'+type_+ " svg_arrow"+
 				svgPiont(xStart,yStart) + //starting piont
 				svgHorizontalLine(h1) + //vertical line
 				svgRightUp(radius) + //curve down and right
@@ -42,7 +42,7 @@ function hArrowSVG(deltaX_,deltaY_,strokeThickness_,type_,color_){
 				svgUpRight(radius) + //curve down
 				svgHorizontalLine(h1) +//vertical line
 				svgArrowDown(arrowSize) +
-				' " style="stroke-width:4;fill:none;stroke:' + color_ + ';" />';
+				' " style="fill:none;stroke:' + color_ + ';" />';
 
 		}
 	}else if(deltaX_<=20){
@@ -59,7 +59,7 @@ function hArrowSVG(deltaX_,deltaY_,strokeThickness_,type_,color_){
 			v1 = (deltaY_ - radius*4)/2;
 
 
-			return '<path class="'+type_+
+			return '<path class="'+type_+ " svg_arrow"+
 				svgPiont(xStart,yStart) + //starting piont
 				svgHorizontalLine(h01) + 
 				svgRightDown(radius) + 
@@ -71,7 +71,7 @@ function hArrowSVG(deltaX_,deltaY_,strokeThickness_,type_,color_){
 				svgDownRight(radius) +
 				svgHorizontalLine(h02) +
 				svgArrowDown(arrowSize) +
-				' " style="stroke-width:4;fill:none;stroke:' + color_ + ';" />';
+				' " style="fill:none;stroke:' + color_ + ';" />';
 
 		}else{
 
@@ -87,7 +87,7 @@ function hArrowSVG(deltaX_,deltaY_,strokeThickness_,type_,color_){
 			v2 = deltaY_ - v1;
 
 
-			return '<path class="'+type_+
+			return '<path class="'+type_ + " svg_arrow" +
 				svgPiont(xStart,yStart) + //starting piont
 				svgHorizontalLine(h01) + 
 				svgRightDown(radius) + 
@@ -99,7 +99,7 @@ function hArrowSVG(deltaX_,deltaY_,strokeThickness_,type_,color_){
 				svgUpRight(radius) +
 				//svgHorizontalLine(h02) +
 				svgArrowDown(arrowSize) +
-				' " style="stroke-width:4;fill:none;stroke:' + color_ + ';" />';
+				' " style="fill:none;stroke:' + color_ + ';" />';
 
 		}
 

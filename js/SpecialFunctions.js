@@ -1,3 +1,57 @@
+var selectedNodes=[];
+var shiftPressed=false
+
+
+document.onkeydown = function(e) {
+    switch (e.keyCode) {
+        case 37:
+            break;
+        case 38:// up arrow 
+            currentStory.togglePlayPause();
+            break;
+        case 39:
+        	currentStory.skip();
+            break;
+        case 40:// down arrow 
+            currentStory.togglePlayPause();
+            break;
+        case 83://'s'
+            currentStory.skip();
+            break;
+        case 32://' ' - space bar
+            currentStory.togglePlayPause();
+            break;
+        case 81:
+        	currentStory.printActiveDelays();
+        	break;
+        case 66:
+        	currentStory.backEnd.display();
+        	break;
+        case 16://shift
+        	shiftPressed=true;
+        	break;
+        default:
+    		console.log(e.keyCode)
+    }
+};
+
+document.onkeyup = function(e) {
+	if(shiftPressed){
+	    shiftPressed=false;
+	}
+}
+
+
+
+
+function clearSelectedNodes(){
+	for(let i=selectedNodes.length-1;i>=0;i--){
+		selectedNodes[i].deselect();
+	}
+}
+
+
+
 function setCookie(name,value,days) {
     var expires = "";
     if (days) {
@@ -7,6 +61,7 @@ function setCookie(name,value,days) {
     }
     document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 }
+//document.
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -97,4 +152,56 @@ Math.sumArray=function(array_){
 
 function size(obj_){
 	return Object.keys(obj_).length;
+}
+
+
+
+
+
+//box-shadow: rgb(0, 0, 255) 0px 0px 10px;
+
+
+
+function dragElement(elmnt) {
+	elmnt.onmousedown = dragMouseDown;
+
+	function dragMouseDown(e) {
+		e = e || window.event;
+		e.preventDefault();
+		// get the mouse cursor position at startup:
+		//pos3 = e.clientX;
+		lastX = e.clientX;
+		// pos4 = e.clientY;
+		document.onmouseup = closeDragElement;
+		// call a function whenever the cursor moves:
+		document.onmousemove = elementDrag;
+	}
+
+	function elementDrag(e) {
+		e = e || window.event;
+		e.preventDefault();
+		// calculate the new cursor position:
+		
+
+
+		deltaX = e.clientX - lastX;
+		// pos2 = pos4 - e.clientY;
+		lastX = e.clientX;
+		// pos4 = e.clientY;
+		// set the element's new position:
+		//elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+
+		for(let i in selectedNodes){
+			selectedNodes[i].shiftX(deltaX);
+			
+		}
+
+		//elmnt.style.left = (elmnt.offsetLeft + deltaX) + "px";
+	}
+
+	function closeDragElement() {
+		/* stop moving when mouse button is released:*/
+		document.onmouseup = null;
+		document.onmousemove = null;
+	}
 }

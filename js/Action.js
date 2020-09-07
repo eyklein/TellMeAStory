@@ -12,6 +12,8 @@ class Action{
 		this.tempId=Math.round(Math.random(0, 1)*100);
 		this.tail;//either the scene itself or content object
 		this.head;//either content of a new scene
+		this.tailElicitNode=null;//either the scene itself or content object
+		this.headElicitNode;//either content of a new scene
 		this.block;//this will turn off other actions deafalt is to just turn itself off 
 		this.trigger=actionJSON_.trigger;//time/click are the basic but could be any sensable action...
 		this.elicit=actionJSON_.elicit;// display/clickable/...
@@ -252,21 +254,74 @@ class Action{
 
 	}
 
-	setPosition(leftPos_, topPos_){
+	setYPosition(topPos_){
+		// if(this.scene.id=="SC"){
+		// 	console.log(topPos_)
+		// }
 		if(this.pos.set==false){
 			this.pos.set=true;
-			this.pos.y = topPos_;
-			this.pos.x = leftPos_
+			//console.log(indexOut_)
+			this.pos.y = topPos_ //+ this.tail.actionsOut.indexOf(this)*4;
+			//this.pos.x = leftPos_
 			//this.pos.x = this.index * 100;
 
+
 			if(this.head instanceof Content){
-				this.head.cNode.setPosition(leftPos_+this.width , topPos_+this.height , this.elicit);
+				console.log("- " + this.head.id);
+				this.head.cNode.setYPosition(topPos_+this.height, this);
+
+			}else if(this.head instanceof Scene){
+				console.log("out " + this.head.id)
+				//console.log()
+				this.scene.sudoContent.out[this.head.id].cNode.setYPosition(topPos_+this.height, this);
+				//console.log()
+				//this.head.cNode.setYPosition(topPos_+this.height, this);
 			}
+
+
+			// else if(this.head instanceof Scene){
+			// 	this.head.cNode.setYPosition(topPos_+this.height, this);
+			// }
+
+
 
 			this.pos.set = true;
 
 			this.createBackEndHTML();		
 		}
+	}
+
+	update(){
+
+		this.updateHeight();
+		this.updateWidth();
+
+		//console.log(this.width)
+		this.html.svg.innerHTML = hArrowSVG(this.width, this.height, 2, this.elicit+"_arrow");
+		
+
+		if(this.tailElicitNode instanceof ElicitNode){
+			//console.log(this.tailElicitNode.pos)
+			this.html.svg.style.left=this.tailElicitNode.posOut.x + "px";
+		}
+
+
+
+
+	}
+
+	updateHeight(){
+		console.log(this)
+		this.height = this.headElicitNode.posIn.y - this.pos.y//this.tailElicitNode.posOut.y 
+	}
+
+	updateWidth(){
+		if(this.tailElicitNode instanceof ElicitNode){
+			this.width = this.headElicitNode.posIn.x - this.tailElicitNode.posOut.x
+		}else{
+			this.width = this.headElicitNode.posIn.x - 0//this.tailElicitNode.posOut.x
+		}
+		
 	}
 
 
@@ -286,12 +341,12 @@ class Action{
 
 	setSize(){
 		// console.log("SET SIZE!!!!!!!!!!")
-		this.setHeight();
+		this.setInitalHeight();
 		// console.log("Height :   " + this.height)
-		this.setWidth();
+		this.setInitalWidth();
 	}
 
-	setHeight(){
+	setInitalHeight(){
 		if(this.trigger == "time"){
 			// console.log("this.delay :   " + this.delay)
 			// console.log(this)
@@ -301,40 +356,21 @@ class Action{
 			this.height = clickScale; 
 		}
 	}
-	setWidth(){
-		// console.log("h : " + this.head.node.index + "   t : " + this.tail.node.index)
-		// console.log( this.head)
-		if(this.head instanceof Scene){
-			if(this.tail instanceof Scene){
-				this.width=(0)
-			}else{
+	setInitalWidth(){
+		// if(this.head instanceof Scene){
+		// 	if(this.tail instanceof Scene){
+		// 		this.width=(0)
+		// 	}else{
 				
-				this.width=(0 - this.tail.cNode.index)*100
-			}
-		}
-		else if(this.tail instanceof Scene){
-			this.width=(this.head.cNode.index - 0)*100
-		}else{
-			// console.log(this.head.cNode)
-			// console.log("h : " + this.head.cNode.index + "   t : " + this.tail.cNode.index)
-			//this.width=(this.head.node.index - this.tail.node.index)*100 //- this.tail.node.width
-			this.width=(this.head.cNode.index - this.tail.cNode.index) //- this.tail.node.width
-
-			
-		}
-		// console.log( this.width + " ******************************")
-
-		
-		// 	console.log(this.head.cNode.index)
-		// 	console.log(this.head)
-		// 	console.log(this.tail.cNode.index)
-		// 	console.log(this.tail)
-		
-
-	
-		
-
-		
+		// 		this.width=(0 - this.tail.cNode.index)*100
+		// 	}
+		// }
+		// else if(this.tail instanceof Scene){
+		// 	this.width=(this.head.cNode.index - 0)*100
+		// }else{
+		// 	this.width=(this.head.cNode.index - this.tail.cNode.index) 
+		// }
+		this.width=0;//this.head.cNode - this.tail.cNode
 	}
 	// addIndex(index_){
 	// 	// if(this.indices==undefined){
@@ -349,22 +385,22 @@ class Action{
 		
 	// }
 
-	setIndex(index_){
-		// if(this.indices==undefined){
-		// 	this.indices=[]
-		// }
+	// setIndex(index_){
+	// 	// if(this.indices==undefined){
+	// 	// 	this.indices=[]
+	// 	// }
 
 		
-		if(this.index == undefined){
-			this.index = index_;
-			if(this.head instanceof Content){
-				this.head.cNode.setIndex(index_+1);
-			}
+	// 	if(this.index == undefined){
+	// 		this.index = index_;
+	// 		if(this.head instanceof Content){
+	// 			this.head.cNode.setIndex(index_+1);
+	// 		}
 
-		}
+	// 	}
 
 		
-	}
+	// }
 
 	createBackEndHTML(){
 		//actionArrowSVG
@@ -376,7 +412,7 @@ class Action{
 
 		// console.log("setWidth of arrow  " + this.width+ "   ,    " + this.height)
 		//this.html.svg.innerHTML = hArrowSVG(this.width, this.height, 2, "dashed");
-		this.html.svg.innerHTML = hArrowSVG(this.width, this.height, 2, "dashed");
+		this.html.svg.innerHTML = hArrowSVG(this.width, this.height, 2, this.elicit+"_arrow");
 		//console.log(this.html.svg)
 		this.html.container.append(this.html.svg);
 
@@ -543,65 +579,65 @@ Action.prototype.updateOutInIndexes=function(){
 
 
 
-Action.prototype.updateArrow=function(deltaX,deltaY){
+// Action.prototype.updateArrow=function(deltaX,deltaY){
 
-	//console.log("YES")
+// 	//console.log("YES")
 
-	let width=100;
-	let height=75;
+// 	let width=100;
+// 	let height=75;
 
-	let strokeThickness=6;
+// 	let strokeThickness=6;
 
-	let deltaYArrow=deltaY;
-	let deltaXArrow=deltaX;
+// 	let deltaYArrow=deltaY;
+// 	let deltaXArrow=deltaX;
 
-	this.html.be.svg.style.width=deltaXArrow + strokeThickness +"px";
+// 	this.html.be.svg.style.width=deltaXArrow + strokeThickness +"px";
 
-	if(deltaYArrow>20){
-		this.html.be.svg.style.height=deltaYArrow + "px";
-		this.html.be.svg.style.top=-1*deltaYArrow + "px";
-	}else if(deltaYArrow<0){
-		this.html.be.svg.style.top=0 + "px";
-		this.html.be.svg.style.height=(Math.abs(deltaYArrow)+20) + "px";
-	}else{
-		this.html.be.svg.style.height=(20) + "px";
-		this.html.be.svg.style.top=-1*deltaYArrow + "px";
-	}
+// 	if(deltaYArrow>20){
+// 		this.html.be.svg.style.height=deltaYArrow + "px";
+// 		this.html.be.svg.style.top=-1*deltaYArrow + "px";
+// 	}else if(deltaYArrow<0){
+// 		this.html.be.svg.style.top=0 + "px";
+// 		this.html.be.svg.style.height=(Math.abs(deltaYArrow)+20) + "px";
+// 	}else{
+// 		this.html.be.svg.style.height=(20) + "px";
+// 		this.html.be.svg.style.top=-1*deltaYArrow + "px";
+// 	}
 
-	this.html.be.svg.style.left=-1*(deltaXArrow+strokeThickness/2) + "px";
+// 	this.html.be.svg.style.left=-1*(deltaXArrow+strokeThickness/2) + "px";
 
 
-	if(this.tail instanceof Scene || this.head instanceof Scene){
-		this.html.be.svg.innerHTML=actionArrowSVG(deltaXArrow,deltaYArrow,strokeThickness,"self-driven");
-	}else{
-		if(this.trigger=="click"){
-			this.html.be.svg.innerHTML=actionSVG(deltaXArrow,100,strokeThickness,this.trigger) +
-			getArrowVerticalExtenderSVG(deltaXArrow,deltaYArrow,strokeThickness,this.trigger) ;
-			//this.html.be.svg.innerHTML=getArrowSVG(deltaXArrow,deltaYArrow,strokeThickness,this.type) ;
-		}else{
-			this.html.be.svg.innerHTML=actionArrowSVG(deltaXArrow,deltaYArrow,strokeThickness,this.trigger) ;
-		}
-	}
+// 	if(this.tail instanceof Scene || this.head instanceof Scene){
+// 		this.html.be.svg.innerHTML=actionArrowSVG(deltaXArrow,deltaYArrow,strokeThickness,"self-driven");
+// 	}else{
+// 		if(this.trigger=="click"){
+// 			this.html.be.svg.innerHTML=actionSVG(deltaXArrow,100,strokeThickness,this.trigger) +
+// 			getArrowVerticalExtenderSVG(deltaXArrow,deltaYArrow,strokeThickness,this.trigger) ;
+// 			//this.html.be.svg.innerHTML=getArrowSVG(deltaXArrow,deltaYArrow,strokeThickness,this.type) ;
+// 		}else{
+// 			this.html.be.svg.innerHTML=actionArrowSVG(deltaXArrow,deltaYArrow,strokeThickness,this.trigger) ;
+// 		}
+// 	}
 	
 	
-}
+// }
 
-Action.prototype.deltaActionDelay=function(deltaY_){
-	//console.log(height_)
-	// this.html.be.height=this.html.be.height+movementY_;
-	this.delay=this.delay+deltaY_/100;
+// Action.prototype.deltaActionDelay=function(deltaY_){
+// 	//console.log(height_)
+// 	// this.html.be.height=this.html.be.height+movementY_;
+// 	this.delay=this.delay+deltaY_/100;
 
-	this.setWidthHeight();
-
-
-	this.setPosChain();
-
-	//this.updateArrow(100,100)
-
-	this.updateArrow(parseInt(this.html.be.width), parseInt(this.html.be.height))
+// 	this.setWidthHeight();
 
 
-}
+// 	this.setPosChain();
+
+// 	//this.updateArrow(100,100)
+
+// 	this.updateArrow(parseInt(this.html.be.width), parseInt(this.html.be.height))
+
+
+// }
 
 
 // Action.prototype.changeActionDelay=function(movementY_){

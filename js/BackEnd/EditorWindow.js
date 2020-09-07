@@ -27,13 +27,21 @@ class EditorWindow{
 
 		this.html.style["background-color"] = "#fff";
 
+		this.html.addEventListener("click", function(e){
+			// console.log(e.target)
+			if(e.target==this.html && !shiftPressed){
+				clearSelectedNodes();
+			}
+		}.bind(this));
+
 
 
 
 	}
 
 	display(){
-		document.getElementById('content').appendChild(this.html)
+		//document.getElementById('content').appendChild(this.html)
+		document.body.appendChild(this.html)
 	}
 	
 

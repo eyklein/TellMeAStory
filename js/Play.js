@@ -10,35 +10,7 @@ var absoluteLocation="";
 
 
 
-document.onkeydown = function(e) {
-    switch (e.keyCode) {
-        case 37:
-            break;
-        case 38:// up arrow 
-            currentStory.togglePlayPause();
-            break;
-        case 39:
-        	currentStory.skip();
-            break;
-        case 40:// down arrow 
-            currentStory.togglePlayPause();
-            break;
-        case 83://'s'
-            currentStory.skip();
-            break;
-        case 32://' ' - space bar
-            currentStory.togglePlayPause();
-            break;
-        case 81:
-        	currentStory.printActiveDelays();
-        	break;
-        case 66:
-        	currentStory.backEnd.display();
-        	break;
-        default:
-    		console.log(e.keyCode)
-    }
-};
+
 
 window.AudioContext = window.AudioContext||window.webkitAudioContext;
 
@@ -118,14 +90,6 @@ class Story{
 	  					this.scenesLib[sceneID].contentsLib[contentID].html = this.scenesLib["uni"].contentsLib[contentID].html
 	  					//replace effects
 	  					this.scenesLib[sceneID].contentsLib[contentID].effects = this.scenesLib["uni"].contentsLib[contentID].effects
-
-
-	  					//add ass scene to this content
-	  					//this.scenesLib[sceneID].contentsLib[contentID].addParentScene(this.scenesLib[sceneID])
-	  					
-	  					//add universal content to each scene
-	  					this.scenesLib[sceneID].contentNodes[contentID]={}
-	  					//this.scenesLib[sceneID].contentNodes[contentID].node = this.scenesLib[sceneID].getContentNode(contentID);
 	  				}
 	  			}
 	  		}
@@ -171,28 +135,17 @@ class Story{
 	  		this.scenesLib[id].setBackEndActionAndContentPositions();
 	  	}
 
-
-
-
-	  	//setHight of actions
 	  	// for(let i=0; i<scenesData_.length;i++){//think about the order of loading. right now to goes through scene by scene maybe load all scens first and then do content
-	  		
-	  	// 	this.scenesLib[scenesData_[i].id].setHightActions()
+	  	// 	for(let id in this.scenesLib[scenesData_[i].id].contentsLib){
+	  	// 		if(this.scenesLib[scenesData_[i].id].contentsLib[id] instanceof AudioContent){
+		  // 			console.log(this.scenesLib[scenesData_[i].id].contentsLib[id].effects)
+		  // 			console.log(this.scenesLib[scenesData_[i].id].contentsLib[id].effects.general.clipping)
+		  // 		}
+	  	// 	}
+
 	  	// }
 
-	  	// //setYof actions and content nodes
-	  	// for(let i=0; i<scenesData_.length;i++){//think about the order of loading. right now to goes through scene by scene maybe load all scens first and then do content
-	  		
-	  	// 	this.scenesLib[scenesData_[i].id].setPositionActions()
-	  	// }
 
-
-	  	// for(let id in this.scenesLib){//think about the order of loading. right now to goes through scene by scene maybe load all scens first and then do content
-	  		
-	  	// 	this.scenesLib[id].setBackEndContentPositions();
-	  	// }
-	  	// this.setContentIndexNumbers();
-	  	// this.setContentFullWidth()
 
 
 
@@ -574,11 +527,11 @@ class Story{
 			this.scenesLib[sceneKey].createBackEndHTML();//scene will cycle through each content (and action?) and create a div/span for each
 		}
 	}
-	createProperties(){
-		for(let sceneKey in this.scenesLib){//this will create the divs for all the scenes. they could be created on each scene load
-			this.scenesLib[sceneKey].createProperties();//scene will cycle through each content (and action?) and create a div/span for each
-		}
-	}
+	// createProperties(){
+	// 	for(let sceneKey in this.scenesLib){//this will create the divs for all the scenes. they could be created on each scene load
+	// 		this.scenesLib[sceneKey].createProperties();//scene will cycle through each content (and action?) and create a div/span for each
+	// 	}
+	// }
 	applyProperties(){
 		for(let sceneKey in this.scenesLib){//this will create the divs for all the scenes. they could be created on each scene load
 			this.scenesLib[sceneKey].applyProperties();//scene will cycle through each content (and action?) and create a div/span for each

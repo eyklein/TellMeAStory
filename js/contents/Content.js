@@ -62,7 +62,7 @@ class Content{
 		// 	this.actionsOut.append(tailAction_)
 		// }
 
-		this.cNode=new ContentNode(this,this.parentScene);
+		this.cNode=new ContentNode(this);//,this.parentScene);
 	}
 
 	getFirstAction(){

@@ -13,11 +13,15 @@ class Scene{
 		this.contentsIndexes={};
 
 		this.node=new SceneNode(this);
-		this.contentNodes={}
+		//this.contentNodes={}
 		
-		this.baseNodes=[]; //contentNodes
-		this.rootEndNodes=[];
-		this.exitNodes=[];
+		//this.baseNodes=[]; //contentNodes
+		//this.rootEndNodes=[];
+		// this.exitNodes=[];
+
+		this.sudoContent={};
+		this.sudoContent.in;
+		this.sudoContent.out={};
 
 		this.backEnd={}
 		this.backEnd.contentClusters={};
@@ -39,26 +43,27 @@ class Scene{
 			//console.log(this.id)
 			for(let content of this.sceneData.contents){
 				this.contentsLib[content.id] = this.createContent(content);
-
-				// if(content.content.type=="audio"){
-				// 	this.contentsLib[content.id]=new AudioContent(content,this)
-				// }else if(content.content.type=="text"){
-				// 	this.contentsLib[content.id]=new TextContent(content,this)
-				// }else if(content.content.type=="img"){
-				// 	this.contentsLib[content.id]=new ImageContent(content,this)
-				// }else{
-				// 	this.contentsLib[content.id]=new Content(content,this)
-				// }
-
-				//make a node
-				//console.log(content.id)
-
-
-
-				// console.log("Nodes added")
-				// this.contentNodes[content.id]={};
-				// this.contentNodes[content.id].node = this.getContentNode(content.id)
 			}
+
+			//add sudo content that starts the scene
+			this.sudoContent.in = new SudoContent(null, this, "in");
+
+			//out sudo content will be added when looking at the actions
+
+			//add sudo content that ends the scene
+			// for(let i in this.node.children){
+			// 	// stored in the current display scene
+			// 	// console.log(this.node.children[i])
+			// 	// this.sudoContent.out[this.node.children[i].scene.id]=new SudoContent(null, this.node.children[i].scene)
+
+			// 	//or stored in the coresponding scene
+			// }
+			
+
+
+
+			
+
 		}
 	}
 
@@ -84,14 +89,25 @@ class Scene{
 	addActions(sceneJson_){
 		if(this.sceneData.contents){
 			for(let action of this.sceneData.actions){
+				let actionIDName;
 				if(this.actionsLib[action.id]==undefined){
+					actionIDName=action.id;
 					this.actionsLib[action.id]=new Action(action,this)
 				}else{
 					let namingOffset=1;
 					while(this.actionsLib[action.id+namingOffset]!=undefined){
 						namingOffset++;
 					}
+
+					actionIDName=action.id+namingOffset;
 					this.actionsLib[action.id+namingOffset]=new Action(action,this)
+				}
+
+
+				//add sudo content of actions out
+				if(this.actionsLib[actionIDName].head instanceof Scene){
+					this.sudoContent.out[this.actionsLib[actionIDName].head.id]=new SudoContent(null ,this.actionsLib[actionIDName].head, "out");
+					this.sudoContent.out[this.actionsLib[actionIDName].head.id].cNode.createHTML();
 				}
 			}
 		}
@@ -211,26 +227,42 @@ class Scene{
 		
 
 		
-		console.log("index content through actions");
-		for(let id in this.actionsOut){
-			// this.actionsOut[id].addIndex(0);
-			this.actionsOut[id].setIndex(0);
-		}
+		// console.log("index content through actions");
+		// for(let id in this.actionsOut){
+		// 	// this.actionsOut[id].addIndex(0);
+		// 	this.actionsOut[id].setIndex(0);
+		// }
 
-		console.log("set Action Heights")
+		// console.log("set Action Heights")
 		for(let id in this.actionsLib){
 			this.actionsLib[id].setSize();
 		}
 
-		console.log("position content and actions through actions");
-		for(let id in this.actionsOut){
-			// this.actionsOut[id].addIndex(0);
-			this.actionsOut[id].setPosition(50,50);
-		}
+		// console.log("position content and actions through actions");
 
-		console.log("create the content nodes HTML")
+		console.log("IN ------------ " + this.sudoContent.in.parentScene.id)
+		this.sudoContent.in.cNode.setYPosition(50, null); //set the position of a sudo node that is this scenes display sudo node
+
+		// for(let i in this.actionsOut){
+		// 	// this.actionsOut[id].addIndex(0);
+		// 	//let indexOut=this.actionsOut.indexOf(this.actionsOut[id])
+
+		// 	this.actionsOut[i].setYPosition(50);
+		// }
+
+		
+
+		// console.log("create the content nodes HTML")
 		for(let id in this.contentsLib){
 			this.contentsLib[id].cNode.createHTML();
+		}
+
+
+		this.sudoContent.in.cNode.createHTML();
+
+
+		for(let id in this.sudoContent.out){
+			this.sudoContent.out[id].cNode.createHTML();
 		}
 
 
@@ -261,15 +293,15 @@ class Scene{
 	}
 
 
-	setContentIndexNumbers(){
+	// setContentIndexNumbers(){
 
 
-		for(let i in this.baseNodes){
-			this.baseNodes[i].assignDescendentsIndexes(0);
-		}
+	// 	// for(let i in this.baseNodes){
+	// 	// 	this.baseNodes[i].assignDescendentsIndexes(0);
+	// 	// }
 
 		
-	}
+	// }
 
 	setContentFullWidth(){//sets the width the the children nodes will take up
 		for(let i in this.rootEndNodes){

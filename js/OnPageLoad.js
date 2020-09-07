@@ -2,12 +2,21 @@ var pageLoaded=false;
 
 var mouseDown = false;
 
+var mouseDownTime;
+
 //var backEnd;
 
 
 
 
 var loadScreen
+
+
+window.addEventListener("mousedown", function(e){
+	// console.log("down")
+	// console.log(e)
+	mouseDownTime=e.timeStamp;
+});
 
 window.onload=function(){
 	// currentStory.windowManager.addFullScreen();
