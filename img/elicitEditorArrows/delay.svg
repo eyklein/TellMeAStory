@@ -1,0 +1,7 @@
+<svg version="1.1"
+     baseProfile="full"
+     width="300" height="200"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <path class="_arrow svg_arrow" d="m 0 10  l 40 0 l 40 0 l-10 -10" stroke="green" stroke-width="2px" fill="none"/>
+</svg>

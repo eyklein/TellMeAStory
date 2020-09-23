@@ -8,6 +8,7 @@ class ImageContent extends Content{
 		//this.createNode();
 
 		this.type="image";
+		this.cNode=new ContentNode(this);
 
 	}
 
@@ -36,6 +37,7 @@ class ImageContent extends Content{
 
 	createEffects(){
 		//console.log("createEffects **********!!!!!**")
+		//console.log("createEffects image");
 		for(let effect in this.JSONData.effects.general){
 			this.effects.general[effect] = this.getEffect(effect,this.JSONData.effects.general[effect])
 		}
@@ -56,9 +58,9 @@ class ImageContent extends Content{
 		for(let effect in this.JSONData.effects.hover){
 			this.effects.hover[effect]=this.getEffect(effect, this.JSONData.effects.hover[effect]);
 		}
-		this.effects.mousePressed={}
-		for(let effect in this.JSONData.effects.mousePressed){
-			this.effects.mousePressed[effect]=this.getEffect(effect, this.JSONData.effects.mousePressed[effect]);
+		this.effects.pressed={}
+		for(let effect in this.JSONData.effects.pressed){
+			this.effects.pressed[effect]=this.getEffect(effect, this.JSONData.effects.pressed[effect]);
 		}
 		this.effects.entrance={}
 		for(let effect in this.JSONData.effects.entrance){
@@ -68,12 +70,15 @@ class ImageContent extends Content{
 		for(let effect in this.JSONData.effects.exit){
 			this.effects.exit[effect]=this.getEffect(effect, this.JSONData.effects.exit[effect]);
 		}
+
+		this.cNode.update();
 	
 	}
 
 	//this.frontEndLoaded=false;
 
 	createFrontEndHTML(){
+		super.createFrontEndHTML();
 		if(!this.html.fe.created){
 				this.html.fe.created=true;
 				this.frontEndCreated=true;
@@ -94,6 +99,8 @@ class ImageContent extends Content{
 		
 		
 				this.html.fe.src=absoluteLocation + this.content.value;
+
+				// super.addEffectEditors();
 				
 				//this.html.fe.classList.add('icon-img')
 		

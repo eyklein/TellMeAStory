@@ -1,11 +1,12 @@
 
+var log=false;
 class ContentNode{ //not to be confused with nodejs
 	constructor(content_){
 		//this.enclosingStructure;//this is the story or scene depending on what this node if for
 		this.isBase=false;
 		this.content=content_;
 
-		this.height=30;
+		this.height=10;
 		this.width=90;
 		// this.left;
 		// this.top;
@@ -24,16 +25,38 @@ class ContentNode{ //not to be confused with nodejs
 
 		this.xPos=50;
 
+		this.editor=new ContentEditorElement(this, currentStory.backEnd);
+	}
 
+	addPosition(backendData_){
+		if(backendData_ != undefined){
+			if(backendData_.pos != undefined && backendData_.pos.x != undefined){
+				this.xPos = backendData_.pos.x;
+			}
+			//console.log(this.content.parentScene.id)
+			if(backendData_[this.content.parentScene.id] != undefined){
+				//console.log(this.content.id)
+				if(backendData_[this.content.parentScene.id].pos != undefined && backendData_[this.content.parentScene.id].pos.x != undefined){
+					
+					this.xPos = backendData_[this.content.parentScene.id].pos.x;
+					
+				}
+			}	
+		}
 
-
-
+		if(this.content instanceof SudoContent){
+			if(this.order != undefined){
+				this.xPos = 50 + this.order*100
+			}
+		}
 	}
 	createPositions(){//create the positions for all the inputs (these show up as bars)
 		for(let elicityType in this.positions){
 			for(let i in this.positions[elicityType]){
 
 				this.positions[elicityType][i].creatHTML();//=//new ElicitNode(this, elicityType);
+				this.positions[elicityType][i].editor.addToContentEditor()
+				//this.positions[elicityType][i].createEditor();
 
 				// this.positions[elicityType][i].html=document.createElement("div");
 				// this.positions[elicityType][i].html.style.width=this.width+"px";
@@ -64,22 +87,92 @@ class ContentNode{ //not to be confused with nodejs
 
 			}
 		}
-
-		// let sumXPositions=0;
-		// let numbPositions=0;
-
-		// for(let elicityType in this.positions){
-		// 	for(let i in this.positions[elicityType]){
-		// 		sumXPositions+=this.positions[elicityType][i].x;
-		// 		numbPositions++;
-
-		// 	}
-		// }
-		// this.avrageX=sumXPositions/numbPositions;
-		
 	}
 
-	getMinPosition(){
+	
+
+	toggleSelection(){
+		if(this.selected){
+			this.deselect();
+		}else{
+			this.select();
+		}
+	}
+
+	select(){
+		// console.log(this)
+
+		this.editor.display();
+
+		this.selected=true;
+		this.html.info.classList.add("selected");
+		if(selectedNodes.indexOf(this)==-1){
+			selectedNodes.push(this);
+		}
+
+		for(let id in this.positions){
+			for(let i in this.positions[id]){
+				this.positions[id][i].selectArrows()
+			}
+		}
+
+		
+		
+	}
+	deselect(){
+		this.editor.hide();
+
+		this.selected=false;
+		this.html.info.classList.remove("selected");
+		if(selectedNodes.indexOf(this)==-1){
+			//selectedNodes.push(selected);
+		}else{
+			selectedNodes.splice(selectedNodes.indexOf(this), 1);
+		}
+
+		for(let id in this.positions){
+			for(let i in this.positions[id]){
+				this.positions[id][i].deselectArrows()
+			}
+		}
+	}
+
+	shiftX(deltaX_){
+
+		this.xPos = (this.html.info.offsetLeft + deltaX_)
+
+		this.html.info.style.left = this.xPos + "px";
+
+		for(let elicityType in this.positions){
+			for(let i in this.positions[elicityType]){
+				this.positions[elicityType][i].updateX();
+				// this.positions[elicityType][i].posIn=
+				// this.positions[elicityType][i].html.style.left = (this.positions[elicityType][i].html.offsetLeft + deltaX_) + "px";
+			}
+		}
+	}
+
+
+	getMaxYPos(){
+		let maxPos = {};
+
+		for(let elicityType in this.positions){
+			for(let i in this.positions[elicityType]){
+				// console.log(this.positions[elicityType][i].posOut.y)
+				if(maxPos.y==undefined || maxPos.y<this.positions[elicityType][i].posOut.y){
+					maxPos.y = this.positions[elicityType][i].posOut.y;
+
+				}
+
+			}
+		}
+
+		
+
+		return maxPos.y;
+	}
+
+	getMinYPos(){
 		let minPos = {}
 
 		for(let elicityType in this.positions){
@@ -96,81 +189,76 @@ class ContentNode{ //not to be confused with nodejs
 		// console.log(this.positions)
 		// console.log("minPos")
 		// console.log(minPos)
-		return minPos;
-	}
-
-	toggleSelection(){
-		if(this.selected){
-			this.deselect();
-		}else{
-			this.select();
-		}
-	}
-
-	select(){
-		console.log(this)
-		this.selected=true;
-		this.html.info.classList.add("selected");
-		if(selectedNodes.indexOf(this)==-1){
-			selectedNodes.push(this);
-		}
-		
-	}
-	deselect(){
-		this.selected=false;
-		this.html.info.classList.remove("selected");
-		if(selectedNodes.indexOf(this)==-1){
-			//selectedNodes.push(selected);
-		}else{
-			selectedNodes.splice(selectedNodes.indexOf(this), 1);
-		}
-	}
-
-	shiftX(deltaX_){
-		this.html.info.style.left = (this.html.info.offsetLeft + deltaX_) + "px";
-
-		for(let elicityType in this.positions){
-			for(let i in this.positions[elicityType]){
-				this.positions[elicityType][i].shiftX(deltaX_);
-				// this.positions[elicityType][i].posIn=
-				// this.positions[elicityType][i].html.style.left = (this.positions[elicityType][i].html.offsetLeft + deltaX_) + "px";
-			}
-		}
-	}
-
-	getMaxPosition(){
-		let maxPos = {}
-
-		for(let elicityType in this.positions){
-			for(let i in this.positions[elicityType]){
-				if(maxPos.x==undefined || maxPos.x<this.positions[elicityType][i].x+this.width){
-					maxPos.x = this.positions[elicityType][i].x+this.width;
-				}
-				if(maxPos.y==undefined || maxPos.y<this.positions[elicityType][i].y){
-					maxPos.y = this.positions[elicityType][i].y;
-				}
-
-			}
-		}
-		// console.log("maxPos")
-		// console.log(maxPos)
-		return maxPos;
+		return minPos.y;
 	}
 
 	update(){
 
 		//console.log(this.content instanceof AudioContent)
+		//console.log("UPDATE!!!!!@")
 		if(this.content instanceof AudioContent){
-			//console.log(this.content)
-			this.html.info.style.height = ("300")+ "px";
+			// console.log(this.content.effects.general.clipping)
+			this.html.info.style.height = this.content.effects.general.clipping.vareables.duration*10+ "px";
+
+			
+
+			// console.log(this.content);
+			// console.log(this.content.audioDisplay)
+			// console.log(audioCanvase)
+
+			// let audioCanvase = this.content.audioDisplay.getCanvaseWrap()
+
+			// this.html.info.append(audioCanvase)
+			
 
 			//this.html.info.style.height="1000px"
 			// console.log(this.content.uniqueIdentifier)
 			// console.log(this.content.duration)
 			// console.log("this.content.duration*timeScale   " + this.content.duration+"*"+timeScale +" = "+this.content.duration*timeScale)
+		}else if(this.content instanceof ImageContent){
+			if(this.positions['unclickable'] != undefined && this.positions['unclickable'].length>=1){ //this is just for the activation but not set yet!!!!!
+				this.html.info.style["background-image"] = "linear-gradient(to bottom, rgba(255,165,0,0), rgba(255,165,0,1))";
+				this.html.info.style["background-color"] = "white";
+				// this.html.info.style["padding-top"] = "40px";
+				this.html.info.style["font-size"] = "10px";
+				this.html.info.style["margin-top"] = "-50px";
+				//console.log(this.content)
+				
+				this.html.image=document.createElement("img");
+				this.html.info.append(this.html.image)
+				this.html.image.style.height="50px";
+				this.html.image.style["margin-top"]="-15px";
+				this.html.image.src=this.content.content.value;
+				// this.html.info.style["background-image"] = "url(" + this.content.content.value + " )";
+
+			}else if(false){
+
+			}else if(this.positions['clickable'] != undefined && this.positions['clickable'].length>=1){
+				this.html.info.style["background-image"] = "linear-gradient(to bottom, rgba(255,165,0,1), rgba(255,165,0,0))";
+				this.html.info.style["background-color"] = "white";
+				this.html.info.style["padding-bottom"] = "40px";
+				this.html.info.style["font-size"] = "10px";
+				// this.html.info.style["margin-top"] = "-50px";
+			}
 		}else{
-			this.html.info.style.height = Math.max(100,(maxPos.y - minPos.y))+ "px";
+			let iconHeight=this.getMaxYPos() - this.getMinYPos();
+			// if(iconHeight>0){
+				this.html.info.style.height =  iconHeight + "px";
+			// }else{
+				//this.html.info.style.height =  100 + "px";
+				// this.html.info.style["background-image"] = "linear-gradient(to bottom, rgba(0,0,255,0), rgba(0,0,255,1), rgba(0,0,255,0))";
+				// this.html.info.style["background-image"] = "linear-gradient(to bottom, rgba(0,0,255,0), rgba(0,0,255,1))";
+				// this.html.info.style["background-color"] = "white";
+				// this.html.info.style["padding-top"] = "40px";
+				// this.html.info.style["font-size"] = "10px";
+				// this.html.info.style["margin-top"] = "-50px";
+
+			// }
+			
 		}
+
+		this.updatePositions()
+		//this.shiftX(10);
 
 	}
 
@@ -185,14 +273,6 @@ class ContentNode{ //not to be confused with nodejs
 		this.html.container.style.display="inline-block;"
 		this.html.container.style.position="absolute";
 		this.html.container.classList.add("container");
-		//console.log(this.content)
-		// if(this.content instanceof SudoContent){
-		// 	this.html.container.classList.add("sudo-container");
-		// 	this.html.container.style.width="100px"
-		// 	this.html.container.style.height="100px"
-		// 	this.html.container.style["background-color"]="red"
-		// 	this.html.container.style["z-index"]=10000;
-		// }
 
 		
 
@@ -200,51 +280,27 @@ class ContentNode{ //not to be confused with nodejs
 
 		this.html.info=document.createElement("div");
 		this.html.info.classList.add("info");
-		
-		this.html.info.style['color']="white";
-		this.html.info.style['font-size']="10px";
-		
-		this.html.info.style.position="absolute";
-		this.html.info.style.opacity=.8;
-		this.html.info.style['background-color']="gray";
+		this.html.info.classList.add("info-"+this.content.type);
 
-		let minPos = this.getMinPosition();
-		let maxPos = this.getMaxPosition();
+	
+		
+		
+
+		let minYPos = this.getMinYPos();
 
 		this.html.info.style.left=this.xPos + "px";
-		this.html.info.style.top=minPos.y+"px";
+		this.html.info.style.top=minYPos+"px";
 
 
-		this.html.info.style.width=this.width+"px"//(maxPos.x - minPos.x) + "px";
-
-		
-		
+		this.html.info.style.width=this.width+"px"
 
 		this.html.container.appendChild(this.html.info);
 	
-
-
-		this.html.info.style.opacity=.8;
-
-
-
-		
-
-		//console.log(this.content)
-
-		
-		this.html.info.innerHTML= this.content.name
-
-		//this.html.container.style.top = Math.random()*300+"px";
-		//console.log(this.content.id)
+		this.html.info.innerHTML= this.content.name;
 		
 
 		if(this.content.actionsIn.length>0 || this.content instanceof SudoContent){ //this content is used and not just part of universal
-			
 			this.html.container.style.display = "block";
-			//this.html.container.style.left = this.left + "px";
-			//console.log((this.content.actionsIn[0].pos.y   + " --------- " + this.content.actionsIn[0].height))
-			//this.html.container.style.top=this.content.getFirstAction().getHeadPosition().y+ "px";
 		}else{//hide
 			this.html.container.style.display = "none";
 		}
@@ -274,44 +330,10 @@ class ContentNode{ //not to be confused with nodejs
 		}.bind(this));
 
 		dragElement(this.html.info)
-
-
-		
-
-		// if(this.content.parentScene.id=="SC-BA" && this.content.actionsIn.length>0){
-		// 	console.log("--------------------------------------------------------")
-		// 	console.log(this)
-		// 	console.log(this.content.pos)
-
-		// }
 	}
 
-	// addIndex(index_){
-	// 	if(this.indices.indexOf(index_) == -1){
-	// 		this.indices.push(index_);
-	// 		for(let i in this.content.actionsOut){
-	// 			this.content.actionsOut[i].addIndex(index_);
-	// 		}
-			
-	// 	}
-	// }
 
-	// setIndex(index_){
-
-	// 	// console.log("Set index " + this.content.parentScene.id + this.content.id)
-
-	// 	if(this.index==undefined){
-	// 		this.index = index_;
-	// 		this.left=this.index*100
-	// 		for(let i in this.content.actionsOut){
-	// 			this.content.actionsOut[i].setIndex(index_);
-	// 		}
-			
-	// 	}
-	// }
-
-
-	setYPosition(topPos_, action_){//elicit_){
+	setYPosition(topPos_, action_, setTime_){//action_ is the action into the content node
 
 		if(this.content instanceof SudoContent){//action_ == null){//for sudo nodes
 			if(this.positions["display"]==undefined){
@@ -329,14 +351,17 @@ class ContentNode{ //not to be confused with nodejs
 				for(let i in this.content.parentScene.actionsOut){ //for sudo content actions out of scene
 			
 					newElicitNode.actionsOut.push(this.content.parentScene.actionsOut[i]);
-					this.content.parentScene.actionsOut[i].setYPosition(topPos_);
+					this.content.parentScene.actionsOut[i].setYPosition(topPos_, setTime_);
 	
 					this.content.parentScene.actionsOut[i].tailElicitNode=newElicitNode;
 				}
 			}
 
 			else if(this.content.inOut=="out"){
+
+				
 				let newElicitNode = new ElicitNode(this, action_, topPos_)
+				// console.log(newElicitNode)
 				this.positions["display"].push(newElicitNode);
 			}
 
@@ -346,6 +371,8 @@ class ContentNode{ //not to be confused with nodejs
 				this.positions[action_.elicit]=[];
 			}
 
+			//create the "line" or "elicitNode" that action_ is pionting to
+			// console.log("norm " + this.content.id)
 			let newElicitNode = new ElicitNode(this, action_, topPos_)
 			this.positions[action_.elicit].push(newElicitNode);
 
@@ -353,103 +380,53 @@ class ContentNode{ //not to be confused with nodejs
 
 				//if the action in was clickable make all the click actions out
 				if(action_.elicit == "clickable"){
-					if(this.content.actionsOut[i].trigger="click"){
+					//console.log(this.content.actionsOut[i].trigger="click")
+					if(this.content.actionsOut[i].trigger=="click"){
+						if(this.content.parentScene.id=="SC" && this.content.name == "No! No! Do the voices"){
+							log=true;
+						}else{
+							log=false;
+						}
+						
+
 						newElicitNode.actionsOut.push(this.content.actionsOut[i]);
-						this.content.actionsOut[i].setYPosition(topPos_);
+						
 
 						this.content.actionsOut[i].tailElicitNode=newElicitNode;
+
+						this.content.actionsOut[i].setYPosition(topPos_);
 					}
+
 
 				}else if(action_.elicit == "display"){//if the action in was display make all the time trigger actions out
-					if(this.content.actionsOut[i].trigger="time"){
+					if(this.content.actionsOut[i].trigger=="time"){
 						newElicitNode.actionsOut.push(this.content.actionsOut[i]);
 						this.content.actionsOut[i].setYPosition(topPos_);
 
 						this.content.actionsOut[i].tailElicitNode=newElicitNode;
+						this.content.actionsOut[i].setYPosition(topPos_);
 					}
 				}
-
-
-				this.content.actionsOut[i].setYPosition(topPos_);
-
-			
-			
 			}
-
-		}
-		
-
-		
+		}	
 	}
+	updateYPosition(setTime_){//action_ is the action into the content node
+
+		for(let id in this.positions){
+			for(let i in this.positions[id]){
+				this.positions[id][i].updateYPos();
+
+				this.positions[id][i].updateActionsOut(setTime_);
+				// for(let j in this.positions[id][i].actionsOut){
+				// 	this.positions[id][i].actionsOut.updateYPosition()
+				// }
+			}
+		}
+
+		this.html.info.style.top=this.getMinYPos()+"px";
+		
 
 
 
-	// assignDescendentsIndexes(index_,primaryParent_){
-
-
-
-	// 	if(this.index == undefined){ //if not already asigned an index
-	// 		this.index=index_;
-	// 		this.primaryParent=primaryParent_;
-
-	// 		let rootEnd=true;
-	// 		for(let i in this.children){
-
-	// 			if(this.children[i].index==undefined){
-	// 				// console.log(this)
-	// 				// console.log(this.children[i])
-	// 				this.children[i].assignDescendentsIndexes(index_+1,this)
-	// 				rootEnd=false;
-	// 			}else{
-	// 				if(this.children[i].index>=this.index){
-	// 					rootEnd=false;
-	// 				}
-	// 			}
-	// 		}
-
-	// 		if(rootEnd){ //this.children.length=0 ||   if any of the children have a hight index
-	// 			this.isRootEnd=true;
-	// 			this.enclosingStructure.rootEndNodes.push(this);
-
-	// 			console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-	// 		}else{
-	// 			this.isRootEnd=false;
-	// 		}
-	// 	}
-	// }
-
-
-
-	// assignDescendentsIndexes(index_,primaryParent_){
-
-
-	// 	if(this.index == undefined){ //if not already asigned an index
-	// 		this.index=index_;
-	// 		this.primaryParent=primaryParent_;
-
-	// 		let rootEnd=true;
-	// 		for(let i in this.children){
-
-	// 			if(this.children[i].index==undefined){
-	// 				this.children[i].assignDescendentsIndexes(index_+1,this)
-	// 				rootEnd=false;
-	// 			}else{
-	// 				if(this.children[i].index>=this.index){
-	// 					rootEnd=false;
-	// 				}
-	// 			}
-	// 		}
-
-	// 		if(rootEnd){ //this.children.length=0 ||   if any of the children have a hight index
-	// 			this.isRootEnd=true;
-	// 			this.enclosingStructure.rootEndNodes.push(this);
-	// 		}else{
-	// 			this.isRootEnd=false;
-	// 		}
-	// 	}
-	// }
-
-
-
-
+	}
 }

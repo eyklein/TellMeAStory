@@ -98,10 +98,18 @@ class LoadScreen{
 		document.getElementById('content').appendChild(this.html.loadDisplay);
 	}
 	hide(){
+
 		clearInterval(this.updateInterval);
-		console.log(currentStory.windowManager.html.content)
-		console.log(this.html.loadDisplay)
-		console.log(this.html.loadDisplay.parentNode)
+
+		//this.draw();
+		// for(let id in currentStory.scenesLib){
+		// 	currentStory.scenesLib[id].updateContentSize();
+	 //  	}
+
+
+		// console.log(currentStory.windowManager.html.content)
+		// console.log(this.html.loadDisplay)
+		// console.log(this.html.loadDisplay.parentNode)
 
 		//this.html.loadDisplay.parentNode.removeChild(this.html.loadDisplay);
 
@@ -203,6 +211,10 @@ class LoadScreen{
 
 	
 	draw(){
+
+		//console.log("d")
+
+
 		
 		// let speed = (this.loaded-this.easedLoaded)*this.easing
 		// this.easedLoaded = speed + this.easedLoaded;
@@ -222,6 +234,12 @@ class LoadScreen{
 			//console.log(faviconLoadedAddress)
 			this.favicon.href = faviconLoadedAddress;
 		}
+
+
+		//???
+		// for(let id in currentStory.scenesLib){
+		// 	currentStory.scenesLib[id].updateContentSize();
+	 //  	}
 		
 
 

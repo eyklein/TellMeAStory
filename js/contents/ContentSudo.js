@@ -1,5 +1,5 @@
 class SudoContent extends Content{
-	constructor(null_,parentScene_, inOut_){ //,url_, content_, propertiesJSON_
+	constructor(null_,parentScene_, inOut_, xPos_){ //,url_, content_, propertiesJSON_
 
 
 		let contentJson_ = {
@@ -21,12 +21,15 @@ class SudoContent extends Content{
         }
 		super(contentJson_,parentScene_)
 		this.inOut=inOut_;
-		this.type="Sudo";
+		this.type="sudo";
 		this.htmlParent={};
 
-		this.name=this.content.value;
+		this.name=this.parentScene.id;
+
+		
+		this.cNode=new ContentNode(this);
+		this.cNode.xPos = xPos_;
 		//this.createNode();
-		this.type="text";
 	}
 
 	createFrontEndHTML(){
@@ -35,6 +38,8 @@ class SudoContent extends Content{
 
 
 	createEffects(){
+
+		this.cNode.update();
 		
 	
 	}

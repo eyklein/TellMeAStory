@@ -82,10 +82,8 @@ class Story{
 	  			if(sceneID != "uni"){
 	  				for(let contentID in this.scenesLib["uni"].contentsLib){
 
-
 	  					this.scenesLib[sceneID].contentsLib[contentID] = this.scenesLib[sceneID].createContent(this.scenesLib["uni"].contentsLib[contentID].JSONData); //new ImageContent(this.scenesLib["uni"].contentsLib[contentID].JSONData,this.scenesLib[sceneID])
 	  					
-
 	  					//replace (unify) html
 	  					this.scenesLib[sceneID].contentsLib[contentID].html = this.scenesLib["uni"].contentsLib[contentID].html
 	  					//replace effects
@@ -94,6 +92,20 @@ class Story{
 	  			}
 	  		}
 	  	}
+
+	  	//position the back end of every cNode
+	  	for(let sceneID in this.scenesLib){//think about the order of loading. right now to goes through scene by scene maybe load all scens first and then do content
+	  		for(let contentID in this.scenesLib[sceneID].contentsLib){
+	  			this.scenesLib[sceneID].contentsLib[contentID].addNodePosition()
+	  		}
+	  		this.scenesLib[sceneID].sudoContent.in.addNodePosition()
+	  		for(let id in this.scenesLib[sceneID].sudoContent.out){
+	  			this.scenesLib[sceneID].sudoContent.out[id].addNodePosition();
+	  		}
+	  		//this.scenesLib[sceneID].addContents(scenesData_[i]);
+	  	}
+
+	  	// this.cNode.addPosition(this.JSONData.backend)
 
 	  	//add actions
 	  	for(let i=0; i<scenesData_.length;i++){//think about the order of loading. right now to goes through scene by scene maybe load all scens first and then do content
@@ -134,6 +146,8 @@ class Story{
 	  		
 	  		this.scenesLib[id].setBackEndActionAndContentPositions();
 	  	}
+
+	  	
 
 	  	// for(let i=0; i<scenesData_.length;i++){//think about the order of loading. right now to goes through scene by scene maybe load all scens first and then do content
 	  	// 	for(let id in this.scenesLib[scenesData_[i].id].contentsLib){
@@ -517,9 +531,20 @@ class Story{
 		stopAudio()
 	}
 
+	addEffectEditors(){
+		for(let sceneKey in this.scenesLib){//this will create the divs for all the scenes. they could be created on each scene load
+			this.scenesLib[sceneKey].addEffectEditors();//scene will cycle through each content (and action?) and create a div/span for each
+		}
+	}
+
 	createScenesFrontEndHTMLs(){
 		for(let sceneKey in this.scenesLib){//this will create the divs for all the scenes. they could be created on each scene load
 			this.scenesLib[sceneKey].createFrontEndHTML();//scene will cycle through each content (and action?) and create a div/span for each
+		}
+	}
+	createScenesContentEffectEditors(){
+		for(let sceneKey in this.scenesLib){//this will create the divs for all the scenes. they could be created on each scene load
+			this.scenesLib[sceneKey].createContentEffectEditors();//scene will cycle through each content (and action?) and create a div/span for each
 		}
 	}
 	createScenesBackEndHTMLs(){
@@ -583,8 +608,6 @@ class Story{
 	}
 
 	start(){
-
-		console.log(this.startingScene)
 		this.newScene(this.startingScene);
 		//currentStory.windowManager=new WindowManager();
 		loadScreen.hide();
@@ -659,8 +682,6 @@ fetch(absoluteLocation + "json/scenes.json")
 		
 		window.onload.data=data;
 		dataLoaded=true;
-
-		console.log("JSON LOADED!!!!!!!!!!!!!!!")
 		
 
 		//console.log("loading scen data");

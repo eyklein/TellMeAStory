@@ -1,10 +1,39 @@
+
 {
+  "startingScene":"CONSTRUCT",
   "scenes": [
     {
+      "data":"this is updated",
       "name": "universal",
       "id": "uni",
       "actions": [],
       "contents": [
+        {
+          "id": "799",
+          "content": {
+            "type": "audio",
+            "value": "audio/Background Noise.mp3"
+          },
+          "effects": {
+            "general": {
+              "clipping": {
+                "start": 0,
+                "duration": 467
+              },
+              "repeat":true,
+              "track":{
+                "value":"background"
+              }
+            },
+            "entrance": {},
+            "exit": {
+              "hide": true
+            },
+            "clickable": {},
+            "hover": {},
+            "pressed": {}
+          }
+        },
         {
           "id": "901",
           "content": {
@@ -19,28 +48,32 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
           "id": "902",
           "content": {
             "type": "img",
-            "value": "img/Ballerina.GIF"
+            "value": "img/Ballerina.gif"
           },
           "effects": {
             "general": {
               "position": {
                 "type": "absolute",
-                "top": "8.5%",
-                "left": "75%"
+                "top": "20%",
+                "left": "79.5%"
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {
               "generic": {
                 "glow": {
@@ -55,33 +88,61 @@
                 "className": "glow-gif-blue"
               }
             },
-            "mousePressed": {
+            "pressed": {
               "glow": {
                 "className": "glow-gif"
               }
             }
+          },
+          "backend":{
+            "uni":{"pos":{}},
+            "CONSTRUCT":{"pos":{"x":300}},
+            "INSTUCTIONS":{"pos":{}},
+            "INTRO":{"pos":{}},
+            "START":{"pos":{}},
+            "SC":{"pos":{"x":450}},
+            "SC-BA":{"pos":{}},
+            "SC-BA-FIS":{"pos":{}},
+            "SC-BA-UK":{"pos":{}},
+            "SC-RC":{"pos":{}},
+            "SC-RC-FIS":{"pos":{}},
+            "SC-RC-UK":{"pos":{}},
+            "TS":{"pos":{}},
+            "TS-BA":{"pos":{}},
+            "TS-BA-FIS":{"pos":{}},
+            "TS-BA-UK":{"pos":{}},
+            "TS-RC":{"pos":{}},
+            "TS-RC-FIS":{"pos":{}},
+            "YS-RC-UK":{"pos":{}},
+            "END-AS":{"pos":{}},
+            "END-END":{"pos":{}}
           }
         },
         {
           "id": "903",
           "content": {
             "type": "img",
-            "value": "img/Corgi.GIF"
+            "value": "img/Corgi.gif"
           },
           "effects": {
             "general": {
               "position": {
                 "type": "absolute",
-                "top": "-3%",
-                "left": "73.3%"
+                "top": "2.2%",
+                "left": "78.3%"
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {
               "generic": {
                 "glow": {
                   "className": "glow-gif"
+                },
+                "replace":{
+                  "url": "img/Corgi_animated.gif"
                 }
               },
               "hover": {},
@@ -92,50 +153,100 @@
                 "className": "glow-gif-blue"
               }
             },
-            "mousePressed": {
+            "pressed": {
               "glow": {
                 "className": "glow-gif-red"
               }
             }
+          },
+          "backend":{
+            "uni":{"pos":{}},
+            "CONSTRUCT":{"pos":{"x":400}},
+            "INSTUCTIONS":{"pos":{}},
+            "INTRO":{"pos":{}},
+            "START":{"pos":{}},
+            "SC":{"pos":{"x":400}},
+            "SC-BA":{"pos":{}},
+            "SC-BA-FIS":{"pos":{}},
+            "SC-BA-UK":{"pos":{}},
+            "SC-RC":{"pos":{}},
+            "SC-RC-FIS":{"pos":{}},
+            "SC-RC-UK":{"pos":{}},
+            "TS":{"pos":{}},
+            "TS-BA":{"pos":{}},
+            "TS-BA-FIS":{"pos":{}},
+            "TS-BA-UK":{"pos":{}},
+            "TS-RC":{"pos":{}},
+            "TS-RC-FIS":{"pos":{}},
+            "YS-RC-UK":{"pos":{}},
+            "END-AS":{"pos":{}},
+            "END-END":{"pos":{}}
           }
         },
         {
           "id": "904",
           "content": {
             "type": "img",
-            "value": "img/Brushes.GIF"
+            "value": "img/Brushes.gif"
           },
           "effects": {
             "general": {
               "position": {
                 "type": "absolute",
-                "top": "13.2%",
-                "left": "67.8%"
+                "top": "20.2%",
+                "left": "71%"
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
+          },
+          "backend":{
+            "uni":{"pos":{}},
+            "CONSTRUCT":{"pos":{"x":500}},
+            "INSTUCTIONS":{"pos":{}},
+            "INTRO":{"pos":{}},
+            "START":{"pos":{}},
+            "SC":{"pos":{}},
+            "SC-BA":{"pos":{}},
+            "SC-BA-FIS":{"pos":{}},
+            "SC-BA-UK":{"pos":{}},
+            "SC-RC":{"pos":{}},
+            "SC-RC-FIS":{"pos":{}},
+            "SC-RC-UK":{"pos":{}},
+            "TS":{"pos":{}},
+            "TS-BA":{"pos":{}},
+            "TS-BA-FIS":{"pos":{}},
+            "TS-BA-UK":{"pos":{}},
+            "TS-RC":{"pos":{}},
+            "TS-RC-FIS":{"pos":{}},
+            "YS-RC-UK":{"pos":{}},
+            "END-AS":{"pos":{}},
+            "END-END":{"pos":{}}
           }
         },
         {
           "id": "905",
           "content": {
             "type": "img",
-            "value": "img/Clock.GIF"
+            "value": "img/Clock.gif"
           },
           "effects": {
             "general": {
               "position": {
                 "type": "absolute",
-                "top": "36%",
-                "left": "10%"
+                "top": "51.5%",
+                "left": "15%"
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {
               "generic": {
                 "glow": {
@@ -150,29 +261,54 @@
                 "className": "glow-gif-blue"
               }
             },
-            "mousePressed": {
+            "pressed": {
               "glow": {
                 "className": "glow-gif-red"
               }
             }
+          },
+          "backend":{
+            "uni":{"pos":{}},
+            "CONSTRUCT":{"pos":{"x":600}},
+            "INSTUCTIONS":{"pos":{}},
+            "INTRO":{"pos":{}},
+            "START":{"pos":{}},
+            "SC":{"pos":{}},
+            "SC-BA":{"pos":{}},
+            "SC-BA-FIS":{"pos":{}},
+            "SC-BA-UK":{"pos":{}},
+            "SC-RC":{"pos":{}},
+            "SC-RC-FIS":{"pos":{}},
+            "SC-RC-UK":{"pos":{}},
+            "TS":{"pos":{}},
+            "TS-BA":{"pos":{}},
+            "TS-BA-FIS":{"pos":{}},
+            "TS-BA-UK":{"pos":{}},
+            "TS-RC":{"pos":{}},
+            "TS-RC-FIS":{"pos":{}},
+            "YS-RC-UK":{"pos":{}},
+            "END-AS":{"pos":{}},
+            "END-END":{"pos":{}}
           }
         },
         {
           "id": "906",
           "content": {
             "type": "img",
-            "value": "img/Helmet.GIF"
+            "value": "img/Helmet.gif"
           },
           "effects": {
             "general": {
               "position": {
                 "type": "absolute",
-                "top": "53.8%",
-                "left": "46%"
+                "top": "60.8%",
+                "left": "49%"
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {
               "generic": {
                 "glow": {
@@ -187,29 +323,54 @@
                 "className": "glow-gif-blue"
               }
             },
-            "mousePressed": {
+            "pressed": {
               "glow": {
                 "className": "glow-gif-red"
               }
             }
+          },
+          "backend":{
+            "uni":{"pos":{}},
+            "CONSTRUCT":{"pos":{"x":700}},
+            "INSTUCTIONS":{"pos":{}},
+            "INTRO":{"pos":{}},
+            "START":{"pos":{}},
+            "SC":{"pos":{}},
+            "SC-BA":{"pos":{}},
+            "SC-BA-FIS":{"pos":{}},
+            "SC-BA-UK":{"pos":{}},
+            "SC-RC":{"pos":{}},
+            "SC-RC-FIS":{"pos":{}},
+            "SC-RC-UK":{"pos":{}},
+            "TS":{"pos":{}},
+            "TS-BA":{"pos":{}},
+            "TS-BA-FIS":{"pos":{}},
+            "TS-BA-UK":{"pos":{}},
+            "TS-RC":{"pos":{}},
+            "TS-RC-FIS":{"pos":{}},
+            "YS-RC-UK":{"pos":{}},
+            "END-AS":{"pos":{}},
+            "END-END":{"pos":{}}
           }
         },
         {
           "id": "907",
           "content": {
             "type": "img",
-            "value": "img/Juice.GIF"
+            "value": "img/Juice.gif"
           },
           "effects": {
             "general": {
               "position": {
                 "type": "absolute",
-                "top": "19%",
-                "left": "85.5%"
+                "top": "26%",
+                "left": "87.5%"
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {
               "generic": {
                 "glow": {
@@ -224,29 +385,54 @@
                 "className": "glow-gif-blue"
               }
             },
-            "mousePressed": {
+            "pressed": {
               "glow": {
                 "className": "glow-gif-red"
               }
             }
+          },
+          "backend":{
+            "uni":{"pos":{}},
+            "CONSTRUCT":{"pos":{"x":800}},
+            "INSTUCTIONS":{"pos":{}},
+            "INTRO":{"pos":{}},
+            "START":{"pos":{}},
+            "SC":{"pos":{}},
+            "SC-BA":{"pos":{}},
+            "SC-BA-FIS":{"pos":{}},
+            "SC-BA-UK":{"pos":{}},
+            "SC-RC":{"pos":{}},
+            "SC-RC-FIS":{"pos":{}},
+            "SC-RC-UK":{"pos":{}},
+            "TS":{"pos":{}},
+            "TS-BA":{"pos":{}},
+            "TS-BA-FIS":{"pos":{}},
+            "TS-BA-UK":{"pos":{}},
+            "TS-RC":{"pos":{}},
+            "TS-RC-FIS":{"pos":{}},
+            "YS-RC-UK":{"pos":{}},
+            "END-AS":{"pos":{}},
+            "END-END":{"pos":{}}
           }
         },
         {
           "id": "908",
           "content": {
             "type": "img",
-            "value": "img/Laundry.GIF"
+            "value": "img/Laundry.gif"
           },
           "effects": {
             "general": {
               "position": {
                 "type": "absolute",
-                "top": "61.3%",
-                "left": "68.3%"
+                "top": "69.3%",
+                "left": "75.3%"
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {
               "generic": {
                 "glow": {
@@ -261,29 +447,54 @@
                 "className": "glow-gif-blue"
               }
             },
-            "mousePressed": {
+            "pressed": {
               "glow": {
                 "className": "glow-gif-red"
               }
             }
+          },
+          "backend":{
+            "uni":{"pos":{}},
+            "CONSTRUCT":{"pos":{"x":900}},
+            "INSTUCTIONS":{"pos":{}},
+            "INTRO":{"pos":{}},
+            "START":{"pos":{}},
+            "SC":{"pos":{}},
+            "SC-BA":{"pos":{}},
+            "SC-BA-FIS":{"pos":{}},
+            "SC-BA-UK":{"pos":{}},
+            "SC-RC":{"pos":{}},
+            "SC-RC-FIS":{"pos":{}},
+            "SC-RC-UK":{"pos":{}},
+            "TS":{"pos":{}},
+            "TS-BA":{"pos":{}},
+            "TS-BA-FIS":{"pos":{}},
+            "TS-BA-UK":{"pos":{}},
+            "TS-RC":{"pos":{}},
+            "TS-RC-FIS":{"pos":{}},
+            "YS-RC-UK":{"pos":{}},
+            "END-AS":{"pos":{}},
+            "END-END":{"pos":{}}
           }
         },
         {
           "id": "909",
           "content": {
             "type": "img",
-            "value": "img/Poster.GIF"
+            "value": "img/Poster.gif"
           },
           "effects": {
             "general": {
               "position": {
                 "type": "absolute",
-                "top": "24%",
-                "left": "0%"
+                "top": "30.5%",
+                "left": "1.5%"
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {
               "generic": {
                 "glow": {
@@ -298,29 +509,54 @@
                 "className": "glow-gif-blue"
               }
             },
-            "mousePressed": {
+            "pressed": {
               "glow": {
                 "className": "glow-gif-red"
               }
             }
+          },
+          "backend":{
+            "uni":{"pos":{}},
+            "CONSTRUCT":{"pos":{"x":1000}},
+            "INSTUCTIONS":{"pos":{}},
+            "INTRO":{"pos":{}},
+            "START":{"pos":{}},
+            "SC":{"pos":{}},
+            "SC-BA":{"pos":{}},
+            "SC-BA-FIS":{"pos":{}},
+            "SC-BA-UK":{"pos":{}},
+            "SC-RC":{"pos":{}},
+            "SC-RC-FIS":{"pos":{}},
+            "SC-RC-UK":{"pos":{}},
+            "TS":{"pos":{}},
+            "TS-BA":{"pos":{}},
+            "TS-BA-FIS":{"pos":{}},
+            "TS-BA-UK":{"pos":{}},
+            "TS-RC":{"pos":{}},
+            "TS-RC-FIS":{"pos":{}},
+            "YS-RC-UK":{"pos":{}},
+            "END-AS":{"pos":{}},
+            "END-END":{"pos":{}}
           }
         },
         {
           "id": "910",
           "content": {
             "type": "img",
-            "value": "img/Racecar.GIF"
+            "value": "img/Racecar.gif"
           },
           "effects": {
             "general": {
               "position": {
                 "type": "absolute",
-                "top": "70.3%",
-                "left": "10.3%"
+                "top": "75.3%",
+                "left": "12.3%"
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {
               "generic": {
                 "glow": {
@@ -335,29 +571,54 @@
                 "className": "glow-gif-blue"
               }
             },
-            "mousePressed": {
+            "pressed": {
               "glow": {
                 "className": "glow-gif-red"
               }
             }
+          },
+          "backend":{
+            "uni":{"pos":{}},
+            "CONSTRUCT":{"pos":{"x":1100}},
+            "INSTUCTIONS":{"pos":{}},
+            "INTRO":{"pos":{}},
+            "START":{"pos":{}},
+            "SC":{"pos":{"x":550}},
+            "SC-BA":{"pos":{}},
+            "SC-BA-FIS":{"pos":{}},
+            "SC-BA-UK":{"pos":{}},
+            "SC-RC":{"pos":{}},
+            "SC-RC-FIS":{"pos":{}},
+            "SC-RC-UK":{"pos":{}},
+            "TS":{"pos":{}},
+            "TS-BA":{"pos":{}},
+            "TS-BA-FIS":{"pos":{}},
+            "TS-BA-UK":{"pos":{}},
+            "TS-RC":{"pos":{}},
+            "TS-RC-FIS":{"pos":{}},
+            "YS-RC-UK":{"pos":{}},
+            "END-AS":{"pos":{}},
+            "END-END":{"pos":{}}
           }
         },
         {
           "id": "911",
           "content": {
             "type": "img",
-            "value": "img/Sweater.GIF"
+            "value": "img/Sweater.gif"
           },
           "effects": {
             "general": {
               "position": {
                 "type": "absolute",
-                "top": "42.3%",
-                "left": "29.3%"
+                "top": "53.3%",
+                "left": "34.3%"
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {
               "generic": {
                 "glow": {
@@ -372,33 +633,61 @@
                 "className": "glow-gif-blue"
               }
             },
-            "mousePressed": {
+            "pressed": {
               "glow": {
                 "className": "glow-gif-red"
               }
             }
+          },
+          "backend":{
+            "uni":{"pos":{}},
+            "CONSTRUCT":{"pos":{"x":1200}},
+            "INSTUCTIONS":{"pos":{}},
+            "INTRO":{"pos":{}},
+            "START":{"pos":{}},
+            "SC":{"pos":{}},
+            "SC-BA":{"pos":{}},
+            "SC-BA-FIS":{"pos":{}},
+            "SC-BA-UK":{"pos":{}},
+            "SC-RC":{"pos":{}},
+            "SC-RC-FIS":{"pos":{}},
+            "SC-RC-UK":{"pos":{}},
+            "TS":{"pos":{}},
+            "TS-BA":{"pos":{}},
+            "TS-BA-FIS":{"pos":{}},
+            "TS-BA-UK":{"pos":{}},
+            "TS-RC":{"pos":{}},
+            "TS-RC-FIS":{"pos":{}},
+            "YS-RC-UK":{"pos":{}},
+            "END-AS":{"pos":{}},
+            "END-END":{"pos":{}}
           }
         },
         {
           "id": "912",
           "content": {
             "type": "img",
-            "value": "img/Toy-Soldier.GIF"
+            "value": "img/Toy-Soldier.gif"
           },
           "effects": {
             "general": {
               "position": {
                 "type": "absolute",
-                "top": "0%",
-                "left": "3.3%"
+                "top": "3.1%",
+                "left": "8.3%"
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {
               "generic": {
                 "glow": {
                   "className": "glow-gif"
+                },
+                "replace":{
+                  "url": "img/Toy-Soldier-animated.gif"
                 }
               },
               "hover": {},
@@ -409,29 +698,54 @@
                 "className": "glow-gif-blue"
               }
             },
-            "mousePressed": {
+            "pressed": {
               "glow": {
                 "className": "glow-gif-red"
               }
             }
+          },
+          "backend":{
+            "uni":{"pos":{}},
+            "CONSTRUCT":{"pos":{"x":1300}},
+            "INSTUCTIONS":{"pos":{}},
+            "INTRO":{"pos":{}},
+            "START":{"pos":{}},
+            "SC":{"pos":{"x":300}},
+            "SC-BA":{"pos":{}},
+            "SC-BA-FIS":{"pos":{}},
+            "SC-BA-UK":{"pos":{}},
+            "SC-RC":{"pos":{}},
+            "SC-RC-FIS":{"pos":{}},
+            "SC-RC-UK":{"pos":{}},
+            "TS":{"pos":{}},
+            "TS-BA":{"pos":{}},
+            "TS-BA-FIS":{"pos":{}},
+            "TS-BA-UK":{"pos":{}},
+            "TS-RC":{"pos":{}},
+            "TS-RC-FIS":{"pos":{}},
+            "YS-RC-UK":{"pos":{}},
+            "END-AS":{"pos":{}},
+            "END-END":{"pos":{}}
           }
         },
         {
           "id": "913",
           "content": {
             "type": "img",
-            "value": "img/Ukulele.GIF"
+            "value": "img/Ukulele.gif"
           },
           "effects": {
             "general": {
               "position": {
                 "type": "absolute",
-                "top": "59%",
-                "left": "26.5%"
+                "top": "67%",
+                "left": "30.5%"
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {
               "generic": {
                 "glow": {
@@ -446,11 +760,34 @@
                 "className": "glow-gif-blue"
               }
             },
-            "mousePressed": {
+            "pressed": {
               "glow": {
                 "className": "glow-gif-red"
               }
             }
+          },
+          "backend":{
+            "uni":{"pos":{}},
+            "CONSTRUCT":{"pos":{"x":1400}},
+            "INSTUCTIONS":{"pos":{}},
+            "INTRO":{"pos":{}},
+            "START":{"pos":{}},
+            "SC":{"pos":{}},
+            "SC-BA":{"pos":{}},
+            "SC-BA-FIS":{"pos":{}},
+            "SC-BA-UK":{"pos":{}},
+            "SC-RC":{"pos":{}},
+            "SC-RC-FIS":{"pos":{}},
+            "SC-RC-UK":{"pos":{}},
+            "TS":{"pos":{}},
+            "TS-BA":{"pos":{}},
+            "TS-BA-FIS":{"pos":{}},
+            "TS-BA-UK":{"pos":{}},
+            "TS-RC":{"pos":{}},
+            "TS-RC-FIS":{"pos":{}},
+            "YS-RC-UK":{"pos":{}},
+            "END-AS":{"pos":{}},
+            "END-END":{"pos":{}}
           }
         },
         {
@@ -464,7 +801,11 @@
             "general": {
               "fill": {
                 "color": "#888"
+              },"position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
               }
+
             },
             "entrance": {},
             "exit": {
@@ -480,299 +821,337 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
+          },
+          "backend":{
+            "uni":{"pos":{}},
+            "CONSTRUCT":{"pos":{"x":1500}},
+            "INSTUCTIONS":{"pos":{}},
+            "INTRO":{"pos":{}},
+            "START":{"pos":{}},
+            "SC":{"pos":{"x" : 680}},
+            "SC-BA":{"pos":{}},
+            "SC-BA-FIS":{"pos":{}},
+            "SC-BA-UK":{"pos":{}},
+            "SC-RC":{"pos":{}},
+            "SC-RC-FIS":{"pos":{}},
+            "SC-RC-UK":{"pos":{}},
+            "TS":{"pos":{}},
+            "TS-BA":{"pos":{}},
+            "TS-BA-FIS":{"pos":{}},
+            "TS-BA-UK":{"pos":{}},
+            "TS-RC":{"pos":{}},
+            "TS-RC-FIS":{"pos":{}},
+            "YS-RC-UK":{"pos":{}},
+            "END-AS":{"pos":{}},
+            "END-END":{"pos":{}}
           }
         }
       ]
     },
     {
-      "name": "intro",
-      "id": "aa",
+      "name": "constructBedroom",
+      "id": "CONSTRUCT",
       "actions": [
+        
         {
-          "id": "5001",
-          "tailID": "aa",
-          "headID": "001",
-          "trigger": "time",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id": "5002",
-          "tailID": "aa",
-          "headID": "001",
-          "trigger": "time",
-          "elicit": "clickable",
-          "delay": 1
-        },
-        {
-          "id": "5002",
-          "tailID": "001",
-          "headID": "001",
-          "trigger": "click",
-          "elicit": "hide",
-          "delay": 0
-        },
-        {
-          "id": "543",
-          "tailID": "aa",
+          "id":"04",
+          "tailID": "CONSTRUCT",
           "headID": "901",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "543",
-          "tailID": "aa",
+          "id":"05",
+          "tailID": "CONSTRUCT",
           "headID": "902",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "543",
-          "tailID": "aa",
+          "id":"06",
+          "tailID": "CONSTRUCT",
           "headID": "903",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "543",
-          "tailID": "aa",
+          "id":"07",
+          "tailID": "CONSTRUCT",
           "headID": "904",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "543",
-          "tailID": "aa",
+          "id":"08",
+          "tailID": "CONSTRUCT",
           "headID": "905",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "543",
-          "tailID": "aa",
+          "id":"09",
+          "tailID": "CONSTRUCT",
           "headID": "906",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "543",
-          "tailID": "aa",
+          "id":"010",
+          "tailID": "CONSTRUCT",
           "headID": "907",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "543",
-          "tailID": "aa",
+          "id":"011",
+          "tailID": "CONSTRUCT",
           "headID": "908",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "543",
-          "tailID": "aa",
+          "id":"012",
+          "tailID": "CONSTRUCT",
           "headID": "909",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "543",
-          "tailID": "aa",
+          "id":"013",
+          "tailID": "CONSTRUCT",
           "headID": "910",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "543",
-          "tailID": "aa",
+          "id":"014",
+          "tailID": "CONSTRUCT",
           "headID": "911",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "543",
-          "tailID": "aa",
+          "id":"015",
+          "tailID": "CONSTRUCT",
           "headID": "912",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "543",
-          "tailID": "aa",
+          "id":"016",
+          "tailID": "CONSTRUCT",
           "headID": "913",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "601",
-          "tailID": "001",
-          "headID": "701",
-          "trigger": "click",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id": "501",
-          "tailID": "001",
-          "headID": "005",
-          "trigger": "click",
-          "elicit": "display",
-          "delay": 19
-        },
-        {
-          "id": "508",
-          "tailID": "001",
-          "headID": "005",
-          "trigger": "click",
-          "elicit": "clickable",
-          "delay": 19
-        },
-        {
-          "id": "502",
-          "tailID": "001",
+          "id":"020",
+          "tailID": "CONSTRUCT",
           "headID": "901",
           "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "506",
-          "tailID": "005",
-          "headID": "006",
-          "trigger": "click",
+          "id":"023",
+          "tailID": "CONSTRUCT",
+          "headID": "INSTUCTIONS",
+          "conditions":["false"],
+          "trigger": "time",
           "elicit": "display",
           "delay": 0
         },
         {
-          "id": "506",
-          "tailID": "005",
-          "headID": "702",
-          "trigger": "click",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id": "506",
-          "tailID": "005",
-          "headID": "903",
-          "trigger": "click",
-          "elicit": "clickable",
-          "delay": 4
-        },
-        {
-          "id": "506",
-          "tailID": "005",
-          "headID": "912",
-          "trigger": "click",
-          "elicit": "clickable",
-          "delay": 4
-        },
-        {
-          "id": "506",
-          "tailID": "005",
-          "headID": "007",
-          "trigger": "click",
-          "elicit": "display",
-          "delay": 4
-        },
-        {
-          "id": "506",
-          "tailID": "912",
-          "headID": "007",
-          "trigger": "click",
-          "elicit": "hide",
-          "delay": 0
-        },
-        {
-          "id": "506",
-          "tailID": "903",
-          "headID": "007",
-          "trigger": "click",
-          "elicit": "hide",
-          "delay": 0
-        },
-        {
-          "id": "507",
-          "tailID": "903",
-          "headID": "SC",
-          "trigger": "click",
-          "elicit": "display",
-          "delay": 0
-        },
-        {
-          "id": "507",
-          "tailID": "912",
-          "headID": "TS",
-          "trigger": "click",
+          "id":"023",
+          "tailID": "CONSTRUCT",
+          "headID": "INTRO",
+          "conditions":["true"],
+          "trigger": "time",
           "elicit": "display",
           "delay": 0
         }
       ],
       "contents": [
+        
+      ]
+    },
+    {
+      "name": "instuctions",
+      "id": "INSTUCTIONS",
+      "actions": [
         {
-          "id": "701",
-          "content": {
-            "type": "audio",
-            "value": "audio/OMS-Intro_mixdown.wav"
-          },
-          "effects": {
-            "general": {
-              "clipping": {
-                "start": 0,
-                "duration": 19
-              }
-            },
-            "entrance": {},
-            "exit": {},
-            "clickable": {},
-            "hover": {},
-            "mousePressed": {}
-          }
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "001",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "005",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "002",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "002",
+          "trigger": "time",
+          "elicit": "clickable",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "002",
+          "headID": "002",
+          "trigger": "click",
+          "elicit": "unclickable",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "002",
+          "headID": "003",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "004",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "004",
+          "trigger": "time",
+          "elicit": "clickable",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "004",
+          "headID": "INTRO",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "004",
+          "headID": "001",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "004",
+          "headID": "002",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info":""
         },
         {
-          "id": "702",
-          "content": {
-            "type": "audio",
-            "value": "audio/OMS-Intro_mixdown.wav"
-          },
-          "effects": {
-            "general": {
-              "clipping": {
-                "start": 21,
-                "duration": 4
-              }
-            },
-            "entrance": {},
-            "exit": {},
-            "clickable": {},
-            "hover": {},
-            "mousePressed": {}
-          }
-        },
+          "id":"01",
+          "tailID": "004",
+          "headID": "003",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "004",
+          "headID": "004",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "004",
+          "headID": "005",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "004",
+          "headID": "501",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info":""
+        },{
+          "id":"01",
+          "tailID": "INSTUCTIONS",
+          "headID": "501",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info":""
+        }
+
+      ],
+      "contents": [
         {
           "id": "001",
           "content": {
             "type": "text",
-            "value": "Can you tell me a story?"
+            "value": "This is an experimental story telling platform. You can click on &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            text or objects to inspire the reader through the story."
           },
           "effects": {
             "general": {
-              "position": {
-                "value": "text-main"
+              "position":{
+                "type":"absolute",
+                "top": "10%",
+                "left": "10%"
+              },
+              "dimensions":{
+                
+                "width": "80%",
+                "height": "80%"
+              },
+              "font":{
+                "font-family":"indieFlower"
+              },
+              "size":{
+                "type":"scalable",
+                "value":0.04
+              },"z-index":{
+                "index":101
               },
               "fill": {
                 "color": "#fff"
@@ -780,11 +1159,498 @@
               "stroke": {
                 "color": "#00ff00",
                 "thickness": "0px"
+              }
+            },
+            "entrance": {
+              "fade": {
+                "type": "linear",
+                "duration": 0.5
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow"
+                }
               },
-              "font": {
-                "size": "2vw"
+              "hover": {},
+              "pressed": {}
+            }
+          }
+        },{
+          "id": "005",
+          "content": {
+            "type": "text",
+            "value": "Click here to go full screen &#x2193;"
+          },
+          "effects": {
+            "general": {
+              "position":{
+                "type":"absolute",
+                "bottom": "2%",
+                "right": "1.1%"
               },
-              "font-name": "null"
+              "font":{
+                "font-family":"indieFlower"
+              },
+              "size":{
+                "type":"scalable",
+                "value":0.04
+              },"z-index":{
+                "index":101
+              },
+              "fill": {
+                "color": "#fff"
+              },
+              "stroke": {
+                "color": "#00ff00",
+                "thickness": "0px"
+              }
+            },
+            "entrance": {
+              "fade": {
+                "type": "linear",
+                "duration": 0.5
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            }
+          }
+        },{
+          "id": "002",
+          "content": {
+            "type": "text",
+            "value": "highlighted"
+          },
+          "effects": {
+            "general": {
+              "position":{
+                "type":"absolute",
+                "top": "20.2%",
+                "left": "37.39%"
+              },
+              "font":{
+                "font-family":"indieFlower"
+              },
+              "size":{
+                "type":"scalable",
+                "value":0.04
+              },"z-index":{
+                "index":102
+              },
+              "fill": {
+                "color": "#fff"
+              },
+              "stroke": {
+                "color": "#00ff00",
+                "thickness": "0px"
+              }
+            },
+            "entrance": {
+              "fade": {
+                "type": "linear",
+                "duration": 0.5
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            }
+          }
+        },{
+          "id": "003",
+          "content": {
+            "type": "text",
+            "value": "highlighted"
+          },
+          "effects": {
+            "general": {
+              "position":{
+                "type":"absolute",
+                "top": "20.2%",
+                "left": "37.39%"
+              },
+              "font":{
+                "font-family":"indieFlower"
+              },
+              "size":{
+                "type":"scalable",
+                "value":0.04
+              },"z-index":{
+                "index":103
+              },
+              "fill": {
+                "color": "#6aca4d"
+              },
+              "stroke": {
+                "color": "#00ff00",
+                "thickness": "0px"
+              }
+            },
+            "entrance": {
+              "fade": {
+                "type": "linear",
+                "duration": 0.5
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            }
+          }
+        },{
+          "id": "004",
+          "content": {
+            "type": "text",
+            "value": "<u>START</u>"
+          },
+          "effects": {
+            "general": {
+              "position":{
+                "type":"absolute",
+                "top": "45%",
+                "left": "37.39%"
+              },
+              "font":{
+                "font-family":"indieFlower"
+              },
+              "size":{
+                "type":"scalable",
+                "value":0.04
+              },"z-index":{
+                "index":103
+              },
+              "fill": {
+                "color": "#fff"
+              },
+              "stroke": {
+                "color": "#00ff00",
+                "thickness": "0px"
+              }
+            },
+            "entrance": {
+              "fade": {
+                "type": "linear",
+                "duration": 0.5
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            }
+          }
+        },{
+          "id": "501",
+          "content": {
+            "type": "img",
+            "value": "img/black.jpg"
+          },
+          "properties": {},
+          "effects": {
+            "general": {
+              "position": {
+                "type": "absolute",
+                "top": "0%",
+                "left": "0%"
+              },
+              "opacity":{
+                "opacity":"0.7"
+              }
+
+            },
+            "entrance": {},
+            "exit": {
+              "hide": true
+            },
+            "clickable": {},
+            "hover": {},
+            "pressed": {}
+          }
+        }
+        
+      ]
+    },
+    {
+      "name": "intro",
+      "id": "INTRO",
+      "actions": [
+        {
+          "id":"01",
+          "tailID": "001",
+          "headID": "799",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0,
+          "info":"background content it should start auto but need an interaction"
+        },
+         {
+          "id":"01",
+          "tailID": "INTRO",
+          "headID": "000",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"01",
+          "tailID": "INTRO",
+          "headID": "000",
+          "trigger": "time",
+          "elicit": "clickable",
+          "delay": 0
+        },
+        {
+          "id":"01",
+          "tailID": "000",
+          "headID": "000",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+        {
+          "id":"01",
+          "tailID": "000",
+          "headID": "001",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+        {
+          "id":"01",
+          "tailID": "000",
+          "headID": "INSTUCTIONS",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"01",
+          "tailID": "INTRO",
+          "headID": "001",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"02",
+          "tailID": "INTRO",
+          "headID": "001",
+          "trigger": "time",
+          "elicit": "clickable",
+          "delay": 0
+        },
+
+        {
+          "id":"03",
+          "tailID": "001",
+          "headID": "001",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        }, {
+          "id":"03",
+          "tailID": "001",
+          "headID": "000",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+        {
+          "id":"017",
+          "tailID": "001",
+          "headID": "701",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"018",
+          "tailID": "001",
+          "headID": "005",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 17
+        },
+        {
+          "id":"018",
+          "tailID": "001",
+          "headID": "005",
+          "trigger": "click",
+          "elicit": "clickable",
+          "delay": 17
+        },
+        {
+          "id":"021",
+          "tailID": "005",
+          "headID": "005",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+        {
+          "id":"022",
+          "tailID": "005",
+          "headID": "702",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"023",
+          "tailID": "005",
+          "headID": "START",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 8
+        }
+      ],
+      "contents": [
+        {
+          "id": "701",
+          "content": {
+            "type": "audio",
+            "value": "audio/OMS-Intro-Final_mixdown.mp3"
+          },
+          "effects": {
+            "general": {
+              "clipping": {
+                "start": 0,
+                "duration": 17
+              }
+            },
+            "entrance": {},
+            "exit": {
+              "hide": true
+            },
+            "clickable": {},
+            "hover": {},
+            "pressed": {}
+          }
+        },
+        {
+          "id": "702",
+          "content": {
+            "type": "audio",
+            "value": "audio/OMS-Intro-Final_mixdown.mp3"
+          },
+          "effects": {
+            "general": {
+              "clipping": {
+                "start": 17,
+                "duration": 8
+              }
+            },
+            "entrance": {},
+            "exit": {
+              "hide": true
+            },
+            "clickable": {},
+            "hover": {},
+            "pressed": {}
+          }
+        },
+        {
+          "id": "000",
+          "content": {
+            "type": "text",
+            "value": "< Directions"
+          },
+          "effects": {
+            "general": {
+              "position":{
+                "type":"absolute",
+                "top":"2%",
+                "left":"2%"
+              },
+
+              "size": {
+                "type": "scalable",
+                "value":0.02
+              },"font":{
+                "font-family":"indieFlower"
+              },"fill": {
+                "color": "#fff"
+              },
+              "stroke": {
+                "color": "#00ff00",
+                "thickness": "0px"
+              }
+            },
+            "entrance": {
+              "fade": {
+                "type": "linear",
+                "duration": 0.5
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            }
+          }
+        },{
+          "id": "001",
+          "content": {
+            "type": "text",
+            "value": "Can you tell me a story?"
+          },
+          "effects": {
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              },
+              "fill": {
+                "color": "#fff"
+              },
+              "stroke": {
+                "color": "#00ff00",
+                "thickness": "0px"
+              }
             },
             "entrance": {
               "fade": {
@@ -814,9 +1680,16 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {
               "generic": {
                 "glow": {
@@ -827,59 +1700,81 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
-          }
-        },
-        {
-          "id": "007",
-          "content": {
-            "type": "text",
-            "value": "Choose One..."
-          },
-          "properties": {},
-          "effects": {
-            "general": {
-              "fill": {
-                "color": "#888"
-              }
-            },
-            "entrance": {},
-            "exit": {
-              "hide": true
-            },
-            "clickable": {
-              "glow": {
-                "className": "glow"
-              }
-            },
-            "hover": {},
-            "mousePressed": {}
-          }
-        },
-        {
-          "id": "006",
-          "content": {
-            "type": "clear-text",
-            "value": ""
-          },
-          "properties": {},
-          "effects": {
-            "general": {},
-            "entrance": {},
-            "exit": {},
-            "clickable": {},
-            "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         }
+        
       ]
+    },{
+      "name": "start",
+      "id": "START",
+      "actions": [
+        
+        {
+          "id":"023",
+          "tailID": "START",
+          "headID": "903",
+          "trigger": "click",
+          "elicit": "clickable",
+          "delay": 0
+        },
+        {
+          "id":"024",
+          "tailID": "START",
+          "headID": "912",
+          "trigger": "click",
+          "elicit": "clickable",
+          "delay": 0
+        },
+        {
+          "id":"025",
+          "tailID": "START",
+          "headID": "007",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"026",
+          "tailID": "912",
+          "headID": "007",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+        {
+          "id":"027",
+          "tailID": "903",
+          "headID": "007",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+        {
+          "id":"028",
+          "tailID": "903",
+          "headID": "SC",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0
+        },
+        {
+          "id":"029",
+          "tailID": "912",
+          "headID": "TS",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0
+        }
+      ],
+      "contents": []
     },
     {
       "name": "Stuffed Corgi",
       "id": "SC",
       "actions": [
         {
-          "id": "500",
+          "id": "u903_0",
           "tailID": "SC",
           "headID": "903",
           "trigger": "time",
@@ -888,7 +1783,7 @@
           "info": "remove clickable corgi"
         },
         {
-          "id": "500",
+          "id": "u912_0",
           "tailID": "SC",
           "headID": "912",
           "trigger": "time",
@@ -896,7 +1791,7 @@
           "delay": 0,
           "info": "make toy soder not clickable"
         },{
-          "id": "5001",
+          "id": "d701_0",
           "tailID": "SC",
           "headID": "701",
           "trigger": "time",
@@ -904,7 +1799,7 @@
           "delay": 0,
           "info": "start paying audio #1"
         },{
-          "id": "5001",
+          "id": "d001_46",
           "tailID": "SC",
           "headID": "001",
           "trigger": "time",
@@ -912,7 +1807,7 @@
           "delay": 46,
           "info": "display: Do the voices"
         },{
-          "id": "5001",
+          "id": "c001_46",
           "tailID": "SC",
           "headID": "001",
           "trigger": "time",
@@ -920,7 +1815,7 @@
           "delay": 46,
           "info": "clickable: Do the voices"
         },{
-          "id": "5001",
+          "id": "h001_0",
           "tailID": "001",
           "headID": "001",
           "trigger": "click",
@@ -928,7 +1823,7 @@
           "delay": 0,
           "info": "hide: Do the voices"
         },{
-          "id": "5001",
+          "id": "d702_0",
           "tailID": "001",
           "headID": "702",
           "trigger": "click",
@@ -937,25 +1832,52 @@
           "info": "play audio #2"
         },
         {
-          "id": "500",
+          "id": "c902_10",
           "tailID": "001",
           "headID": "902",
           "trigger": "click",
           "elicit": "clickable",
-          "delay": 10,
+          "delay": 9,
           "info": "make balaeriena clickable"
         },
         {
-          "id": "500",
+          "id": "c910_10",
           "tailID": "001",
           "headID": "910",
           "trigger": "click",
           "elicit": "clickable",
-          "delay": 10,
+          "delay": 9,
           "info": "make race car clickable"
         },
+
         {
-          "id": "500",
+          "id":"025",
+          "tailID": "001",
+          "headID": "007",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 9
+        },
+        {
+          "id":"026",
+          "tailID": "902",
+          "headID": "007",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+        {
+          "id":"027",
+          "tailID": "910",
+          "headID": "007",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+
+
+        {
+          "id": "dSCBA_0",
           "tailID": "902",
           "headID": "SC-BA",
           "trigger": "click",
@@ -964,7 +1886,7 @@
           "info": "if ballerian is clicked"
         },
         {
-          "id": "500",
+          "id": "dSCRC_0",
           "tailID": "910",
           "headID": "SC-RC",
           "trigger": "click",
@@ -978,39 +1900,54 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-Corgi_mixdown.wav"
+            "value": "audio/OMS-Stuffed Corgi-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
               "clipping": {
-                "start": 4,
+                "start": 0,
                 "duration": 46
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
+          },
+          "backend":{
+            "pos":{
+              "x":200
+            }
           }
+
         },{
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-Corgi_mixdown.wav"
+            "value": "audio/OMS-Stuffed Corgi-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
               "clipping": {
-                "start": 50,
-                "duration": 11
+                "start": 46,
+                "duration": 10
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
+          },
+          "backend":{
+            "pos":{
+              "x":800
+            }
           }
         },{
           "id": "001",
@@ -1020,7 +1957,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -1035,7 +1977,12 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
+          },
+          "backend":{
+            "pos":{
+              "x":300
+            }
           }
         }
       ]
@@ -1099,16 +2046,7 @@
           "info": "hide 'how do dogs dance?'"
         },
         {
-          "id": "5001",
-          "tailID": "001",
-          "headID": "702",
-          "trigger": "click",
-          "elicit": "display",
-          "delay": 0,
-          "info": "start paying the reset of the audio audio"
-        },
-        {
-          "id": "5001",
+          "id": "5002",
           "tailID": "001",
           "headID": "702",
           "trigger": "click",
@@ -1116,7 +2054,7 @@
           "delay": 0,
           "info": "start paying the reset of the audio audio"
         },{
-          "id": "5001",
+          "id": "5004",
           "tailID": "001",
           "headID": "911",
           "trigger": "click",
@@ -1124,6 +2062,41 @@
           "delay": 138,
           "info": "highlight swetter"
         },{
+          "id": "5005",
+          "tailID": "001",
+          "headID": "913",
+          "trigger": "click",
+          "elicit": "clickable",
+          "delay": 138,
+          "info": "highlight Ukulele"
+        },
+
+        {
+          "id":"5006",
+          "tailID": "001",
+          "headID": "007",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 138
+        },
+        {
+          "id":"026",
+          "tailID": "911",
+          "headID": "007",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+        {
+          "id":"027",
+          "tailID": "913",
+          "headID": "007",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+
+        {
           "id": "5001",
           "tailID": "911",
           "headID": "SC-BA-FIS",
@@ -1131,14 +2104,6 @@
           "elicit": "display",
           "delay": 0,
           "info": "goto swetter"
-        },{
-          "id": "5001",
-          "tailID": "001",
-          "headID": "913",
-          "trigger": "click",
-          "elicit": "clickable",
-          "delay": 138,
-          "info": "highlight Ukulele"
         },{
           "id": "5001",
           "tailID": "913",
@@ -1155,7 +2120,7 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-SC-Ballerina_mixdown.wav"
+            "value": "audio/OMS-SC-Ballerina-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -1165,17 +2130,19 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-SC-Ballerina_mixdown.wav"
+            "value": "audio/OMS-SC-Ballerina-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -1185,10 +2152,12 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
@@ -1199,7 +2168,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -1214,7 +2188,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         }
       ]
@@ -1311,6 +2285,14 @@
           "elicit": "display",
           "delay": 0,
           "info": "start paying audio #3"
+        },{
+          "id": "5001",
+          "tailID": "002",
+          "headID": "END-AS",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 166,
+          "info": "Go to end looped"
         }
       ],
       "contents": [
@@ -1318,7 +2300,7 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-SC-B-FIS_mixdown.wav"
+            "value": "audio/OMS-SC-B-FIS-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -1328,16 +2310,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-SC-B-FIS_mixdown.wav"
+            "value": "audio/OMS-SC-B-FIS-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -1347,16 +2331,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "703",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-SC-B-FIS_mixdown.wav"
+            "value": "audio/OMS-SC-B-FIS-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -1366,10 +2352,12 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "001",
@@ -1379,7 +2367,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -1394,7 +2387,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "002",
@@ -1404,7 +2397,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -1419,7 +2417,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         }
       ]
@@ -1484,6 +2482,14 @@
           "elicit": "display",
           "delay": 0,
           "info": "play audio #2"
+        },{
+          "id": "5001",
+          "tailID": "001",
+          "headID": "END-AS",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 240,
+          "info": "Go to end looped"
         }
         
       ],
@@ -1492,7 +2498,7 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-SC-B-Ukulele_mixdown.wav"
+            "value": "audio/OMS-SC-B-U-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -1502,16 +2508,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-SC-B-Ukulele_mixdown.wav"
+            "value": "audio/OMS-SC-B-U-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -1521,10 +2529,12 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "001",
@@ -1534,7 +2544,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -1549,7 +2564,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         }
       ]
@@ -1669,7 +2684,35 @@
           "elicit": "clickable",
           "delay": 73.5,
           "info": "highlight Ukulele"
-        },{
+        },
+
+        {
+          "id":"025",
+          "tailID": "002",
+          "headID": "007",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 73.5
+        },
+        {
+          "id":"026",
+          "tailID": "911",
+          "headID": "007",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+        {
+          "id":"027",
+          "tailID": "913",
+          "headID": "007",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0
+        },
+
+
+        {
           "id": "5001",
           "tailID": "911",
           "headID": "SC-RC-FIS",
@@ -1692,7 +2735,7 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-SC-Racecar_mixdown.wav"
+            "value": "audio/OMS-SC-Racecar-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -1702,17 +2745,19 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-SC-Racecar_mixdown.wav"
+            "value": "audio/OMS-SC-Racecar-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -1722,16 +2767,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "703",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-SC-Racecar_mixdown.wav"
+            "value": "audio/OMS-SC-Racecar-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -1741,10 +2788,12 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
@@ -1755,7 +2804,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -1770,7 +2824,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "002",
@@ -1780,7 +2834,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -1795,7 +2854,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         }
       ]
@@ -1864,6 +2923,14 @@
           "elicit": "display",
           "delay": 0,
           "info": "start paying the reset of the audio audio"
+        },{
+          "id": "5001",
+          "tailID": "001",
+          "headID": "END-AS",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 195,
+          "info": "Go to end looped"
         }
       ],
       "contents": [
@@ -1871,7 +2938,7 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS SC-RC-FIS_mixdown.wav"
+            "value": "audio/OMS-SC-RC-FIS-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -1881,17 +2948,19 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS SC-RC-FIS_mixdown.wav"
+            "value": "audio/OMS-SC-RC-FIS-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -1901,10 +2970,12 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
@@ -1915,7 +2986,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -1930,7 +3006,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         }
       ]
@@ -2034,6 +3110,14 @@
           "elicit": "display",
           "delay": 0,
           "info": "start paying the reset of the audio audio"
+        },{
+          "id": "5001",
+          "tailID": "002",
+          "headID": "END-AS",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 200,
+          "info": "Go to end looped"
         }
       ],
       "contents": [
@@ -2041,7 +3125,7 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-SC-RC-U_mixdown.wav"
+            "value": "audio/OMS-SC-R-U-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2051,17 +3135,19 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-SC-RC-U_mixdown.wav"
+            "value": "audio/OMS-SC-R-U-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2071,17 +3157,19 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
           "id": "703",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-SC-RC-U_mixdown.wav"
+            "value": "audio/OMS-SC-R-U-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2091,10 +3179,12 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
@@ -2105,7 +3195,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -2120,7 +3215,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "002",
@@ -2130,7 +3225,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -2145,7 +3245,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         }
       ]
@@ -2156,7 +3256,7 @@
       "actions": [
         
         {
-          "id": "500",
+          "id": "u903_0",
           "tailID": "TS",
           "headID": "903",
           "trigger": "time",
@@ -2165,7 +3265,7 @@
           "info": "remove clickable corgi"
         },
         {
-          "id": "500",
+          "id": "u912_0",
           "tailID": "TS",
           "headID": "912",
           "trigger": "time",
@@ -2173,7 +3273,7 @@
           "delay": 0,
           "info": "make toy soder not clickable"
         },{
-          "id": "5001",
+          "id": "d701_0",
           "tailID": "TS",
           "headID": "701",
           "trigger": "time",
@@ -2181,7 +3281,7 @@
           "delay": 0,
           "info": "play audio"
         },{
-          "id": "5001",
+          "id": "d001_2",
           "tailID": "TS",
           "headID": "001",
           "trigger": "time",
@@ -2189,7 +3289,7 @@
           "delay": 2,
           "info": "what was his name?"
         },{
-          "id": "5001",
+          "id": "c001_2",
           "tailID": "TS",
           "headID": "001",
           "trigger": "time",
@@ -2197,7 +3297,7 @@
           "delay": 2,
           "info": "what was his my?"
         },{
-          "id": "5001",
+          "id": "h001_0",
           "tailID": "001",
           "headID": "001",
           "trigger": "click",
@@ -2205,7 +3305,7 @@
           "delay": 0,
           "info": "what was his my?"
         },{
-          "id": "5001",
+          "id": "d702_0",
           "tailID": "001",
           "headID": "702",
           "trigger": "click",
@@ -2214,7 +3314,7 @@
           "info": "play audio #2"
         },
         {
-          "id": "500",
+          "id": "c902_64",
           "tailID": "001",
           "headID": "902",
           "trigger": "click",
@@ -2223,7 +3323,7 @@
           "info": "make balaeriena clickable"
         },
         {
-          "id": "500",
+          "id": "c910_64",
           "tailID": "001",
           "headID": "910",
           "trigger": "click",
@@ -2232,7 +3332,7 @@
           "info": "make race car clickable"
         },
         {
-          "id": "500",
+          "id": "cTSBA_0",
           "tailID": "902",
           "headID": "TS-BA",
           "trigger": "click",
@@ -2241,7 +3341,7 @@
           "info": "if ballerian is clicked"
         },
         {
-          "id": "500",
+          "id": "dTSRC_0",
           "tailID": "910",
           "headID": "TS-RC",
           "trigger": "click",
@@ -2255,7 +3355,7 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-Toy Soldier_mixdown.wav"
+            "value": "audio/OMS-Toy Soldier_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2265,16 +3365,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-Toy Soldier_mixdown.wav"
+            "value": "audio/OMS-Toy Soldier_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2284,10 +3386,12 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "001",
@@ -2297,7 +3401,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -2312,7 +3421,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         }
       ]
@@ -2450,7 +3559,7 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-Ballerina_mixdown.wav"
+            "value": "audio/OMS-TS-Ballerina_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2460,17 +3569,19 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-Ballerina_mixdown.wav"
+            "value": "audio/OMS-TS-Ballerina_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2480,16 +3591,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "703",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-Ballerina_mixdown.wav"
+            "value": "audio/OMS-TS-Ballerina_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2499,10 +3612,12 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
@@ -2513,7 +3628,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -2528,7 +3648,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "002",
@@ -2538,7 +3658,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -2553,7 +3678,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         }
       ]
@@ -2651,6 +3776,14 @@
           "elicit": "display",
           "delay": 0,
           "info": "start paying audio #3"
+        },{
+          "id": "5001",
+          "tailID": "002",
+          "headID": "END-AS",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 104,
+          "info": "Go to end looped"
         }
         
       ],
@@ -2659,7 +3792,7 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-B-FIS_mixdown.wav"
+            "value": "audio/OMS-TS-B-FIS_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2669,16 +3802,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-B-FIS_mixdown.wav"
+            "value": "audio/OMS-TS-B-FIS_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2688,16 +3823,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "703",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-B-FIS_mixdown.wav"
+            "value": "audio/OMS-TS-B-FIS_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2707,10 +3844,12 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "001",
@@ -2720,7 +3859,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -2735,7 +3879,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "002",
@@ -2745,7 +3889,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -2760,7 +3909,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         }
       ]
@@ -2858,6 +4007,14 @@
           "elicit": "display",
           "delay": 0,
           "info": "start paying audio #3"
+        },{
+          "id": "5001",
+          "tailID": "002",
+          "headID": "END-AS",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 119,
+          "info": "Go to end looped"
         }
         
       ],
@@ -2866,7 +4023,7 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-B-U_mixdown.wav"
+            "value": "audio/OMS-TS-B-U_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2876,16 +4033,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-B-U_mixdown.wav"
+            "value": "audio/OMS-TS-B-U_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2895,16 +4054,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "703",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-B-U_mixdown.wav"
+            "value": "audio/OMS-TS-B-U_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -2914,10 +4075,12 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "001",
@@ -2927,7 +4090,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -2942,7 +4110,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "002",
@@ -2952,7 +4120,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -2967,7 +4140,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         }
       ]
@@ -3040,7 +4213,7 @@
           "headID": "911",
           "trigger": "click",
           "elicit": "clickable",
-          "delay": 121,
+          "delay": 120.5,
           "info": "clickable sweater"
         },
         {
@@ -3049,7 +4222,7 @@
           "headID": "913",
           "trigger": "click",
           "elicit": "clickable",
-          "delay": 124,
+          "delay": 120.5,
           "info": "clickable Ukulele"
         },
         {
@@ -3076,7 +4249,7 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-Racecar_mixdown.wav"
+            "value": "audio/OMS-TS-Racecar_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -3086,16 +4259,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-Racecar_mixdown.wav"
+            "value": "audio/OMS-TS-Racecar_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -3105,10 +4280,12 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
@@ -3119,7 +4296,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -3134,7 +4316,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         }
       ]
@@ -3238,7 +4420,7 @@
           "headID": "003",
           "trigger": "click",
           "elicit": "display",
-          "delay": 14,
+          "delay": 12,
           "info": "where is that"
         },{
           "id": "5001",
@@ -3246,7 +4428,7 @@
           "headID": "003",
           "trigger": "click",
           "elicit": "clickable",
-          "delay": 14,
+          "delay": 12,
           "info": "where is that"
         },{
           "id": "5001",
@@ -3264,6 +4446,14 @@
           "elicit": "display",
           "delay": 0,
           "info": "audiod #3"
+        },{
+          "id": "5001",
+          "tailID": "003",
+          "headID": "END-AS",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 115,
+          "info": "Go to end looped"
         }
         
       ],
@@ -3272,7 +4462,7 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-RC-FIS_mixdown.wav"
+            "value": "audio/OMS-TS-RC-FIS-final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -3282,16 +4472,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-RC-FIS_mixdown.wav"
+            "value": "audio/OMS-TS-RC-FIS-final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -3301,48 +4493,54 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "703",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-RC-FIS_mixdown.wav"
+            "value": "audio/OMS-TS-RC-FIS-final_mixdown.mp3"
           },
           "effects": {
             "general": {
               "clipping": {
                 "start": 6,
-                "duration": 14
+                "duration": 12
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "704",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-RC-FIS_mixdown.wav"
+            "value": "audio/OMS-TS-RC-FIS-final_mixdown.mp3"
           },
           "effects": {
             "general": {
               "clipping": {
-                "start": 20,
-                "duration": 115
+                "start": 18,
+                "duration": 117
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
@@ -3353,7 +4551,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -3368,7 +4571,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "002",
@@ -3378,7 +4581,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -3393,7 +4601,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "003",
@@ -3403,7 +4611,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -3418,7 +4631,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         }
       ]
@@ -3517,6 +4730,14 @@
           "elicit": "display",
           "delay": 0,
           "info": "#3 finish paying audio"
+        },{
+          "id": "5001",
+          "tailID": "002",
+          "headID": "END-AS",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 149,
+          "info": "Go to end looped"
         }
       ],
       "contents": [
@@ -3524,7 +4745,7 @@
           "id": "701",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-RC-U_mixdown.wav"
+            "value": "audio/OMS-TS-RC-U-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -3534,16 +4755,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "702",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-RC-U_mixdown.wav"
+            "value": "audio/OMS-TS-RC-U-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -3553,16 +4776,18 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },{
           "id": "703",
           "content": {
             "type": "audio",
-            "value": "audio/OMS-TS-RC-U_mixdown.wav"
+            "value": "audio/OMS-TS-RC-U-Final_mixdown.mp3"
           },
           "effects": {
             "general": {
@@ -3572,10 +4797,12 @@
               }
             },
             "entrance": {},
-            "exit": {},
+            "exit": {
+              "hide": true
+            },
             "clickable": {},
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
@@ -3586,7 +4813,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -3601,7 +4833,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
@@ -3612,7 +4844,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -3627,7 +4864,7 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
           }
         },
         {
@@ -3638,7 +4875,12 @@
           },
           "properties": {},
           "effects": {
-            "general": {},
+            "general": {
+              "position":{
+                "type":"appendIn",
+                "parentClass":"main_text"
+              }
+            },
             "entrance": {},
             "exit": {
               "hide": true
@@ -3653,11 +4895,465 @@
               "pressed": {}
             },
             "hover": {},
-            "mousePressed": {}
+            "pressed": {}
+          }
+        }
+      ]
+    },
+    {
+      "name": "The End Another Story",
+      "id": "END-AS",
+      "actions": [
+        
+        {
+          "id": "500",
+          "tailID": "END-AS",
+          "headID": "501",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info": "Background dim/gray"
+        },
+        {
+          "id": "500",
+          "tailID": "END-AS",
+          "headID": "502",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info": "Another Story"
+        },{
+          "id": "5001",
+          "tailID": "END-AS",
+          "headID": "503",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info": "Goodnight"
+        },{
+          "id": "500",
+          "tailID": "END-AS",
+          "headID": "502",
+          "trigger": "time",
+          "elicit": "clickable",
+          "delay": 0,
+          "info": "Another Story"
+        },{
+          "id": "5001",
+          "tailID": "END-AS",
+          "headID": "503",
+          "trigger": "time",
+          "elicit": "clickable",
+          "delay": 0,
+          "info": "Goodnight"
+        },{
+          "id": "5001",
+          "tailID": "END-AS",
+          "headID": "504",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info": "Servey"
+        },{
+          "id": "5001",
+          "tailID": "END-AS",
+          "headID": "504",
+          "trigger": "time",
+          "elicit": "clickable",
+          "delay": 0,
+          "info": "Servey"
+        },{
+          "id": "500",
+          "tailID": "502",
+          "headID": "501",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info": "hide background"
+        },{
+          "id": "500",
+          "tailID": "502",
+          "headID": "502",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info": "hide another story"
+        },{
+          "id": "500",
+          "tailID": "502",
+          "headID": "503",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info": "hide goodnight"
+        },{
+          "id": "500",
+          "tailID": "502",
+          "headID": "START",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0,
+          "info": "intro scene"
+        },{
+          "id": "500",
+          "tailID": "503",
+          "headID": "502",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info": "hide another story"
+        },{
+          "id": "500",
+          "tailID": "503",
+          "headID": "503",
+          "trigger": "click",
+          "elicit": "hide",
+          "delay": 0,
+          "info": "hide goodnight"
+        },{
+          "id": "500",
+          "tailID": "503",
+          "headID": "END-END",
+          "trigger": "click",
+          "elicit": "display",
+          "delay": 0,
+          "info": "end end scene"
+        }
+      ],
+      "contents": [
+        {
+          "id": "501",
+          "content": {
+            "type": "img",
+            "value": "img/black.jpg"
+          },
+          "properties": {},
+          "effects": {
+            "general": {
+              "position": {
+                "type": "absolute",
+                "top": "0%",
+                "left": "0%"
+              },
+              "opacity":{
+                "opacity":"0.5"
+              }
+
+            },
+            "entrance": {},
+            "exit": {
+              "hide": true
+            },
+            "clickable": {},
+            "hover": {},
+            "pressed": {}
+          }
+        },{
+          "id": "502",
+          "content": {
+            "type": "img",
+            "value": "img/OneMoreStory.jpg"
+          },
+          "effects": {
+            "general": {
+              "position": {
+                "type": "absolute",
+                "top": "40%",
+                "left": "30%"
+              }, 
+              "opacity":{
+                "opacity":"0.7"
+              }
+            },
+            "entrance": {},
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow-gif"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            },
+            "hover": {
+              "glow": {
+                "className": "glow-gif-blue"
+              }
+            },
+            "pressed": {
+              "glow": {
+                "className": "glow-gif-red"
+              }
+            }
+          }
+        },{
+          "id": "503",
+          "content": {
+            "type": "img",
+            "value": "img/Goodnight.jpg"
+          },
+          "effects": {
+            "general": {
+              "position": {
+                "type": "absolute",
+                "top": "40%",
+                "left": "55%"
+              }, 
+              "opacity":{
+                "opacity":"0.7"
+              }
+            },
+            "entrance": {},
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow-gif"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            },
+            "hover": {
+              "glow": {
+                "className": "glow-gif-blue"
+              }
+            },
+            "pressed": {
+              "glow": {
+                "className": "glow-gif-red"
+              }
+            }
+          }
+        },{
+          "id": "504",
+          "content": {
+            "type": "img",
+            "value": "img/Survey.jpg"
+          },
+          "effects": {
+            "general": {
+              "position": {
+                "type": "absolute",
+                "top": "55%",
+                "left": "30%"
+              }, 
+              "opacity":{
+                "opacity":"0.7"
+              },
+              "link":{
+                "src":"https://docs.google.com/forms/d/e/1FAIpQLSe4tEClYYzqHX6zR4-J4kw0OI5Uw7ctgMmSIqyPjhel6HOlZQ/viewform",
+                "type":"window",
+                "name":"Aeaea Servey"
+              }
+            },
+            "entrance": {},
+            "exit": {
+              "hide": true
+            },
+            "clickable": {
+              "generic": {
+                "glow": {
+                  "className": "glow-gif"
+                }
+              },
+              "hover": {},
+              "pressed": {}
+            },
+            "hover": {
+              "glow": {
+                "className": "glow-gif-red"
+              }
+            },
+            "pressed": {
+              "glow": {
+                "className": "glow-gif-red"
+              }
+            }
+          }
+        }
+      ]
+    },{
+      "name": "End",
+      "id": "END-END",
+      "actions": [
+        {
+          "id": "500",
+          "tailID": "END-END",
+          "headID": "501",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info": "black-top"
+        },{
+          "id": "500",
+          "tailID": "END-END",
+          "headID": "502",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 0,
+          "info": "black-bottom"
+        },{
+          "id": "500",
+          "tailID": "END-END",
+          "headID": "001",
+          "trigger": "time",
+          "elicit": "display",
+          "delay": 1,
+          "info": "black-bottom"
+        }
+      ],
+      "contents": [
+        {
+          "id": "501",
+          "content": {
+            "type": "img",
+            "value": "img/black-half.jpg"
+          },
+          "properties": {},
+          "effects": {
+            "general": {
+              "position": {
+                "type": "absolute",
+                "top": "0%",
+                "left": "0%"
+              },
+              "opacity":{
+                "opacity":"0.95"
+              }
+
+            },
+            "entrance": {
+              "translate":{
+                "from":{
+                  "xPos":"0%",
+                  "yPos":"-99%"
+                },"to":{
+                  "xPos":"0%",
+                  "yPos":"0%"
+                },"properties":{
+                  "time":0.5,
+                  "type":"linear"
+                }
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {},
+            "hover": {},
+            "pressed": {}
+          }
+        },{
+          "id": "502",
+          "content": {
+            "type": "img",
+            "value": "img/black-half.jpg"
+          },
+          "properties": {},
+          "effects": {
+            "general": {
+              "position": {
+                "type": "absolute",
+                "left": "0%",
+                "bottom": "0%"
+              },
+              "opacity":{
+                "opacity":"0.95"
+              }
+
+            },
+            "entrance": {
+              "translate":{
+                "from":{
+                  "xPos":"0%",
+                  "yPos":"100%"
+                },"to":{
+                  "xPos":"0%",
+                  "yPos":"0%"
+                },"properties":{
+                  "time":0.5,
+                  "type":"linear"
+                }
+              }
+            },
+            "exit": {
+              "hide": true
+            },
+            "clickable": {},
+            "hover": {},
+            "pressed": {}
+          }
+        },
+        {
+          "id": "503",
+          "content": {
+            "type": "img",
+            "value": "img/black.jpg"
+          },
+          "properties": {},
+          "effects": {
+            "general": {
+              "position": {
+                "type": "absolute",
+                "top": "0%",
+                "left": "0%"
+              },
+              "opacity":{
+                "opacity":"0.9"
+              }
+
+            },
+            "entrance": {},
+            "exit": {
+              "hide": true
+            },
+            "clickable": {},
+            "hover": {},
+            "pressed": {}
+          }
+        },{
+          "id": "001",
+          "content": {
+            "type": "text",
+            "value": "< Back"
+          },
+          "properties": {},
+          "effects": {
+            "general": {
+              "position": {
+                "type": "absolute",
+                "bottom": "10%",
+                "left": "10%"
+              },
+              "opacity":{
+                "opacity":"0.9"
+              },"z-index":{
+                "index":100
+              },"fill":{
+                "color":"#fff"
+              },"font":{
+                "font-family":"indieFlower"
+              },"link":{
+                "src":"https://www.aeaea.co/one-more-story"
+              }
+
+            },
+            "entrance": {},
+            "exit": {
+              "hide": true
+            },
+            "clickable": {},
+            "hover": {},
+            "pressed": {}
           }
         }
       ]
     }
-    
   ]
 }

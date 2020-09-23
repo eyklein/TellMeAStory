@@ -20,9 +20,13 @@ class SceneNode extends Node{ //not to be confused with nodejs
 		this.html.node.innerHTML=this.id;
 
 		this.html.node.addEventListener('dblclick', function (e) {
+			this.scene.addEffectEditors();
+			
 			currentStory.backEnd.setEditor(currentStory.backEnd.storyEditor.sceneEditors[this.id])
 			//currentStory.backEnd.storyEditor.sceneEditors[this.id].display();
 			currentStory.backEnd.display()
+
+
 		}.bind(this));
 	}
 

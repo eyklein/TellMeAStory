@@ -1,9 +1,7 @@
 class LinkTextEffect extends TextEffect{
 
-	constructor(JSON_,parentContent_){
-		super(JSON_,parentContent_);
-		console.log("make link effect!!!!!!!!!!!")
-		
+	constructor(JSON_,parentContent_,effectCatagory_){
+		super(JSON_,parentContent_,effectCatagory_);		
 	}
 
 	apply(){

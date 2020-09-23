@@ -12,7 +12,6 @@ class Cookie{
 
 			this[name] = value;
 		}
-		console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 		console.log(this)
 
 	// 	function getCookie(name){

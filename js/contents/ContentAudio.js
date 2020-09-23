@@ -11,6 +11,7 @@ class AudioContent extends Content{
 		
 
 		super(contentJson_,parentScene_)
+		this.name=this.content.value;
 
 		//console.log("new audioContent " + this.content.value)
 		//this.name=this.content.value;
@@ -24,13 +25,18 @@ class AudioContent extends Content{
 		this.gainNode.gain.value=currentStory.volume[this.track]; //default
 
 
-		this.name=this.content.value;
+		
 		//this.createNode();
 
 		this.type="audio";
 		//this._audioContext = audioContext;
 	    //this._buffer = buffer; // AudioBuffer
 	    //this._source; // AudioBufferSourceNode
+
+	    this.cNode=new ContentNode(this);
+
+	    this.backEndCreated=false;
+	    this.audioLoaded=false
 
 	    
 	
@@ -186,9 +192,25 @@ class AudioContent extends Content{
 
 
 
-	createBackEndHTML(){
+	createBackEndHTML(){//this creates the divs 
 		super.createBackEndHTML();
 	}
+
+	addBackEndEditors(){ //this fills them out and creates the editors
+
+		if(!this.backEndCreated){
+			this.backEndCreated=true;
+			this.addEffectEditors();
+
+			if(this.audioLoaded){
+				this.updateAudioDisplay();
+			}
+		}
+
+		
+	}
+
+
 	getAmplitudes(samples_){ //,startPosition_,duration_) {
 		const rawData = this.audioBuffer.getChannelData(0); // We only need to work with one channel of data
 		const samples = samples_; // Number of samples we want to have in our final data set
@@ -205,19 +227,10 @@ class AudioContent extends Content{
 		return filteredData;
 	}
 
-	updateIconContent(){
-		// let iconWidth=100;
-		// let iconHeight=75;
-
+	updateIcon(){
 	
 		this.html.be.divIcon.innerHTML=this.content.value;
-		
-
-		// if(this.properties["clipping"]!=undefined){
-			this.html.be.divIcon.style.height=this.duration * 100 + "px";
-		// }else{
-		// 	this.html.be.divIcon.style.height=this.duration * 100 + "px";
-		// }
+		this.html.be.divIcon.style.height=this.duration * 100 + "px";
 		
 		this.html.be.divIcon.style.width=30 + "px";
 
@@ -373,6 +386,10 @@ class AudioContent extends Content{
 		
 	// }
 
+	createFrontEndHTML(){
+		super.createFrontEndHTML();
+	}
+
 	endOfPlayback(){
 		if(this.isPlaying){ //if isPlaying is true then its not just paused
 			delete currentStory.activeMainAudio[currentStory.currentScene.id+this.id];
@@ -415,15 +432,23 @@ class AudioContent extends Content{
 
 	applyGeneralEffects(){
 		for(let effect in this.effects.general){
+			// console.log(this)
 			this.effects.general[effect].apply();
 		}
+
+		// this.updateAudioDisplay();
+		// this.addEffectEditors();
+
 		
 	}
+
+	
 
 	createEffects(){
 		// console.log(this.JSONData)
 		// console.log("**********************************************************************")
 		// console.log(this.JSONData)
+
 		for(let effect in this.JSONData.effects.general){
 			// console.log(effect)
 			if(effect=="clipping"){
@@ -436,9 +461,14 @@ class AudioContent extends Content{
 				this.effects.general[effect]=new ContentEffect(this.JSONData.effects.general[effect],this)
 			}
 		}
+
+		this.cNode.update();
+		
+		// super.addEffectEditors();
 	
 		
 	}
+
 
 };
 
@@ -448,13 +478,16 @@ function onLoadError(error_){
 	console.log("error loading audio " + error_)
 }	
 
-function AudioDisplay(audioContent_){
-	//AudioObjectHandler.prototype.audioDisplay=function(startPosition_,duration_) {
+
+
+
+class AudioDisplay{
+	constructor(audioContent_){
+		//AudioObjectHandler.prototype.audioDisplay=function(startPosition_,duration_) {
 	this.audioContent=audioContent_;
-	this.scale=100;		// pixels/second
+	this.scale=timeScale;		// pixels/second
 	//this.currentPlayTime=30;
-	console.log(this.audioContent)
-	this.duration=this.audioContent.audioBuffer.duration;
+	this.duration=this.audioContent.audioBuffer.duration; //this durration is the complet durration of the audio not the playtime
 	this.numSamples=this.duration*this.scale;
 	this.amplitudes=this.audioContent.getAmplitudes(this.numSamples);
 	
@@ -466,8 +499,11 @@ function AudioDisplay(audioContent_){
 
 	const dpr = window.devicePixelRatio || 1;
 	//const padding = 20;
-	this.html.canvas.width = 320;
+	this.html.canvas.width = 90;
 	this.html.canvas.height = this.duration * this.scale;
+	this.html.canvas.style.position="absolute";
+	this.html.canvas.style.top="0px";
+
 	this.html.ctx = this.html.canvas.getContext("2d");
 	//this.html.ctx.scale(dpr, dpr);
 
@@ -495,112 +531,125 @@ function AudioDisplay(audioContent_){
 
 
 	this.html.playBar=document.createElement("div");
-	this.html.playBar.style.height="5px";
-	this.html.playBar.style.width="500px";
+	this.html.playBar.style.height="1px";
+	this.html.playBar.style.width="100px";
 	this.html.playBar.style['background-color']="green";
 	this.html.playBar.style.position = 'absolute';
 	this.html.playBar.style.left="0px";
-	this.html.playBar.style.top="-50px";
+	this.html.playBar.style.top="0px";
 
 	this.html.canvasWrap.appendChild(this.html.canvas);
 
 	this.html.canvasWrap.appendChild(this.html.playBar);
+	}
+	
 
 
 
 					
-	this.getCanvaseWrap=function(){
-		console.log(this.html.canvasWrap)
+	getCanvaseWrap(){
 		return this.html.canvasWrap;
 
 	}
+	continuousUpdatePlayBar(){
 
-}
-
-AudioDisplay.prototype.continuousUpdatePlayBar=function(){
-
-
-	//console.log(this)
-	this.updatePlayPosition();
-
-	//document.getElementById(chr).scrollIntoView(true);
-	//console.log(this.audioContent)
-	if(this.audioContent.isPlaying){
-		setTimeout(this.continuousUpdatePlayBar.bind(this), 6);
-	}
-	
-}
-
-
-AudioDisplay.prototype.draw = function(start_,duration_){
-
-	let indent=100;
-
-	this.html.ctx.clearRect(0, 0, this.html.canvas.width, this.html.canvas.height);
-
-	//axis line
-	this.html.ctx.strokeStyle = "#000000";// what color our line is	
-	this.html.ctx.beginPath();
-	this.html.ctx.moveTo(indent, 0);
-	this.html.ctx.lineTo(indent, this.html.canvas.height);
-	this.html.ctx.stroke();								
-
-
-	this.html.ctx.font = "20px century_gothicregular";
-	this.html.ctx.textAlign = "end";
-	this.html.ctx.textBaseline = "middle";
-	this.html.ctx.fillStyle = "#333";// what color our line is	
-
-	//axis numbers
-	for(let i=0;i<this.amplitudes.length;i+=100){
-		this.html.ctx.fillText(i/this.scale + "  -", indent, i);
-	}
-	
-	for(let i=0;i<this.amplitudes.length;i++){
-		
-
-		if( i/100<start_ || i/100>start_+duration_){
-			this.html.ctx.strokeStyle = "#0000ff";// what color our line is	
-		}else{
-			this.html.ctx.strokeStyle = "#000000";// what color our line is	
-		}																			
-https://css-tricks.com/making-an-audio-waveform-visualizer-with-vanilla-javascript/
-		this.html.ctx.beginPath();
-		this.html.ctx.moveTo(indent, i);
-		this.html.ctx.lineTo(indent + this.amplitudes[i]*800, i);
-		this.html.ctx.stroke();
-	}
-
-	this.html.ctx.beginPath();
-	this.html.ctx.moveTo(0, 2578);
-	this.html.ctx.lineTo(600, 2578);
-	this.html.ctx.stroke();
-}
-
-AudioDisplay.prototype.updatePlayPosition = function(){
-	//console.log(this.audio)
-	//console.log(mouseDown)
-	let scrollToEasing
-	if(mouseDown==false){
-		this.html.playBar.style.top=this.audioContent.getCurrentPlayTime()*100 + "px";
-		//this.html.playBar.scrollIntoView(false);
-		//console.log(this.audioContent.content.contentEditorModual.html.viewport.style)
-
-
-		//this.audioContent.content.contentEditorModual.html.viewport.scrollTo(0,this.html.playBar.offsetTop - 50)
-		//console.log(this.audioContent.content.contentEditorModual.html.viewport.scrollTop)
-		let easing=.1;
 
 		//console.log(this)
+		this.updatePlayPosition();
 
-		scrollToEasing = this.audioContent.contentEditorModual.html.viewport.scrollTop + ((this.html.playBar.offsetTop-400) - this.audioContent.contentEditorModual.html.viewport.scrollTop)*easing;
-		//let scrollToEasing = this.audioContent.content.contentEditorModual.html.viewport.scrollTop + ((this.html.playBar.offsetTop - 400) - this.audioObjectHandler.content.contentEditorModual.html.viewport.scrollTop)*easing;
+		//document.getElementById(chr).scrollIntoView(true);
+		//console.log(this.audioContent)
+		if(this.audioContent.isPlaying){
+			setTimeout(this.continuousUpdatePlayBar.bind(this), 6);
+		}
 		
-		//console.log(scrollToEasing)
 	}
 
-	this.audioContent.contentEditorModual.html.viewport.scrollTo(0, scrollToEasing);
+	draw(start_,duration_){
+		let indent=20;
 
+		this.html.ctx.clearRect(0, 0, this.html.canvas.width, this.html.canvas.height);
+
+		this.html.canvas.style.position="absolute";
+		this.html.canvas.style.top=this.audioContent.start*this.scale*-1 + "px";
+		this.html.canvas.style.left=indent*-1 + "px";
+		
+		
+
+		//axis line
+		this.html.ctx.strokeStyle = "#999";// what color our line is	
+		this.html.ctx.beginPath();
+		this.html.ctx.moveTo(indent, 0);
+		this.html.ctx.lineTo(indent, this.html.canvas.height);
+		this.html.ctx.stroke();								
+
+
+		this.html.ctx.font = "20px century_gothicregular";
+		this.html.ctx.textAlign = "end";
+		this.html.ctx.textBaseline = "middle";
+		this.html.ctx.fillStyle = "#333";// what color our line is	
+
+
+
+		
+		for(let i=0;i<this.amplitudes.length;i++){
+			
+
+			if( i/this.scale<start_ || i/this.scale>start_+duration_){
+				this.html.ctx.strokeStyle = "rgba(0,0,255,.1)";// what color our line is	
+			}else{
+				this.html.ctx.strokeStyle = "#000000";// what color our line is	
+			}																			
+			//https://css-tricks.com/making-an-audio-waveform-visualizer-with-vanilla-javascript/
+			this.html.ctx.beginPath();
+			this.html.ctx.moveTo(indent, i);
+			this.html.ctx.lineTo(indent + this.amplitudes[i]*200, i);
+			this.html.ctx.stroke();
+		}
+
+		// this.html.ctx.beginPath();
+		// this.html.ctx.moveTo(0, 2578);
+		// this.html.ctx.lineTo(600, 2578);
+		// this.html.ctx.stroke();
+
+
+
+		this.html.ctx.font = "10px century_gothicregular";
+		this.html.ctx.textAlign = "start";
+		this.html.ctx.textBaseline = "middle";
+		this.html.ctx.fillStyle = "#777";// what color our line is	
+		//axis numbers
+		for(let i=100;i<this.amplitudes.length;i+=100){
+			this.html.ctx.fillText(i/this.scale + " -", 3, i); //indent, i); 
+		}
+	}
+	updatePlayPosition(){
+		//console.log(this.audio)
+		//console.log(mouseDown)
+		let scrollToEasing
+		if(mouseDown==false){
+			this.html.playBar.style.top=this.audioContent.getCurrentPlayTime()*100 + "px";
+
+			//this.html.playBar.scrollIntoView(false);
+			//console.log(this.audioContent.content.contentEditorModual.html.viewport.style)
+
+
+			//this.audioContent.content.contentEditorModual.html.viewport.scrollTo(0,this.html.playBar.offsetTop - 50)
+			//console.log(this.audioContent.content.contentEditorModual.html.viewport.scrollTop)
+			let easing=.1;
+
+			//console.log(this)
+
+			scrollToEasing = this.audioContent.contentEditorModual.html.viewport.scrollTop + ((this.html.playBar.offsetTop-400) - this.audioContent.contentEditorModual.html.viewport.scrollTop)*easing;
+			//let scrollToEasing = this.audioContent.content.contentEditorModual.html.viewport.scrollTop + ((this.html.playBar.offsetTop - 400) - this.audioObjectHandler.content.contentEditorModual.html.viewport.scrollTop)*easing;
+			
+			//console.log(scrollToEasing)
+		}
+
+		this.audioContent.contentEditorModual.html.viewport.scrollTo(0, scrollToEasing);
+
+
+	}
 
 }
 

@@ -13,6 +13,8 @@ class Content{
 		//this.parentScenes[this.id] = parentScene_;
 		//this.parentScene = parentScene_;
 
+
+
 		this.effects={};
 		this.effects.general={};
 		this.effects.entrance={};
@@ -62,7 +64,43 @@ class Content{
 		// 	this.actionsOut.append(tailAction_)
 		// }
 
-		this.cNode=new ContentNode(this);//,this.parentScene);
+		//,this.parentScene);
+		//this.cNode.addPosition(this.JSONData.backend)
+
+	}
+	createFrontEndHTML(){
+		this.frontEndCreated=true;
+
+
+
+		
+	}
+
+	addEffectEditors(){
+		// console.log(this);
+
+		for(let catagory in this.effects){//general, entrance, exit, clickable, pressed, hover
+			// console.log(catagory);
+
+			if(catagory == "clickable"){ //generic, hover, pressed
+				for(let clickableSubCatagory in this.effects[catagory]){
+					for(let effectType in this.effects[catagory][clickableSubCatagory]){
+						this.effects[catagory][clickableSubCatagory][effectType].addEditor(effectType,catagory,clickableSubCatagory);//effectType,catagory,clickableSubCatagory);
+					}
+				}
+			}else{
+				for(let effectType in this.effects[catagory]){
+					this.effects[catagory][effectType].addEditor(effectType,catagory);//effectType,catagory);
+					// console.log(this.effects[catagory][effectType]);
+				}
+				
+			}
+			
+		} 
+	}
+
+	addNodePosition(){
+		this.cNode.addPosition(this.JSONData.backend)
 	}
 
 	getFirstAction(){
@@ -135,35 +173,15 @@ class Content{
 		this.actionsOut.push(tailAction_)
 	}
 
-
-
-	// getNode(sceneSpacificInfo_){
-	// 	return new ContentNode(this,sceneSpacificInfo_);
-	// }
-	// positionNode(){
-	// 	this.node.createHTML();
-	// }
-	createEffects(){
-		for(let effect in this.JSONData.effects.general){
-			this.effects.general[effect]=new ContentEffect(this.JSONData.effects.general[effect],this)
-		}
-		for(let effect in this.JSONData.effects.entrance){
-			this.effects.entrance[effect]=new ContentEffect(this.JSONData.effects.entrance[effect],this)
-		}
-		for(let effect in this.JSONData.effects.exit){
-			this.effects.exit[effect]=new ContentEffect(this.JSONData.effects.exit[effect],this)
-		}
-
-		for(let effect in this.JSONData.effects.clickable){
-			this.effects.clickable[effect]=new ContentEffect(this.JSONData.effects.clickable[effect],this)
-		}
-	
-	}
 	applyGeneralEffects(){
+		// console.log(this)
 		
 		for(let effect in this.effects.general){
 			this.effects.general[effect].apply();
 		}
+
+		//this.addEffectEditors(); //remove if no need to back end //add the edditors for effects to the side pannel
+
 	}
 	applyEntranceEffects(){
 		
@@ -448,26 +466,7 @@ Content.prototype.createBackEndHTML=function(){
 	
 }
 
-Content.prototype.createFrontEndHTML=function(){
-	this.frontEndCreated=true;
 
-	if(this.content.type=="text"){
-		
-	
-	}else if(this.content.type=="img"){
-		
-
-
-	}else if( this.content.type=="clear-text"){
-		//this.html={};
-		
-	}else if(this.content.type=="audio"){
-		//this.html={};
-		
-		
-	}
-	
-}
 
 
 Content.prototype.activateActionsOut=function(){

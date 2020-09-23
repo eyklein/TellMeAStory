@@ -31,7 +31,7 @@ class StoryEditor{
 	}
 
 	hide(){
-		this.backEnd.editorWindow.html.innerHTML="";
+		this.backEnd.mainEditorWindow.html.innerHTML="";
 	}
 
 	display(){
@@ -40,7 +40,7 @@ class StoryEditor{
 		// 	this.story.scenesLib[scene].positionBE();
 		// }
 
-		this.backEnd.editorWindow.html.appendChild(this.html)
+		this.backEnd.mainEditorWindow.html.appendChild(this.html)
 		//this.backEnd.editorWindow.html.appendChild(this.html)
 	}
 }

@@ -1,10 +1,15 @@
 class ContentEffect{
 
-	constructor(JSON_,parentContent_){
+	constructor(JSON_,parentContent_,effectCatagory_){
 		this.parentContent=parentContent_;
+		this.effectCatagory=effectCatagory_;
 		this.html={};
 		this.html.be={}
 		this.vareables={}
+
+
+
+		//this.parentContent.cNode.editor.
 	
 	
 		// console.log(JSON_)	
@@ -12,7 +17,23 @@ class ContentEffect{
 			
 			this.vareables[vareable]=JSON_[vareable];		
 		}
+		// console.log("creating effect")
+		// console.log(this)
+
+		// this.addEditor();
 		
+	}
+
+	addEditor(effectType_,catagory_,clickableSubCatagory_){
+
+		console.log(this.parentContent.parentScene.id)
+		this.parentContent.cNode.editor.addEffectToEditor(this,catagory_,clickableSubCatagory_)
+		//this.addEditorHTML(effectType_,catagory_,clickableSubCatagory_);
+	}
+	getEditorHTML(){
+		let fillerDiv=document.createElement("div")
+		fillerDiv.innerHTML="No Editor Created"
+		return fillerDiv;
 	}
 	apply(){
 		// console.log(this)

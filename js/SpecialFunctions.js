@@ -133,9 +133,13 @@ function updateContentSize(){
 
 	//update all text font size effects
 	for(let effect in scalableTextEffects){
-		console.log("update size")
 		scalableTextEffects[effect].updateSize(width);
 	}
+
+
+	// for(let id in currentStory.scenesLib){
+	// 	currentStory.scenesLib[id].updateContentSize();
+	// }
 
 
 

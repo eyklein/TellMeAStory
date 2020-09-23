@@ -7,10 +7,12 @@ class TextContent extends Content{
 		this.name=this.content.value;
 		//this.createNode();
 		this.type="text";
+		this.cNode=new ContentNode(this);
 	}
 
 	createFrontEndHTML(){
-		this.frontEndCreated=true;
+		super.createFrontEndHTML();
+		// this.frontEndCreated=true;
 		this.html.fe = document.createElement("span");
 		this.html.fe.innerHTML=this.content.value;
 		this.createEffects();
@@ -92,6 +94,8 @@ class TextContent extends Content{
 				this.effects.clickable.pressed[effect]=new ContentEffect(this.JSONData.effects.clickable.pressed[effect],this)
 			}
 		}
+
+		this.cNode.update();
 	
 	}
 

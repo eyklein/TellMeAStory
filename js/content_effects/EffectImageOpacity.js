@@ -1,7 +1,7 @@
 
 class OpacityImageEffect extends ImageEffect{
-	constructor(JSON_,parentContent_){
-		super(JSON_,parentContent_);
+	constructor(JSON_,parentContent_,effectCatagory_){
+		super(JSON_,parentContent_,effectCatagory_);
 		this.opacity=JSON_.opacity;
 	}
 	apply(){

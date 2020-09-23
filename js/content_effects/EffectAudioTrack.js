@@ -1,7 +1,7 @@
 class TrackAudioEffect extends AudioEffect{
-	constructor(JSON_,parentContent_){
+	constructor(JSON_,parentContent_,effectCatagory_){
 		
-		super(JSON_,parentContent_);
+		super(JSON_,parentContent_,effectCatagory_);
 
 	}
 

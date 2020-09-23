@@ -148,6 +148,20 @@ class Action{
 
 	}
 
+	selectIn(){
+		this.html.svg.classList.add("selected-in")
+	}
+	deselectIn(){
+		this.html.svg.classList.remove("selected-in")
+	}
+
+	selectOut(){
+		this.html.svg.classList.add("selected-out")
+	}
+	deselectOut(){
+		this.html.svg.classList.remove("selected-out")
+	}
+
 	activateNow(){
 		if(this.elicit=="display"){
 			this.displayContent(this.delay);
@@ -254,28 +268,22 @@ class Action{
 
 	}
 
-	setYPosition(topPos_){
-		// if(this.scene.id=="SC"){
-		// 	console.log(topPos_)
-		// }
-		if(this.pos.set==false){
-			this.pos.set=true;
-			//console.log(indexOut_)
+	setYPosition(topPos_, setTime_){
+		if(topPos_ == null){
+			topPos_ = this.pos.y;
+		}
+		if(this.pos.set!=setTime_){//this.pos.setTime!=setTime_){
+			this.pos.set=setTime_;//setTime_;
 			this.pos.y = topPos_ //+ this.tail.actionsOut.indexOf(this)*4;
 			//this.pos.x = leftPos_
 			//this.pos.x = this.index * 100;
 
 
 			if(this.head instanceof Content){
-				console.log("- " + this.head.id);
 				this.head.cNode.setYPosition(topPos_+this.height, this);
 
 			}else if(this.head instanceof Scene){
-				console.log("out " + this.head.id)
-				//console.log()
 				this.scene.sudoContent.out[this.head.id].cNode.setYPosition(topPos_+this.height, this);
-				//console.log()
-				//this.head.cNode.setYPosition(topPos_+this.height, this);
 			}
 
 
@@ -284,10 +292,39 @@ class Action{
 			// }
 
 
+			// if(this.html.svg != undefined){
+			// 	//console.log(this.pos.y + "px")
+			// 	this.html.svg.style.top = this.pos.y + "px";
+			// 	// this.html.svg.style.left = this.pos.x +"px";
+			// }	
+		}
+	}
 
-			this.pos.set = true;
+	updateYPosition(setTime_){
+		if(this.pos.set!=setTime_){//this.pos.setTime!=setTime_){
+			this.pos.set=setTime_;//setTime_;
+			
+			this.pos.y = this.tailElicitNode.posOut.y;
 
-			this.createBackEndHTML();		
+
+			if(this.head instanceof Content){
+				this.head.cNode.updateYPosition(setTime_);
+
+			}else if(this.head instanceof Scene){
+				this.scene.sudoContent.out[this.head.id].cNode.updateYPosition(setTime_);
+			}
+
+
+			// else if(this.head instanceof Scene){
+			// 	this.head.cNode.setYPosition(topPos_+this.height, this);
+			// }
+
+
+			if(this.html.svg != undefined){
+				//console.log(this.pos.y + "px")
+				this.html.svg.style.top = this.pos.y + "px";
+				// this.html.svg.style.left = this.pos.x +"px";
+			}	
 		}
 	}
 
@@ -297,6 +334,7 @@ class Action{
 		this.updateWidth();
 
 		//console.log(this.width)
+		this.html.path=hArrowSVG(this.width, this.height, 2, this.elicit+"_arrow");
 		this.html.svg.innerHTML = hArrowSVG(this.width, this.height, 2, this.elicit+"_arrow");
 		
 
@@ -310,9 +348,20 @@ class Action{
 
 	}
 
+	// shiftPositionsCastcade(){
+
+	// }
+
+	getHeight(){
+		if(this.trigger=="click"){
+			return clickScale + timeScale*this.delay;
+		}else if(this.trigger=="time"){
+			return timeScale*this.delay;
+		}
+	}
+
 	updateHeight(){
-		console.log(this)
-		this.height = this.headElicitNode.posIn.y - this.pos.y//this.tailElicitNode.posOut.y 
+		this.height = this.getHeight();//this.headElicitNode.posIn.y - this.pos.y//this.tailElicitNode.posOut.y 
 	}
 
 	updateWidth(){
@@ -353,7 +402,12 @@ class Action{
 			this.height=this.delay*timeScale;
 		}else if(this.trigger == "click"){
 			// console.log("clickScale:   " + clickScale)
-			this.height = clickScale; 
+			if(this.delay != undefined){
+				this.height = clickScale + this.delay*timeScale; 
+			}else{
+				this.height = clickScale;
+			}
+			
 		}
 	}
 	setInitalWidth(){
@@ -404,6 +458,8 @@ class Action{
 
 	createBackEndHTML(){
 		//actionArrowSVG
+		
+
 		this.html.container = document.createElement("div");
 
 		this.html.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
@@ -415,6 +471,9 @@ class Action{
 		this.html.svg.innerHTML = hArrowSVG(this.width, this.height, 2, this.elicit+"_arrow");
 		//console.log(this.html.svg)
 		this.html.container.append(this.html.svg);
+
+		// console.log(log)
+		
 
 		this.html.svg.style.top = this.pos.y + "px"
 		this.html.svg.style.left = (this.pos.x) +"px"

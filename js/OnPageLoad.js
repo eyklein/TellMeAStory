@@ -105,8 +105,13 @@ function populateStory(sceneData_){
 		
 	currentStory.createScenesFrontEndHTMLs();
 
+	currentStory.createScenesContentEffectEditors();
+
 
 	currentStory.backEnd = new BackEnd(currentStory);
+
+
+
 
 }
 

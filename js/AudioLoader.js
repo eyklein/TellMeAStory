@@ -141,6 +141,19 @@ class AudioLoader{
 		    		priorityAudioLoader.files[this.url]['contentAudioObjects'][i].audioBuffer=priorityAudioLoader.files[this.url]['audioBuffer'];
 		    		priorityAudioLoader.files[this.url]['contentAudioObjects'][i].createEffects();
 		    		priorityAudioLoader.files[this.url]['contentAudioObjects'][i].applyGeneralEffects();
+
+		    		//priorityAudioLoader.files[this.url]['contentAudioObjects'][i].addEffectEditors();
+		    	}
+
+		    	//create icons for each audio content object that contains this audio for the back end
+		    	for(let i in this.contentAudioObjects){
+		    		this.contentAudioObjects[i].audioLoaded = true
+		    		
+		    		if(this.contentAudioObjects[i].backEndCreated){
+			    		this.contentAudioObjects[i].addAudioDisplay()
+			    		this.contentAudioObjects[i].updateAudioDisplay()
+			    		this.contentAudioObjects[i].cNode.html.info.append(this.contentAudioObjects[i].audioDisplay.getCanvaseWrap())
+			    	}
 		    	}
 
 		    }.bind(this), onLoadError);

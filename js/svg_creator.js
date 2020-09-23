@@ -45,6 +45,25 @@ function hArrowSVG(deltaX_,deltaY_,strokeThickness_,type_,color_){
 				' " style="fill:none;stroke:' + color_ + ';" />';
 
 		}
+	}else if(deltaX_>=0 && deltaY_==0){
+		//if(deltaY_==0){
+		
+			radius=Math.min(deltaY_/2,10);
+	
+			xStart=0;
+			yStart=0;
+
+			
+			h1 = deltaX_
+			v1 = (deltaY_ - radius*4)/2;
+
+
+			return '<path class="'+type_+ " svg_arrow"+
+				svgPiont(xStart,yStart) + //starting piont
+				svgHorizontalLine(h1) +
+				svgArrowRight(arrowSize) +
+				' " style="fill:none;stroke:' + color_ + ';" />';
+		//}
 	}else if(deltaX_<=20){
 		if(deltaY_>=20){//is there enogh room in the x direction
 
@@ -332,6 +351,9 @@ function svgDown(length_){
 }
 
 function svgArrowDown(arrowSize_){
+	return 'l' + -arrowSize_ + ' ' + -arrowSize_ + ' ';
+}
+function svgArrowRight(arrowSize_){
 	return 'l' + -arrowSize_ + ' ' + -arrowSize_ + ' ';
 }
 
@@ -729,4 +751,12 @@ function actionArrowSVG(deltaX_,deltaY_,strokeThickness_,type_,color_){
 // 				'opacity="0.5" stroke-width="3.5" stroke="#000" fill="none" />' 
 // 				;
 // }
+
+
+let svgEditorArrow=document.createElementNS("http://www.w3.org/2000/svg", "svg");
+svgEditorArrow.innerHTML = hArrowSVG(80,0,2,"_arrow")
+svgEditorArrow.classList.add("action-line-editor");
+//this.html.container.append(this.html.svgArrow);
+svgEditorArrow.id = "the-arrow";
+
 

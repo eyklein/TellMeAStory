@@ -1,7 +1,6 @@
 class TranslateImageEffect extends ImageEffect{
-	constructor(JSON_,parentContent_){
-		super(JSON_,parentContent_);
-		console.log("TRANSLATE")
+	constructor(JSON_,parentContent_,effectCatagory_){
+		super(JSON_,parentContent_,effectCatagory_);
 	}
 	apply(){
 		

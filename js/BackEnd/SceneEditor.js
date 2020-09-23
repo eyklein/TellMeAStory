@@ -16,10 +16,29 @@ class SceneEditor{
 
 		this.addContentDivs()
 
+		this.backToPlayButton=document.createElement("div");
+		this.backToPlayButton.innerHTML="< Play Editor";
+		this.backToPlayButton.style.position="absolute";
+		this.backToPlayButton.style.top="0px";
+		this.backToPlayButton.style.width="100px";
+		this.backToPlayButton.style.left="0px";
+		this.backToPlayButton.style.background="gray";
+		this.html.append(this.backToPlayButton);
+
+		this.backToPlayButton.addEventListener('dblclick', function (e){
+			console.log("double  click")
+			this.hide();
+			this.storyEditor.display();
+
+		}.bind(this));
+
+
 		//this.addContentDivs()
 
 
 	}
+
+
 
 	addContentDivs(){
 		//console.log(this.scene.id)
@@ -41,7 +60,7 @@ class SceneEditor{
 		// this.html.appendChild(this.scene.sudoContent.in.cNode.html.container)
 	}
 	hide(){
-		this.backEnd.editorWindow.html.innerHTML="";
+		this.backEnd.mainEditorWindow.html.innerHTML="";
 	}
 	display(){
 		//console.log("display story")
@@ -49,7 +68,11 @@ class SceneEditor{
 		// 	this.story.scenesLib[scene].positionBE();
 		// }
 		//console.log(this.html)
-		this.backEnd.editorWindow.html.appendChild(this.html)
+		for(let id in this.scene.actionsLib){
+			this.scene.actionsLib[id].update();
+		}
+
+		this.backEnd.mainEditorWindow.html.appendChild(this.html)
 		//this.backEnd.editorWindow.html.appendChild(this.html)
 	}
 }

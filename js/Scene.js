@@ -22,9 +22,13 @@ class Scene{
 		this.sudoContent={};
 		this.sudoContent.in;
 		this.sudoContent.out={};
+		this.sudoOutCounter=0;
+		this.type="scene"
 
 		this.backEnd={}
 		this.backEnd.contentClusters={};
+
+
 		//this.backEnd.arrows=[];
 
 		//this.setPositionActions();
@@ -46,7 +50,7 @@ class Scene{
 			}
 
 			//add sudo content that starts the scene
-			this.sudoContent.in = new SudoContent(null, this, "in");
+			this.sudoContent.in = new SudoContent(null, this, "in", 20);
 
 			//out sudo content will be added when looking at the actions
 
@@ -106,7 +110,10 @@ class Scene{
 
 				//add sudo content of actions out
 				if(this.actionsLib[actionIDName].head instanceof Scene){
-					this.sudoContent.out[this.actionsLib[actionIDName].head.id]=new SudoContent(null ,this.actionsLib[actionIDName].head, "out");
+					//console.log("***********************************************************" + this.sudoOutCounter)
+					this.sudoContent.out[this.actionsLib[actionIDName].head.id]=new SudoContent(null ,this.actionsLib[actionIDName].head, "out", 50 + this.sudoOutCounter*100);
+					//this.sudoContent.out[this.actionsLib[actionIDName].head.id].cNode.order = this.sudoOutCounter;
+					this.sudoOutCounter++;
 					this.sudoContent.out[this.actionsLib[actionIDName].head.id].cNode.createHTML();
 				}
 			}
@@ -238,10 +245,21 @@ class Scene{
 			this.actionsLib[id].setSize();
 		}
 
-		// console.log("position content and actions through actions");
+		this.sudoContent.in.cNode.setYPosition(50, null, Date.now()); //set the position of a sudo node that is this scenes display sudo node
 
-		console.log("IN ------------ " + this.sudoContent.in.parentScene.id)
-		this.sudoContent.in.cNode.setYPosition(50, null); //set the position of a sudo node that is this scenes display sudo node
+		for(let id in this.actionsLib){
+			this.actionsLib[id].createBackEndHTML();
+		}
+		
+
+		for(let i in this.actionsIn){
+			this.actionsIn[i].createBackEndHTML();
+		}
+		for(let i in this.actionsOut){
+			this.actionsOut[i].createBackEndHTML();
+		}
+
+
 
 		// for(let i in this.actionsOut){
 		// 	// this.actionsOut[id].addIndex(0);
@@ -357,6 +375,21 @@ class Scene{
 		}
 	}
 
+	addEffectEditors(){
+		for(let id in this.contentsLib){
+			//console.log(this.contentsLib[id])
+			this.contentsLib[id].addEffectEditors();
+
+		}
+	}
+
+	// addBackEndEditors(){
+	// 	for(let id in this.contentsLib){
+	// 		this.contentsLib[id].addBackEndEditors();
+
+	// 	}
+	// }
+
 	setIndexNumberRecusive(lastIndex_,array_){
 		
 		if(this.index==undefined){
@@ -380,17 +413,46 @@ class Scene{
 		return this.sceneData.name;
 	}
 
-	createProperties(){
-		console.log("createProperties()")
-		for(let contentId in this.contentsLib){
-			// console.log("Creating property  " + contentId);
-			this.contentsLib[contentId].createEffects();
-		}
+	// createProperties(){
+	// 	console.log("createProperties()")
+	// 	for(let contentId in this.contentsLib){
+	// 		// console.log("Creating property  " + contentId);
+	// 		this.contentsLib[contentId].createEffects();
+	// 	}
 
-	}
+	// }
 	applyProperties(){
 		for(let contentId in this.contentsLib){
 			this.contentsLib[contentId].applyEffects();
+		}
+	}
+
+	updateContentSize(){
+		for(let id in this.contentsLib){
+			
+			this.contentsLib[id].cNode.update();
+		}
+	}
+	createFrontEndHTML(){
+		//this create the front end html for all the content
+		//console.log("create front end " + this.id)
+		for(let id in this.contentsLib){
+			//if(this.contentsLib[id].parentScene == this){//prevent universal or shared content from rendering over and over
+			//console.log(id + "-")
+			if(this.contentsLib[id].frontEndCreated==false){
+				//console.log(id + "o")
+				this.contentsLib[id].createFrontEndHTML();
+			}
+			//}
+		}
+	}
+
+	createContentEffectEditors(){ //all exsept for audio (audio is added in the audio loader)
+		for(let id in this.contentsLib){
+			if(!this.contentsLib[id] instanceof AudioContent){
+				this.contentsLib[id].addEffectEditors();
+			}
+			
 		}
 	}
 
@@ -470,19 +532,7 @@ Scene.prototype.getBackEndHTML=function(){
 	return this.html.be.container;
 }
 
-Scene.prototype.createFrontEndHTML=function(){
-	//this create the front end html for all the content
-	//console.log("create front end " + this.id)
-	for(let id in this.contentsLib){
-		//if(this.contentsLib[id].parentScene == this){//prevent universal or shared content from rendering over and over
-		//console.log(id + "-")
-		if(this.contentsLib[id].frontEndCreated==false){
-			//console.log(id + "o")
-			this.contentsLib[id].createFrontEndHTML();
-		}
-		//}
-	}
-}
+
 
 Scene.prototype.createBackEndHTML=function(){
 	//this create the front end html for all the content
