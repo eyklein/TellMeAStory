@@ -1,3 +1,4 @@
+var counter=0;
 class ContentEffect{
 
 	constructor(JSON_,parentContent_,effectCatagory_){
@@ -24,20 +25,115 @@ class ContentEffect{
 		
 	}
 
-	addEditor(effectType_,catagory_,clickableSubCatagory_){
+	addEditor(contentEditor_, effectType_,catagory_,clickableSubCatagory_){
 
-		console.log(this.parentContent.parentScene.id)
-		this.parentContent.cNode.editor.addEffectToEditor(this,catagory_,clickableSubCatagory_)
+		//console.log(this.parentContent.parentScene.id)
+		contentEditor_.addEffectToEditor(this,catagory_,clickableSubCatagory_)
 		//this.addEditorHTML(effectType_,catagory_,clickableSubCatagory_);
 	}
+
+
 	getEditorHTML(){
-		let fillerDiv=document.createElement("div")
-		fillerDiv.innerHTML="No Editor Created"
-		return fillerDiv;
+		if(this.editor==undefined || this.editor.html==undefined){
+			if(this.createEditorHTML != undefined){
+				this.createEditorHTML()
+			}else{
+				let fillerDiv=document.createElement("div")
+				fillerDiv.innerHTML="No Editor Created"
+				return fillerDiv;
+			}
+			
+		}
+		return this.editor.html.form;
 	}
+
+
+	
 	apply(){
 		// console.log(this)
 		// console.log("Has no apply function")
+	}
+
+
+
+	setHTMLEditorForm(className_){
+		this.editor={}
+		this.editor.html = {}
+		this.editor.html.form = document.createElement("form");
+		this.editor.html.form.classList.add("effect-editor-form");
+		this.editor.html.form.classList.add(className_);
+	}
+
+	getHTMLTitle(Name_){
+
+		let title = document.createElement("div");
+		title.innerHTML=Name_;
+		title.classList.add("effect-title")
+		return title;
+
+	}
+
+	getHTMLInput(Name_, defaultValue_){
+
+		let label = document.createElement("label");
+		label.classList.add("effect-vareable")
+		label.innerHTML=Name_;
+
+		let input =document.createElement("input");
+		input.classList.add("effect-input")
+		input.value=defaultValue_;
+
+		return [label, input];
+	}
+
+
+	getHTMLSelect(Name_, options_, defaultValue_){
+		
+		
+
+		let label = document.createElement("label");
+		label.classList.add("effect-vareable")
+		label.innerHTML=Name_;
+
+		let select = document.createElement("select");
+		select.classList.add("effect-dropdown")
+
+		let options = [];
+
+		for(let i in options_){
+			options[i] =document.createElement("option");
+			options[i].text = options_[i];
+		}
+
+
+		for(let i in options){
+
+			select.add(options[i])
+			if(defaultValue_ == options[i].text){
+				
+				select.selectedIndex=i;
+			}
+		}
+
+		return [label, select];
+
+	}
+
+	getJSON(){
+		let json={}
+		// json[this.type]={}
+
+		
+		
+
+		for(let vareableName in this.vareables){			
+			json[vareableName]=this.vareables[vareableName]
+
+		}
+
+		
+		// console.log(json)
+		return json;
 	}
 };
 
@@ -93,17 +189,3 @@ ContentEffect.prototype.updateChange=function(){
 
 
 
-ContentEffect.prototype.getJSON=function(){
-	// let property={}
-	// property.vareables={};
-
-	// for(let vareableName in this.vareables){
-	// 	property.vareables[vareableName]={}
-	// 	property.vareables[vareableName].value=this.vareables[vareableName].value;
-	// 	property.vareables[vareableName].type=this.vareables[vareableName].type;
-
-	// }
-	// property.type=this.type;
-
-	// return property;
-}

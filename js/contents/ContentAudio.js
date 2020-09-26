@@ -249,6 +249,23 @@ class AudioContent extends Content{
 	//     this.play(this.start,this.duration)			
 	// }
 
+	changeStart(time_){
+		this.start=time_;
+		this.setInitalTimeVars()
+		this.updateAudioDisplay()
+
+	}
+	changeDuration(time_){
+		this.duration=time_;
+		this.setInitalTimeVars()
+		this.cNode.update()
+		this.updateAudioDisplay()
+
+
+		
+	}
+
+
 	setInitalTimeVars(){
 		this.currentPlayTime = this.start; // time of the audio playback, seconds
 	    this.startTimestamp = this.start; // timestamp of last playback start, milliseconds
@@ -423,7 +440,9 @@ class AudioContent extends Content{
 		if(this.audioDisplay==undefined){
 			this.addAudioDisplay();
 		}
+
 		this.audioDisplay.draw(this.start,this.duration)
+		this.cNode.html.info.append(this.audioDisplay.getCanvaseWrap())
 	}
 
 	addAudioDisplay(){ 
@@ -483,12 +502,13 @@ function onLoadError(error_){
 
 class AudioDisplay{
 	constructor(audioContent_){
+	this.lineWidth=3;
 		//AudioObjectHandler.prototype.audioDisplay=function(startPosition_,duration_) {
 	this.audioContent=audioContent_;
 	this.scale=timeScale;		// pixels/second
 	//this.currentPlayTime=30;
 	this.duration=this.audioContent.audioBuffer.duration; //this durration is the complet durration of the audio not the playtime
-	this.numSamples=this.duration*this.scale;
+	this.numSamples=this.duration*this.scale/this.lineWidth;
 	this.amplitudes=this.audioContent.getAmplitudes(this.numSamples);
 	
 	this.html={};
@@ -507,27 +527,8 @@ class AudioDisplay{
 	this.html.ctx = this.html.canvas.getContext("2d");
 	//this.html.ctx.scale(dpr, dpr);
 
-	this.html.ctx.lineWidth = 1; // how thick the line is
+	this.html.ctx.lineWidth = this.lineWidth; // how thick the line is
 	
-	
-
-	//this.draw(5,6)
-
-	
-	
-	
-
-	// this.html.ctx.moveTo(0, 10);
-	// this.html.ctx.lineTo(10,10);
-	// this.html.ctx.strokeStyle = "black";
-	// this.html.ctx.stroke();		
-
-	// this.html.ctx.strokeStyle = "#0000ff";// what color our line is	
-	// this.html.ctx.beginPath();
-	// this.html.ctx.moveTo(10, this.currentPlayTime*100);
-	// this.html.ctx.lineTo(400, this.currentPlayTime*100);
-	// this.html.ctx.stroke();		
-
 
 
 	this.html.playBar=document.createElement("div");
@@ -576,12 +577,12 @@ class AudioDisplay{
 		
 		
 
-		//axis line
-		this.html.ctx.strokeStyle = "#999";// what color our line is	
-		this.html.ctx.beginPath();
-		this.html.ctx.moveTo(indent, 0);
-		this.html.ctx.lineTo(indent, this.html.canvas.height);
-		this.html.ctx.stroke();								
+		// //axis line
+		// this.html.ctx.strokeStyle = "#999";// what color our line is	
+		// this.html.ctx.beginPath();
+		// this.html.ctx.moveTo(indent, 0);
+		// this.html.ctx.lineTo(indent, this.html.canvas.height);
+		// this.html.ctx.stroke();								
 
 
 		this.html.ctx.font = "20px century_gothicregular";
@@ -594,16 +595,17 @@ class AudioDisplay{
 		
 		for(let i=0;i<this.amplitudes.length;i++){
 			
-
-			if( i/this.scale<start_ || i/this.scale>start_+duration_){
-				this.html.ctx.strokeStyle = "rgba(0,0,255,.1)";// what color our line is	
+			
+			//if((i*this.lineWidth/this.scale) < start_ || (i*this.lineWidth/this.scale)>(start_+duration_)){
+			if((i*this.lineWidth/this.scale) < start_ || (i*this.lineWidth/this.scale)>(start_+duration_)){
+				this.html.ctx.strokeStyle = "rgba(0,0,255,.08)";// what color our line is	
 			}else{
 				this.html.ctx.strokeStyle = "#000000";// what color our line is	
 			}																			
 			//https://css-tricks.com/making-an-audio-waveform-visualizer-with-vanilla-javascript/
 			this.html.ctx.beginPath();
-			this.html.ctx.moveTo(indent, i);
-			this.html.ctx.lineTo(indent + this.amplitudes[i]*200, i);
+			this.html.ctx.moveTo(indent, i*this.lineWidth);
+			this.html.ctx.lineTo(indent + this.amplitudes[i]*200, i*this.lineWidth);
 			this.html.ctx.stroke();
 		}
 
@@ -619,8 +621,8 @@ class AudioDisplay{
 		this.html.ctx.textBaseline = "middle";
 		this.html.ctx.fillStyle = "#777";// what color our line is	
 		//axis numbers
-		for(let i=100;i<this.amplitudes.length;i+=100){
-			this.html.ctx.fillText(i/this.scale + " -", 3, i); //indent, i); 
+		for(let i=100/this.lineWidth ; i*this.lineWidth/this.scale<this.amplitudes.length ; i+=100/this.lineWidth){
+			this.html.ctx.fillText(Math.round(i*this.lineWidth/this.scale) + " -", 3, i*this.lineWidth); //indent, i); 
 		}
 	}
 	updatePlayPosition(){

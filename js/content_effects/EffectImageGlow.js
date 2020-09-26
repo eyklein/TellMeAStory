@@ -2,6 +2,8 @@
 class GlowImageEffect extends ImageEffect{
 	constructor(JSON_,parentContent_,effectCatagory_){
 		super(JSON_,parentContent_,effectCatagory_);
+
+		this.type="glow";
 	}
 	apply(){
 		// console.log("applying glow image effect with class " + this.vareables.className)
@@ -10,6 +12,29 @@ class GlowImageEffect extends ImageEffect{
 	remove(){
 		this.parentContent.html.fe.classList.remove(this.vareables.className)
 	}
+
+	// createEditorHTML(){
+ //  		this.setHTMLEditorForm("text-dimansions");
+
+	// 	this.editor.html.effectTitle = this.getHTMLTitle("Dimension Effect")
+	// 	this.editor.html.form.append(this.editor.html.effectTitle);
+
+	// 	let width = this.getHTMLInput("Width", this.vareables.width)
+	// 	this.editor.html.widthLabel = width[0]
+	// 	this.editor.html.widthInput= width[1]
+	// 	this.editor.html.form.append(this.editor.html.widthLabel);
+	// 	this.editor.html.form.append(this.editor.html.widthInput);
+
+	// 	this.editor.html.form.append(document.createElement("br"))
+
+		
+	// 	let height= this.getHTMLInput("Height", this.vareables.height)
+	// 	this.editor.html.heightLabel = height[0]
+	// 	this.editor.html.heightInput = height[1] 
+		
+	// 	this.editor.html.form.append(this.editor.html.heightLabel);
+	// 	this.editor.html.form.append(this.editor.html.heightInput);
+	// }
 
 	createEditorHTML(){
 		this.editor={}
@@ -22,37 +47,21 @@ class GlowImageEffect extends ImageEffect{
 		this.editor.html.effectTitle.innerHTML="Glow Effect"
 		this.editor.html.effectTitle.classList.add("effect-title")
 		this.editor.html.form.append(this.editor.html.effectTitle);
-		this.editor.html.classLabel = document.createElement("label");
-		this.editor.html.classLabel.classList.add("effect-vareable")
-		this.editor.html.classLabel.innerHTML="Class Name"
+
+
+
+		let className = this.getHTMLSelect("Class Name", ["none", "glow", "glow-gif", "glow-gif-blue", "glow-gif-rid"], this.vareables.className)
+		this.editor.html.classLabel = className[0]
+		this.editor.html.classInput= className[1]
 		this.editor.html.form.append(this.editor.html.classLabel);
-		this.editor.html.classSelect =document.createElement("select");
-		this.editor.html.form.append(this.editor.html.classSelect);
-		this.editor.html.classSelect.classList.add("effect-dropdown")
+		this.editor.html.form.append(this.editor.html.classInput);
 
-		let options = [];
+		this.editor.html.form.append(document.createElement("br"))
 
 
-		options[0] =document.createElement("option");
-		options[0].text = "none";
-		options[1] =document.createElement("option");
-		options[1].text = "glow";
-		options[2] =document.createElement("option");
-		options[2].text = "glow-gif";
-		options[3] =document.createElement("option");
-		options[3].text = "glow-gif-blue";
-		options[4] =document.createElement("option");
-		options[4].text = "glow-gif-red";
 
-		for(let i in options){
 
-			this.editor.html.classSelect.add(options[i])
-			if(this.vareables.className == options[i].text){
-				
-				this.editor.html.classSelect.selectedIndex=i;
-			}
-		}
-
+	
 	}
 	getEditorHTML(){
 		if(this.editor==undefined || this.editor.html==undefined){

@@ -24,8 +24,8 @@ function stopAudio(){
 
 function clearTimeOut(){
 	for(let listenerID in timeDelays){
-		console.log("REMOVING");
-		console.log(listenerID);
+		// console.log("REMOVING");
+		// console.log(listenerID);
 		clearTimeout(timeDelays[listenerID]);
 	}
 }
@@ -83,9 +83,14 @@ class Story{
 	  				for(let contentID in this.scenesLib["uni"].contentsLib){
 
 	  					this.scenesLib[sceneID].contentsLib[contentID] = this.scenesLib[sceneID].createContent(this.scenesLib["uni"].contentsLib[contentID].JSONData); //new ImageContent(this.scenesLib["uni"].contentsLib[contentID].JSONData,this.scenesLib[sceneID])
-	  					
+	  					this.scenesLib[sceneID].contentsLib[contentID].isCopyFromUni=true;
+
+
 	  					//replace (unify) html
-	  					this.scenesLib[sceneID].contentsLib[contentID].html = this.scenesLib["uni"].contentsLib[contentID].html
+	  					this.scenesLib[sceneID].contentsLib[contentID].html = this.scenesLib["uni"].contentsLib[contentID].html //front end
+	  					
+
+	  					//console.log(this.scenesLib["uni"].contentsLib[contentID].effects)
 	  					//replace effects
 	  					this.scenesLib[sceneID].contentsLib[contentID].effects = this.scenesLib["uni"].contentsLib[contentID].effects
 	  				}
@@ -573,7 +578,11 @@ class Story{
 	//loads the new scene and tracks path (maybe just use this to start and track elseware?)
 	newScene(newScene_){
 		// console.log(newScene_)
+
 		if(newScene_ instanceof Scene){
+
+			// console.log("Loaing Scene: " + newScene_.id)
+			// console.log(newScene_)
 
 
 			//newScene_.addInheritance(inheritedContent_)
@@ -608,7 +617,9 @@ class Story{
 	}
 
 	start(){
+		console.log("StartingScene: " + this.startingScene)
 		this.newScene(this.startingScene);
+
 		//currentStory.windowManager=new WindowManager();
 		loadScreen.hide();
 		this.windowManager.createMainButtons();
@@ -619,7 +630,7 @@ class Story{
 
 	getJSON(){
 		let jsonPlay={}
-		
+		jsonPlay.startingScene=this.startingScene;
 		jsonPlay.scenes=[];
 		let index=0;
 		for(let id in this.scenesLib){
@@ -632,7 +643,7 @@ class Story{
 	}
 	saveJSON(){
 		//(content, fileName, contentType) {
-	    download( JSON.stringify(this.getJSON()),"scenes_" + Date.now() + ".json"); 
+	    download("scenes_" + Date.now() + ".json",JSON.stringify(this.getJSON())); 
 	}
 };
 

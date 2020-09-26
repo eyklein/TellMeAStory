@@ -94,6 +94,11 @@ class ElicitEditorElement{
 		for(let i in this.html.options){
 			this.html.select.add(this.html.options[i])
 
+			// console.log(this.elicitNode);
+
+			// console.log(this.elicitNode.contentNode.content);
+
+			// console.log(this.elicitNode.elicitType);
 			if(this.elicitNode.elicitType.toLowerCase() == this.html.options[i].text.toLowerCase()){
 				this.html.select.selectedIndex=i;
 			}

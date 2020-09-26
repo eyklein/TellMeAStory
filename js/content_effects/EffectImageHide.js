@@ -2,11 +2,16 @@ class HideImageEffect extends ImageEffect{
 
 	constructor(JSON_,parentContent_,effectCatagory_){
 		super(JSON_,parentContent_,effectCatagory_);
+		this.type="hide";
 
 	}
 
 	apply(){
-		this.parentContent.html.fe.style.display="none";//="hidden";
+		console.log(this);
+		console.log(this.vareables)
+		if(this.vareables.isOn){
+			this.parentContent.html.fe.style.display="none";//="hidden";
+		}
 	}
 
 	createEditorHTML(){

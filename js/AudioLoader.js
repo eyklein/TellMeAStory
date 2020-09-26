@@ -148,12 +148,11 @@ class AudioLoader{
 		    	//create icons for each audio content object that contains this audio for the back end
 		    	for(let i in this.contentAudioObjects){
 		    		this.contentAudioObjects[i].audioLoaded = true
-		    		
-		    		if(this.contentAudioObjects[i].backEndCreated){
-			    		this.contentAudioObjects[i].addAudioDisplay()
-			    		this.contentAudioObjects[i].updateAudioDisplay()
-			    		this.contentAudioObjects[i].cNode.html.info.append(this.contentAudioObjects[i].audioDisplay.getCanvaseWrap())
-			    	}
+
+		    		//if(this.contentAudioObjects[i].backEndCreated){
+			    		//this.contentAudioObjects[i].updateAudioDisplay()
+			    		// this.contentAudioObjects[i].cNode.html.info.append(this.contentAudioObjects[i].audioDisplay.getCanvaseWrap())
+			    	//}
 		    	}
 
 		    }.bind(this), onLoadError);

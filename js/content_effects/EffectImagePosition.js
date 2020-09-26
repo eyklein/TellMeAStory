@@ -2,6 +2,7 @@ class PositionImageEffect extends ImageEffect{
 	constructor(JSON_,parentContent_,effectCatagory_){
 		super(JSON_,parentContent_,effectCatagory_);
 		//console.log("create PositionImageEffect")
+		this.type="position";
 	}
 	apply(){
 

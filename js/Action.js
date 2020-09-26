@@ -20,8 +20,10 @@ class Action{
 		this.delay=actionJSON_.delay;//time/click are the basic but could be any sensable action...
 		this.passOnInheritance=undefined;
 
+		this.conditionals=[];
+
 		if(actionJSON_.conditions != undefined){
-			this.conditionals=[] //all contitions are evaluated as AND conditions
+			//this.conditionals=[] //all contitions are evaluated as AND conditions
 			for(let condition of actionJSON_.conditions){
 				this.conditionals.push(new Conditional(condition));
 			}
@@ -796,8 +798,17 @@ Action.prototype.getJSON=function(){
 	jsonAction.headID = this.head.id;//either content of a new scene
 	jsonAction.block=this.block;//this will turn off other actions deafalt is to just turn itself off 
 	jsonAction.trigger = this.trigger;//time/click are the basic but could be any sensable action...
+	jsonAction.elicit = this.elicit;
 	jsonAction.delay = this.delay;//time/click are the basic but could be any sensable action...
-
+	
+	jsonAction.conditions=[]
+	for(let i in this.conditionals){
+		console.log(i)
+		console.log(this.conditionals[i]["variableString"])
+		jsonAction.conditions.push(this.conditionals[i]["variableString"]);
+	}
+	
+	//console.log(this.conditionals)
 	return jsonAction;
 
 }

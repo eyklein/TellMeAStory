@@ -41,6 +41,31 @@ class Content{
 		//this.pos.x = this.pos.xIndex*200;
 
 		this.frontEndCreated=false;
+
+		//this.backEndXPos = this.JSONData.backend
+
+		this.backEndXPos = {};
+		this.backEndXPos.pos={};
+
+		if(this.JSONData.backend == undefined || this.JSONData.backend.pos == undefined || this.JSONData.backend.pos.x == undefined){
+			this.backEndXPos.pos.x=0;
+		}else{
+			this.backEndXPos.pos.x = this.JSONData.backend.pos.x;
+		}
+
+
+
+
+		if(this.JSONData.backend != undefined && this.JSONData.backend.scenes != undefined){
+			this.backEndXPos.scenes = this.JSONData.backend.scenes;
+		}
+
+		// console.log(this.backEndXPos)
+
+		
+
+
+		this.isCopyFromUni=false
 		//this.pos.yIndex
 
 
@@ -76,6 +101,18 @@ class Content{
 		
 	}
 
+	shifBackendTo(xPos_){
+		if(!this.isCopyFromUni ){ //|| this.parentScene.id=="uni"
+			this.backEndXPos.pos.x = xPos_
+		}else{
+			console.log(currentStory.scenesLib["uni"].contentsLib[this.id].backEndXPos);
+			currentStory.scenesLib["uni"].contentsLib[this.id].backEndXPos.scenes[this.parentScene.id].pos.x =  xPos_;
+			
+		}
+		
+
+	}
+
 	addEffectEditors(){
 		// console.log(this);
 
@@ -85,12 +122,13 @@ class Content{
 			if(catagory == "clickable"){ //generic, hover, pressed
 				for(let clickableSubCatagory in this.effects[catagory]){
 					for(let effectType in this.effects[catagory][clickableSubCatagory]){
-						this.effects[catagory][clickableSubCatagory][effectType].addEditor(effectType,catagory,clickableSubCatagory);//effectType,catagory,clickableSubCatagory);
+						this.effects[catagory][clickableSubCatagory][effectType].addEditor(this.cNode.editor, effectType,catagory,clickableSubCatagory);//effectType,catagory,clickableSubCatagory);
 					}
 				}
 			}else{
 				for(let effectType in this.effects[catagory]){
-					this.effects[catagory][effectType].addEditor(effectType,catagory);//effectType,catagory);
+					//contentEffet.addEditor(...)
+					this.effects[catagory][effectType].addEditor(this.cNode.editor, effectType,catagory);//effectType,catagory);
 					// console.log(this.effects[catagory][effectType]);
 				}
 				
@@ -100,7 +138,9 @@ class Content{
 	}
 
 	addNodePosition(){
-		this.cNode.addPosition(this.JSONData.backend)
+		this.backEndXPos
+		this.cNode.addPosition(this.backEndXPos)
+		// this.cNode.addPosition(this.JSONData.backend)
 	}
 
 	getFirstAction(){
@@ -645,10 +685,50 @@ Content.prototype.getJSON=function(){
 	jsonContent.content={};
 	jsonContent.content.type=this.content.type;
 	jsonContent.content.value=this.content.value;
-	jsonContent.properties={}
-	for(let type in this.properties){
-		jsonContent.properties[type]=this.properties[type].getJSON();
+	jsonContent.effects={}
+	for(let catagory in this.effects){
+		if(jsonContent.effects[catagory]==undefined){
+			jsonContent.effects[catagory]={};
+		}
+
+		
+
+		if(catagory=="clickable"){
+
+			for(let subcatagory in this.effects[catagory]){
+				if(jsonContent.effects[catagory][subcatagory]==undefined){
+					jsonContent.effects[catagory][subcatagory]={}
+				}
+				for(let effect in this.effects[catagory][subcatagory]){
+					jsonContent.effects[catagory][subcatagory][effect]=this.effects[catagory][subcatagory][effect].getJSON();
+				}
+			}
+		}else{
+			for(let effect in this.effects[catagory]){
+				jsonContent.effects[catagory][effect]=this.effects[catagory][effect].getJSON();
+			}
+		}
 	}
+
+	// if(this.backEndXPos != undefined && this.backEndXPos.pos != undefined && this.backEndXPos.posx != undefined){
+
+	// }
+	jsonContent.backend={}
+	jsonContent.backend.pos=this.backEndXPos.pos;
+	
+
+
+	
+
+
+	if(this.parentScene.id=="uni"){
+		jsonContent.backend={};
+		for(let idScene in this.parentScene.play.scenesLib){
+			jsonContent.backend=this.parentScene.play.scenesLib[idScene].contentsLib[this.id].backEndXPos
+		}
+	}
+
+
 	
 	
 

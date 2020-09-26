@@ -48,5 +48,9 @@ class BackEnd{
 
 		this.secondaryEditorWindow.display();
 	}
+	hide(){
+		this.mainEditorWindow.hide();
+		this.secondaryEditorWindow.hide();
+	}
 
 }

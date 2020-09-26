@@ -51,6 +51,10 @@ class MainEditorWindow{
 		document.body.appendChild(this.html)
 		this.currentEditor.display()
 	}
+
+	hide(){
+		document.body.removeChild(this.html);
+	}
 	
 
 }

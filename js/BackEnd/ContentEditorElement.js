@@ -2,6 +2,8 @@ class ContentEditorElement{
 	constructor(contentNode_){
 		
 		this.contentNode=contentNode_;
+
+		this.effectsAdded=[];
 		
 
 		this.html={};
@@ -298,32 +300,50 @@ class ContentEditorElement{
 
 	}
 	addEffectToEditor(effect_,catagory_,clickableSubCatagory_){
-			//this.contentNode.content.
-			let effectHTML = effect_.getEditorHTML()
+		let firstTimeAdded=false;
+		//prevent adding the effect multiple times
+		if(this.effectsAdded.indexOf(effect_) == -1){
+			this.effectsAdded.push(effect_);
+			firstTimeAdded=true;
 
-			
-			//this.setNumberEffects();
+		}
 
-			// console.log(clickableSubCatagory_);
-			// console.log(catagory_);
-			if(clickableSubCatagory_ == undefined){
-				// console.log(this.contentNode.content);
-				// console.log(this.html.effectEditors);
-				// console.log(this.html.effectEditors.catagoties[catagory_]);
-				console.log(this.contentNode.content.parentScene)
-				console.log(this.html.effectEditors.catagoties[catagory_].container);
-				console.log(effectHTML)
 
-				this.html.effectEditors.catagoties[catagory_].content.append(effectHTML)
+		let effectHTML = effect_.getEditorHTML()
 
+		
+		//this.setNumberEffects();
+
+		// console.log(clickableSubCatagory_);
+		// console.log(catagory_);
+		if(clickableSubCatagory_ == undefined){
+			// console.log(this.contentNode.content);
+			// console.log(this.html.effectEditors);
+			// console.log(this.html.effectEditors.catagoties[catagory_]);
+			// console.log(this.contentNode.content.parentScene)
+			// console.log(this.html.effectEditors.catagoties[catagory_].container);
+			// console.log(effectHTML)
+
+			this.html.effectEditors.catagoties[catagory_].content.append(effectHTML)
+
+			if(firstTimeAdded){
 				this.html.effectEditors.catagoties[catagory_].numberEffects.innerHTML = this.html.effectEditors.catagoties[catagory_].numberEffects.innerHTML*1+1
-			}else{
-				// console.log(this.html.effectEditors.catagoties[catagory_][clickableSubCatagory_].container)
-				this.html.effectEditors.catagoties[catagory_][clickableSubCatagory_].content.append(effectHTML)
-
+			}
+		}else{
+			// console.log(this.html.effectEditors.catagoties[catagory_][clickableSubCatagory_].container)
+			this.html.effectEditors.catagoties[catagory_][clickableSubCatagory_].content.append(effectHTML)
+			// console.log(this.html.effectEditors.catagoties[catagory_]["groupContainer"].numberEffects.innerHTML)
+			if(firstTimeAdded){
 				this.html.effectEditors.catagoties[catagory_]["groupContainer"].numberEffects.innerHTML = this.html.effectEditors.catagoties[catagory_]["groupContainer"].numberEffects.innerHTML*1 +1
 				this.html.effectEditors.catagoties[catagory_][clickableSubCatagory_].numberEffects.innerHTML = this.html.effectEditors.catagoties[catagory_][clickableSubCatagory_].numberEffects.innerHTML*1 +1
 			}
+		}
+
+
+		if(this.contentNode.content instanceof AudioContent){
+			this.contentNode.content.updateAudioDisplay()
+		}
+		
 			
 
 		//console.log("addEffectEditor")
@@ -356,6 +376,7 @@ class ContentEditorElement{
 	display(){
 
 		//console.log(currentStory.backEnd)
+		// console.log(this)
 		currentStory.backEnd.secondaryEditorWindow.addContentHTML(this);
 		//this.html
 		// console.log("--------------X-----------------");

@@ -3,11 +3,14 @@ class RepeatAudioEffect extends AudioEffect{
 		
 		super(JSON_,parentContent_,effectCatagory_);
 
+		this.type="repeat";
+
 	}
 
 	apply(){
-		this.parentContent.loop=this.vareables.repeat;
-
+		if(this.vareables.isOn){
+			this.parentContent.loop=true;
+		}
 
 	}
 }

@@ -34,11 +34,11 @@ class ContentNode{ //not to be confused with nodejs
 				this.xPos = backendData_.pos.x;
 			}
 			//console.log(this.content.parentScene.id)
-			if(backendData_[this.content.parentScene.id] != undefined){
-				//console.log(this.content.id)
-				if(backendData_[this.content.parentScene.id].pos != undefined && backendData_[this.content.parentScene.id].pos.x != undefined){
+			if(backendData_.scenes != undefined && backendData_.scenes[this.content.parentScene.id]!= undefined){
+				//console.log(backendData_.scenes[this.content.parentScene.id].pos)
+				if(backendData_.scenes[this.content.parentScene.id].pos != undefined && backendData_.scenes[this.content.parentScene.id].pos.x != undefined){
 					
-					this.xPos = backendData_[this.content.parentScene.id].pos.x;
+					this.xPos = backendData_.scenes[this.content.parentScene.id].pos.x;
 					
 				}
 			}	
@@ -139,7 +139,12 @@ class ContentNode{ //not to be confused with nodejs
 
 	shiftX(deltaX_){
 
+
+
 		this.xPos = (this.html.info.offsetLeft + deltaX_)
+
+		this.content.shifBackendTo(this.xPos);
+
 
 		this.html.info.style.left = this.xPos + "px";
 
@@ -198,6 +203,11 @@ class ContentNode{ //not to be confused with nodejs
 		//console.log("UPDATE!!!!!@")
 		if(this.content instanceof AudioContent){
 			// console.log(this.content.effects.general.clipping)
+			// console.log(this.content)
+
+			if(this.html == undefined){
+				console.log(this.content)
+			}
 			this.html.info.style.height = this.content.effects.general.clipping.vareables.duration*10+ "px";
 
 			

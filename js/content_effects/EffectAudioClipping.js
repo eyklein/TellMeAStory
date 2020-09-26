@@ -3,37 +3,49 @@ class ClippingAudioEffect extends AudioEffect{
 		
 		super(JSON_,parentContent_,effectCatagory_);
 
+		this.type="clipping";
+
 		// this.vareables.start==0;
 		
 		// this.vareables.duration==null;
 	}
 
 	createEditorHTML(){
-		this.editor={};
-		this.editor.html = {}
-		this.editor.html.form = document.createElement("form");
-		this.editor.html.form.classList.add("effect-editor-form");
-		this.editor.html.form.classList.add("audioclipping");
 
-		this.editor.html.startLabel = document.createElement("label");
-		this.editor.html.startLabel.innerHTML="Start Time (s)"
+		this.setHTMLEditorForm("audio-clipping");
+
+		this.editor.html.effectTitle = this.getHTMLTitle("Clipping Effect")
+		this.editor.html.form.append(this.editor.html.effectTitle);
+
+		let start = this.getHTMLInput("Start Time", this.vareables.start)
+		this.editor.html.startLabel = start[0]
+		this.editor.html.startInput= start[1]
 		this.editor.html.form.append(this.editor.html.startLabel);
-		this.editor.html.startInput = document.createElement("input");
-		this.editor.html.startInput.value = this.vareables.start;
 		this.editor.html.form.append(this.editor.html.startInput);
-		this.editor.html.startInput.classList.add("effect-input");
 
 		this.editor.html.form.append(document.createElement("br"));
 
-
-		this.editor.html.durationLabel = document.createElement("label");
-		this.editor.html.durationLabel.innerHTML="Duration Time (s)"
+		let duration = this.getHTMLInput("Duration", this.vareables.duration)
+		this.editor.html.durationLabel = duration[0]
+		this.editor.html.durationInput= duration[1]
 		this.editor.html.form.append(this.editor.html.durationLabel);
-		this.editor.html.durationInput = document.createElement("input");
-		this.editor.html.durationInput.value = this.vareables.duration;
 		this.editor.html.form.append(this.editor.html.durationInput);
-		this.editor.html.durationInput.classList.add("effect-input");
+
+
+		//change effect
+		this.editor.html.startInput.addEventListener("change",function(e){
+			this.vareables.start=e.target.value*1;
+			this.parentContent.changeStart(this.vareables.start)
+		}.bind(this))
+
+		this.editor.html.durationInput.addEventListener("change",function(e){
+			this.vareables.duration=e.target.value*1;
+			this.parentContent.changeDuration(this.vareables.duration)
+		}.bind(this))
+
+
 	}
+	
 	getEditorHTML(){
 		if(this.editor==undefined || this.editor.html==undefined){
 			this.createEditorHTML()

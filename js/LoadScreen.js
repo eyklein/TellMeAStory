@@ -100,6 +100,8 @@ class LoadScreen{
 	hide(){
 
 		clearInterval(this.updateInterval);
+		document.title = 'Story Time' 
+
 
 		//this.draw();
 		// for(let id in currentStory.scenesLib){
@@ -137,7 +139,7 @@ class LoadScreen{
 		return loaded;
 
 	}
-	getTotal(){
+	getTotalFileSizePreload(){
 		let total=0;
 		for(let taget in this.preloadFiles){
 			total += this.preloadFiles[taget].fileSize
@@ -171,7 +173,9 @@ class LoadScreen{
 
 		
 		this.loaded=this.getDownloaded();
-		this.total = this.getTotal()
+		this.total = this.getTotalFileSizePreload()
+
+		//console.log(this.loaded + " / " + this.total)
 
 		// console.log(this.loaded + " / " + this.total)
 

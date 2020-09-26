@@ -9,6 +9,8 @@ class ReplaceImageEffect extends ImageEffect{
 
 		this.random=Math.random();
 
+		this.type="replace";
+
 		
 		//this.oldImage=this.parentContent.html.fe;
 

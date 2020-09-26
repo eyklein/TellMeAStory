@@ -272,6 +272,8 @@ class Scene{
 
 		// console.log("create the content nodes HTML")
 		for(let id in this.contentsLib){
+			
+			
 			this.contentsLib[id].cNode.createHTML();
 		}
 
@@ -377,8 +379,9 @@ class Scene{
 
 	addEffectEditors(){
 		for(let id in this.contentsLib){
-			//console.log(this.contentsLib[id])
+			// console.log(this.contentsLib[id].cNode.editor.contentNode.content.parentScene.id)
 			this.contentsLib[id].addEffectEditors();
+			// console.log(this.contentsLib[id].cNode.editor.contentNode.content.parentScene.id)
 
 		}
 	}
@@ -596,9 +599,14 @@ Scene.prototype.getJSON=function(){
 	jsonScene.contents=[];
 	index=0;
 	for(let id in this.contentsLib){
-		jsonScene.contents[index]=this.contentsLib[id].getJSON()
-		index++;
+		if(this.contentsLib[id].isCopyFromUni==false){ //is not part of universal 
+			jsonScene.contents[index]=this.contentsLib[id].getJSON()
+			index++;
+		}
+		
 	}
+
+
 
 	return jsonScene;
 

@@ -56,6 +56,9 @@ class SecondaryEditorWindow{
 		//document.getElementById('content').appendChild(this.html)
 		document.body.appendChild(this.html)
 	}
+	hide(){
+		document.body.removeChild(this.html);
+	}
 	
 
 }

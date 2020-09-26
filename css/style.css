@@ -44,6 +44,10 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
        
     /*cursor: url("../img/mouse/Cursor-(white).png"), default;*/
 }
+canvas{
+  pointer-events: none;
+}
+
 .effect-catagory-title{
   font-size: 2vw;
   color:#333;

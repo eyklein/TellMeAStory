@@ -26,7 +26,7 @@ class SceneEditor{
 		this.html.append(this.backToPlayButton);
 
 		this.backToPlayButton.addEventListener('dblclick', function (e){
-			console.log("double  click")
+		
 			this.hide();
 			this.storyEditor.display();
 

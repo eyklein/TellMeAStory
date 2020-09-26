@@ -7,7 +7,7 @@ class ImageContent extends Content{
 		this.name=this.content.value;
 		//this.createNode();
 
-		this.type="image";
+		this.type="img";
 		this.cNode=new ContentNode(this);
 
 	}

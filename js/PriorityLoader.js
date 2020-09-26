@@ -57,6 +57,8 @@ class PriorityLoader{
 			}else{
 				this.loadAudioBucket(bucketIndex_+1);
 			}
+		}else{
+			console.log("DONE LOADING?")
 		}
 	}
 
